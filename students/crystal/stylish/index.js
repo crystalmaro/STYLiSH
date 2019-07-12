@@ -33,6 +33,9 @@ function render(data) {
     
         // @todo <img>
         let img = document.createElement("img")
+        img.setAttribute("src", `${obj.data[i].main_image}`);
+        console.log(`${obj.data[i].main_image}`)
+        product_container.appendChild(img);
             // set attribute src to img link
             // obj.data[i].main_image
         // @todo div.all_colors
