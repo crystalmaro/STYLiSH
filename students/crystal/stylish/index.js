@@ -1,28 +1,25 @@
 
 let API_HOST = "https://api.appworks-school.tw/api/1.0";
-// Request Example: https://[HOST_NAME]/api/[API_VERSION]/products/women
 
 function getProducts(type) {
     let productSRC = API_HOST + "/products/" + type;
-
+    // @todo delete existing product container when loading new products
     getProductCategory(productSRC, render);
 }
 
 function getProductCategory(src, callback) { 
-    // 1. create XMLHTTP Request object
     let xhr = new XMLHttpRequest();
-    // 2. onreadychange
     xhr.onreadystatechange = function () {
         if (this.readyState === 4 && this.status === 200) {
             // console.log(this.responseText[0].obj)
             callback(xhr.response);
         }
     }
-    // 3. open a GET request
     xhr.open("GET", src)
-    // 4. send the request
     xhr.send();
  }
+
+ // @todo window.addEventListener() to show ALL products when open the page
 
 function render(data) {
     let all_products = document.querySelector(".all_products");
@@ -35,6 +32,7 @@ function render(data) {
         product_container.setAttribute("class", "product_container");
     
         // @todo <img>
+        let img = document.createElement("img")
             // set attribute src to img link
             // obj.data[i].main_image
         // @todo div.all_colors
@@ -46,10 +44,13 @@ function render(data) {
         product_name.setAttribute("class", "product_name");
         product_name.innerHTML = obj.data[i].title;
         product_container.appendChild(product_name);
-         // @todo div.product_price
+        // @todo div.product_price
+        let product_price = document.createElement("div");
+        product_price.setAttribute("class", "product_price");
+        product_price.appendChild(document.createTextNode(`TWD.${obj.data[i].price}`))
+        product_container.appendChild(product_price);
     
-        
-        console.log(all_products);
+        // console.log(all_products);
         // use all_products[0] if getElementsByClassName
         all_products.appendChild(product_container);
     }
