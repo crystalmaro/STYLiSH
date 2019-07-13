@@ -15,7 +15,7 @@ function getProductCategory(src, callback) {
             callback(xhr.response);
         }
     }
-    xhr.open("GET", src)
+    xhr.open("GET", src);
     xhr.send();
  }
 
@@ -31,22 +31,36 @@ function render(data) {
         let product_container = document.createElement("div");
         product_container.setAttribute("class", "product_container");
     
-        // @todo <img>
-        let img = document.createElement("img")
-        img.setAttribute("src", `${obj.data[i].main_image}`);
-        console.log(`${obj.data[i].main_image}`)
-        product_container.appendChild(img);
-            // set attribute src to img link
-            // obj.data[i].main_image
-        // @todo div.all_colors
-            // (?) count colors.length to create amount of color chips?
-        // @todo div_color
-            // all_colors.appendChild(.color)
+        // div.product_main_img
+        let product_main_img = document.createElement("img")
+        product_main_img.setAttribute("class", "product_main_img")
+        product_main_img.setAttribute("src", `${obj.data[i].main_image}`);
+        // console.log(`${obj.data[i].main_image}`)
+        product_container.appendChild(product_main_img);
+
+        // div.all_colors
+        let all_colors = document.createElement("div");
+        all_colors.setAttribute("class", "all_colors");
+
+        // div.all_colors (individual color chip)
+        for (let i = 0; i < obj.data[i].colors.length; i++) {
+            let color = document.createElement("div");
+            color.setAttribute("class", "color");
+            color.setAttribute("style", `background-color:#${obj.data[i].colors[i].code};`);
+            // @todo need to append corresponding color child to color containers
+            // now all products are all using the first product's colors
+            all_colors.appendChild(color);
+        }
+
+        // console.log(obj.data[1].colors[0])
+        product_container.appendChild(all_colors);
+      
         // div.product_name
         let product_name = document.createElement("div");
         product_name.setAttribute("class", "product_name");
         product_name.innerHTML = obj.data[i].title;
         product_container.appendChild(product_name);
+
         // @todo div.product_price
         let product_price = document.createElement("div");
         product_price.setAttribute("class", "product_price");
@@ -58,6 +72,11 @@ function render(data) {
         all_products.appendChild(product_container);
     }
 }
+
+// below is ajax to show all products on loading
+getProductCategory("https://api.appworks-school.tw/api/1.0/products/all", function(response) {
+    render(response);
+});
 
 
 
