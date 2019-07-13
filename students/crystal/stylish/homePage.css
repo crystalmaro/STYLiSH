@@ -191,7 +191,7 @@ main .all_products .product_container {
     margin: 2%;
 }
 
-main .all_products .product_container img {
+main .all_products .product_container .product_main_img {
     width: 100%;
 }
 
@@ -199,6 +199,8 @@ main .all_products .product_container .all_colors .color {
     width: 1rem;
     height: 1rem;
     display: inline-block;
+    margin-right: 0.5rem;
+    box-shadow: 0px 0px 1px #bbbbbb;
 }
 
 /* ==================== 
