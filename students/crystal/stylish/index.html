@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" type="text/css" href="homePage.css">
     <script type="text/javascript" src="index.js"></script>
+
     <title>STYLiSH</title>
 </head>
 <body>
@@ -13,8 +14,7 @@
     <a href="#" onClick="getProducts('all')"><img class="btn_logo01" src="images/logo.png" alt="logo"></a>
     <!-- href="./" -->
     <div class="nav_product_category">
-        <a href="#" onClick="getProductCategory('https://api.appworks-school.tw/api/1.0/products/women', function(response) {
-            render(response);})">女裝</a>
+        <a href="#" onClick="getProducts('women')">女裝</a>
         <!-- "./?tag=women" -->
         <a href="#" onClick="getProducts('men')">男裝</a>
         <a href="#" onClick="getProducts('accessories')">配件</a>
@@ -58,8 +58,8 @@
     </div>
 
     <main>
-            <!-- <div class="color" style="background-color: #ffffff">HELO</div> -->
         <div class="all_products">
+
             <!-- <div class="product_container">
                 <img src="https://api.appworks-school.tw/assets/201902191247/main.jpg">
                 <div class="all_colors">
@@ -69,6 +69,7 @@
                 <div class="product_name">後鬆緊牛仔落地寬褲</div>
                 <div class="product_price">TWD.590</div>
             </div> -->
+
         </div>
     </main>
 
