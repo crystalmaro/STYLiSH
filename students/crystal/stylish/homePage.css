@@ -195,7 +195,7 @@ main .all_products .product_container .product_main_img {
     width: 100%;
 }
 
-main .all_products .product_container .all_colors .color {
+main .all_products .product_container .all_colors .colorChip {
     width: 1rem;
     height: 1rem;
     display: inline-block;
