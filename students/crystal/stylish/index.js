@@ -53,23 +53,24 @@ function render(data) {
       // div.all_colors
       let all_colors = document.createElement("div");
         all_colors.setAttribute("class", "all_colors");
-      product_container.appendChild(all_colors);
+        product_container.appendChild(all_colors);
         // div.all_colors (individual color chip)
-      product[i].colors.forEach(color => {
+        for (let j = 0; j < product[i].colors.length; j++) { 
+        let colorChip = document.createElement("div");
+        colorChip.setAttribute("class", "colorChip");
+        colorChip.setAttribute("title", product[i].colors[j].name);
+        colorChip.setAttribute("style", `background-color:#${product[i].colors[j].code};`);
+        all_colors.appendChild(colorChip);
+        }
+        /* ------- forEach also works for colorChip
+        product[i].colors.forEach(color => {
         colorChip = document.createElement("div");
         colorChip.setAttribute("class", "color");
         colorChip.setAttribute("style", "background-color:#" + color.code);
         colorChip.title = color.name;
         all_colors.appendChild(colorChip);
-      })
-        /* below for loop error:
-        create color chips for all products using first item's color
-        for (let i = 0; i < product[i].colors.length; i++) { 
-            let color = document.createElement("div");
-            color.setAttribute("class", "color");
-            color.setAttribute("style", `background-color:#${product[i].colors[i].code};`);
-            all_colors.appendChild(color);
-        } */
+        })
+        ------- */
       
         // div.product_name
       let product_name = document.createElement("div");
