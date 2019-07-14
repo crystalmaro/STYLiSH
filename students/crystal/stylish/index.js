@@ -1,6 +1,21 @@
 
 const API_HOST = "https://api.appworks-school.tw/api/1.0";
 
+// AJAX 
+function getProductCategory(src, callback) { 
+    let xhr = new XMLHttpRequest();
+      xhr.onreadystatechange = function () {
+        if (this.readyState === 4 && this.status === 200) {
+          callback(xhr.response);
+        }
+  }
+    xhr.open("GET", src);
+    xhr.send();
+  }
+
+/* ==================
+WEEK 1 PART 3
+================== */
 // Render & display /products/all on homePage initial loading
 // another method: window.addEventListener()
 getProductCategory(API_HOST+"/products/all", function(response) {
@@ -13,26 +28,14 @@ function removeElement(className){
     while(elements.firstChild){
       elements.removeChild(elements.firstChild);
     }
-}
+};
 
 // Render & display based on clicked category
 const getProducts = (type) => {
   let productSRC = API_HOST + "/products/" + type;
     removeElement("all_products");
     getProductCategory(productSRC, render);
-}
-
-// AJAX 
-function getProductCategory(src, callback) { 
-  let xhr = new XMLHttpRequest();
-    xhr.onreadystatechange = function () {
-      if (this.readyState === 4 && this.status === 200) {
-        callback(xhr.response);
-      }
-}
-  xhr.open("GET", src);
-  xhr.send();
-}
+};
 
  // Product display rendering dynamically
 function render(data) {
@@ -61,7 +64,7 @@ function render(data) {
         colorChip.setAttribute("title", product[i].colors[j].name);
         colorChip.setAttribute("style", `background-color:#${product[i].colors[j].code};`);
         all_colors.appendChild(colorChip);
-        }
+        };
         /* ------- forEach also works for colorChip
         product[i].colors.forEach(color => {
         colorChip = document.createElement("div");
@@ -69,7 +72,7 @@ function render(data) {
         colorChip.setAttribute("style", "background-color:#" + color.code);
         colorChip.title = color.name;
         all_colors.appendChild(colorChip);
-        })
+        });
         ------- */
       
         // div.product_name
@@ -86,6 +89,6 @@ function render(data) {
 
       all_products.appendChild(product_container);
     }
-}
+};
 
 
