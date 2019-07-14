@@ -22,12 +22,6 @@ const getProducts = (type) => {
     getProductCategory(productSRC, render);
 }
 
-// function getProducts(type) {
-//       let productSRC = API_HOST + "/products/" + type;
-//     removeElement("all_products");
-//     getProductCategory(productSRC, render);
-// }
-
 // AJAX 
 function getProductCategory(src, callback) { 
   let xhr = new XMLHttpRequest();
@@ -61,10 +55,13 @@ function render(data) {
         all_colors.setAttribute("class", "all_colors");
 
         
+
         // div.all_colors (individual color chip)
-        for (let i = 0; i < product[i].colors.length; i++) {
-          let color = document.createElement("div");
-            // removeElement("color");
+        for (let i = 0; i < product[i].colors.length; i++) { 
+
+            // removeElement("all_colors");
+
+            let color = document.createElement("div");
             color.setAttribute("class", "color");
             color.setAttribute("style", `background-color:#${product[i].colors[i].code};`);
             // @TODO need to append corresponding color child to color containers
