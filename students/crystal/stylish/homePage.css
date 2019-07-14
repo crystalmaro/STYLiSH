@@ -64,17 +64,24 @@ nav {
     align-items: center;
   }
 
-.search_input {
-    background-image: url("images/search.png");
-    background-position: right;
-    background-repeat: no-repeat;
-    width: 160px;
-    height: 40px;
+.search_container {
+    display: flex;
     border: solid 1px #979797;
     border-radius: 20px;
-    color: #8b572a;
     padding-left: 1rem;
+}
+.search_input {
+    flex-grow: 1;
+    border: none;
+    padding: none;
+    width: 100px;
+    color: #8b572a;
     font-size: 1rem;
+}
+.search_button {
+    flex-grow: 1;
+    border: none;
+    padding: none;
 }
 
 .btn_shopping-cart,
