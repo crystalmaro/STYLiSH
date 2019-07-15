@@ -1,5 +1,6 @@
 
 const API_HOST = "https://api.appworks-school.tw/api/1.0";
+const API_HOST_Products = "https://api.appworks-school.tw/api/1.0/products/";
 
 // AJAX 
 function getProductCategory(src, callback) { 
@@ -18,7 +19,7 @@ WEEK 1 PART 3
 ================== */
 // Render & display /products/all on homePage initial loading
 // another method: window.addEventListener()
-getProductCategory(API_HOST+"/products/all", function(response) {
+getProductCategory(API_HOST_Products+"all", function(response) {
   render(response);
 });
 
@@ -32,7 +33,7 @@ function removeElement(className){
 
 // Render & display based on clicked category
 const getProducts = (type) => {
-  let productSRC = API_HOST + "/products/" + type;
+  let productSRC = API_HOST_Products + type;
     removeElement("all_products");
     getProductCategory(productSRC, render);
 };
@@ -91,4 +92,29 @@ function render(data) {
     }
 };
 
+/* ==================
+WEEK 1 PART 4
+================== */
+// 7/14 console.log error
+// "can't read property 'addEventListender' of null
+// let search_button = document.querySelector(".search_button");
+// search_button.addEventListener("click", () => {
+//   let search_input = document.querySelector(".search_input").value;
+//   getProductCategory(API_HOST_Products + "search?keyword=" + search_input, function(response) {
+//     render(response)});
+// });
 
+// DOESN'T WORK EITHER TT___TT
+function search(callback){
+    let searchResult = new XMLHttpRequest();
+    let input = document.querySelector(".search_input").value;
+    searchResult.onreadystatechange = function(){
+      if (searchResult.readyState === 4 && searchResult.status === 200) {
+        let resultOutput = JSON.parse(searchResult.responseText);
+        console.log("this type: " + typeof resultOutput, "output " + resultOutput);
+        callback(resultOutput);
+      }
+    };
+    searchResult.open("GET", API_HOST_Products + "search?keyword=" + input );
+    searchResult.send();
+  }
