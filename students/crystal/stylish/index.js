@@ -39,32 +39,32 @@ const getProducts = (type) => {
 
  // Product display rendering dynamically
 function render(data) {
-  removeElement("all_products");
-  let all_products = document.querySelector(".all_products");
+  removeElement("allProducts");
+  let allProducts = document.querySelector(".allProducts");
   let obj = JSON.parse(data);
   let product = obj.data;
 
     for (let i = 0; i < product.length; i++) {
-      let product_container = document.createElement("div");
-        product_container.setAttribute("class", "product_container");
+      let productContainer = document.createElement("div");
+        productContainer.setAttribute("class", "productContainer");
     
-      // div.product_main_img
-      let product_main_img = document.createElement("img")
-      product_main_img.setAttribute("class", "product_main_img")
-      product_main_img.setAttribute("src", `${product[i].main_image}`);
-      product_container.appendChild(product_main_img);
+      // div.productImage
+      let productImage = document.createElement("img")
+      productImage.setAttribute("class", "productImage")
+      productImage.setAttribute("src", `${product[i].main_image}`);
+      productContainer.appendChild(productImage);
 
-      // div.all_colors
-      let all_colors = document.createElement("div");
-        all_colors.setAttribute("class", "all_colors");
-        product_container.appendChild(all_colors);
-        // div.all_colors (individual color chip)
+      // div.allColors
+      let allColors = document.createElement("div");
+        allColors.setAttribute("class", "allColors");
+        productContainer.appendChild(allColors);
+        // div.allColors (individual color chip)
         for (let j = 0; j < product[i].colors.length; j++) { 
         let colorChip = document.createElement("div");
         colorChip.setAttribute("class", "colorChip");
         colorChip.setAttribute("title", product[i].colors[j].name);
         colorChip.setAttribute("style", `background-color:#${product[i].colors[j].code};`);
-        all_colors.appendChild(colorChip);
+        allColors.appendChild(colorChip);
         };
         /* ------- forEach also works for colorChip
         product[i].colors.forEach(color => {
@@ -72,23 +72,23 @@ function render(data) {
         colorChip.setAttribute("class", "color");
         colorChip.setAttribute("style", "background-color:#" + color.code);
         colorChip.title = color.name;
-        all_colors.appendChild(colorChip);
+        allColors.appendChild(colorChip);
         });
         ------- */
       
-        // div.product_name
-      let product_name = document.createElement("div");
-      product_name.setAttribute("class", "product_name");
-      product_name.innerHTML = product[i].title;
-      product_container.appendChild(product_name);
+        // div.productName
+      let productName = document.createElement("div");
+      productName.setAttribute("class", "productName");
+      productName.innerHTML = product[i].title;
+      productContainer.appendChild(productName);
 
-        // div.product_price
-      let product_price = document.createElement("div");
-      product_price.setAttribute("class", "product_price");
-      product_price.appendChild(document.createTextNode(`TWD.${product[i].price}`))
-      product_container.appendChild(product_price);
+        // div.productPrice
+      let productPrice = document.createElement("div");
+      productPrice.setAttribute("class", "productPrice");
+      productPrice.appendChild(document.createTextNode(`TWD.${product[i].price}`))
+      productContainer.appendChild(productPrice);
 
-      all_products.appendChild(product_container);
+      allProducts.appendChild(productContainer);
     }
 };
 
@@ -96,10 +96,10 @@ function render(data) {
 WEEK 1 PART 4
 ================== */
   function search() {
-    let input = document.querySelector(".search_input").value;
+    let input = document.querySelector(".searchInput").value;
     let searchResult = API_HOST_Products + "search?keyword=" + input;
-    if (event.keyCode === 13) {
-      document.querySelector(".search_button").click();
-    }
+    // if (event.keyCode === 13) {
+    //   document.querySelector(".search_button").click();
+    // }
     ajax(searchResult, render);
   }
