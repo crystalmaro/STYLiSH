@@ -3,7 +3,7 @@ const API_HOST = "https://api.appworks-school.tw/api/1.0";
 const API_HOST_Products = "https://api.appworks-school.tw/api/1.0/products/";
 
 // AJAX 
-function getProductCategory(src, callback) { 
+function ajax(src, callback) { 
     let xhr = new XMLHttpRequest();
       xhr.onreadystatechange = function () {
         if (this.readyState === 4 && this.status === 200) {
@@ -19,7 +19,7 @@ WEEK 1 PART 3
 ================== */
 // Render & display /products/all on homePage initial loading
 // another method: window.addEventListener()
-getProductCategory(API_HOST_Products+"all", function(response) {
+ajax(API_HOST_Products+"all", function(response) {
   render(response);
 });
 
@@ -34,12 +34,12 @@ function removeElement(className){
 // Render & display based on clicked category
 const getProducts = (type) => {
   let productSRC = API_HOST_Products + type;
-    removeElement("all_products");
-    getProductCategory(productSRC, render);
+    ajax(productSRC, render);
 };
 
  // Product display rendering dynamically
 function render(data) {
+  removeElement("all_products");
   let all_products = document.querySelector(".all_products");
   let obj = JSON.parse(data);
   let product = obj.data;
@@ -95,26 +95,11 @@ function render(data) {
 /* ==================
 WEEK 1 PART 4
 ================== */
-// 7/14 console.log error
-// "can't read property 'addEventListender' of null
-// let search_button = document.querySelector(".search_button");
-// search_button.addEventListener("click", () => {
-//   let search_input = document.querySelector(".search_input").value;
-//   getProductCategory(API_HOST_Products + "search?keyword=" + search_input, function(response) {
-//     render(response)});
-// });
-
-// DOESN'T WORK EITHER TT___TT
-function search(callback){
-    let searchResult = new XMLHttpRequest();
+  function search() {
     let input = document.querySelector(".search_input").value;
-    searchResult.onreadystatechange = function(){
-      if (searchResult.readyState === 4 && searchResult.status === 200) {
-        let resultOutput = JSON.parse(searchResult.responseText);
-        console.log("this type: " + typeof resultOutput, "output " + resultOutput);
-        callback(resultOutput);
-      }
-    };
-    searchResult.open("GET", API_HOST_Products + "search?keyword=" + input );
-    searchResult.send();
+    let searchResult = API_HOST_Products + "search?keyword=" + input;
+    if (event.keyCode === 13) {
+      document.querySelector(".search_button").click();
+    }
+    ajax(searchResult, render);
   }
