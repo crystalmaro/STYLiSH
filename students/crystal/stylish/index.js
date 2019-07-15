@@ -107,6 +107,7 @@ WEEK 1 PART 4: Search Function
 const search = () => { 
   let input = document.querySelector(".searchInput").value;
   let searchResult = API_HOST_Products + "search?keyword=" + input;
+  removeElement("allProducts");
   ajax(searchResult, render);
   let searchInput = document.querySelector(".searchInput");
   // 模擬使用者點擊 stimulate user click to close search bar on mobile
