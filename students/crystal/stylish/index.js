@@ -4,15 +4,15 @@ const API_HOST_Products = "https://api.appworks-school.tw/api/1.0/products/";
 
 // AJAX 
 function ajax(src, callback) { 
-    let xhr = new XMLHttpRequest();
-      xhr.onreadystatechange = function () {
-        if (this.readyState === 4 && this.status === 200) {
-          callback(xhr.response);
-        }
+  let xhr = new XMLHttpRequest();
+  xhr.onreadystatechange = function () {
+    if (this.readyState === 4 && this.status === 200) {
+      callback(xhr.response);
+    }
   }
-    xhr.open("GET", src);
-    xhr.send();
-  }
+  xhr.open("GET", src);
+  xhr.send();
+}
 
 /* ==================
 WEEK 1 PART 3
@@ -95,11 +95,26 @@ function render(data) {
 /* ==================
 WEEK 1 PART 4
 ================== */
-  function search() {
-    let input = document.querySelector(".searchInput").value;
-    let searchResult = API_HOST_Products + "search?keyword=" + input;
-    // if (event.keyCode === 13) {
-    //   document.querySelector(".search_button").click();
-    // }
-    ajax(searchResult, render);
+const search = () => { 
+  let input = document.querySelector(".searchInput").value;
+  let searchResult = API_HOST_Products + "search?keyword=" + input;
+  ajax(searchResult, render);
+  let searchInput = document.querySelector(".searchInput");
+  // 模擬使用者點擊 stimulate user click to close search bar on mobile
+  searchInput.click();
+  
+}
+
+let showMobileSearch = () => {
+    console.log("clicked");
+  let searchInput = document.querySelector(".searchInput");
+  let navFeature = document.querySelector(".navFeature");
+  let nav = document.querySelector("nav");
+  if (searchInput.className === "searchInput" && navFeature.className === "navFeature") {
+    searchInput.className += " open";
+    navFeature.className += " open";
+  } else {
+    searchInput.className = "searchInput"
+    navFeature.className = "navFeature";
   }
+}

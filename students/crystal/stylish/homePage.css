@@ -18,7 +18,7 @@ Nav Bar
 nav {
     padding: 1.5rem 3rem;
     width: 100%;
-    height: 100px;
+    height: 80px;
     display: flex;
     align-items: center;
 }
@@ -66,22 +66,21 @@ nav {
 
 .searchContainer {
     display: flex;
-    border: solid 1px #979797;
-    border-radius: 20px;
-    padding-left: 1rem;
+    padding: 0 5px;
     height: 40px;
     cursor: pointer;
 }
 .searchInput {
-    width: 100px;
+    border: solid 1px #979797;
+    border-radius: 20px;
     color: #8b572a;
     font-size: 1rem;
     background-image: url("images/search.png");
     background-position: right;
     background-repeat: no-repeat;
     background-color: transparent;
-    border: none;
-    width: 150px;
+    width: 200px;
+    padding-left: 10px;
 }
 .searchSubmit {
     display: none;
@@ -98,7 +97,7 @@ nav {
 
 .iconCart,
 .iconMember {
-    margin-left: 2rem;
+    margin-left: 10px;
     width: 44px;
     height: 44px;
     object-fit: contain;
@@ -228,7 +227,7 @@ Media Query
 @media (max-width: 1000px) {
     .navProductCategory,
     .iconCart,
-    .iconMember {
+    .iconMember{
         display: none;
     }
     nav {
@@ -241,12 +240,21 @@ Media Query
         margin: auto;
         height: 2.5rem;
     }
-    .navFeature {
-        /* position: absolute;
-        right: 20px; */
+    .searchInput {
+        border: none;
+        width: 50px;
+        color: transparent;
     }
-    .searchContainer {
-        border-width: 0;
+    .searchInput.open {
+        display: block;
+        width: 500px;
+        background-color: white;
+        border: solid 1px #979797;
+        padding: 0 10px;
+        color: #8b572a;
+    }
+    .navFeature.open {
+        right: auto;
     }
     .navProductCategory-mobile {
         display: flex;
@@ -376,10 +384,11 @@ Media Query
 }
 
 @media (max-width: 600px) {
-    .searchInput {
-        width: 50px;
+    .searchInput.open {
+        width: 300px;
     }
     .campaign_text {
         left: 10%;
         bottom: 30%;
     }
+}
