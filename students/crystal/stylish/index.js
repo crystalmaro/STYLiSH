@@ -1,4 +1,5 @@
 
+const HOST = "https://api.appworks-school.tw";
 const API_HOST = "https://api.appworks-school.tw/api/1.0";
 const API_HOST_Products = "https://api.appworks-school.tw/api/1.0/products";
 let type = "all";
@@ -23,7 +24,56 @@ WEEK 1 PART 3
 // === Render & display /products/all on homePage initial loading
 // another method: window.addEventListener()
 ajax(`${API_HOST_Products}/${type}`, renderProduct);
-// ajax(`${API_HOST}/marketing/campaigns`, renderCampaign);
+
+ajax(`${API_HOST}/marketing/campaigns`, renderCampaign)
+
+
+// === Render Marketing Campaign
+function renderCampaign (data) {
+  let campaignData = data.data
+  let keyVisualSection = document.querySelector(".keyVisualSection");
+  keyVisualSection.className = "keyVisualSection";
+  
+  // removeElement("")
+
+  for (let i = 0; i < campaignData.length; i++) {
+
+    let campaign = document.createElement("div");
+    campaign.className = "campaign";
+    campaign.setAttribute("style", `background:url(${HOST}${campaignData[i].picture})`);
+    
+    let campaignLink = document.createElement("a");
+    campaignLink.className = "campaignLink";
+    campaignLink.setAttribute("href", `${HOST}/product.html?id=${campaignData[i].product_id}`)
+    campaign.appendChild(campaignLink);
+    
+    let campaignStory = document.createElement("div");
+    campaignStory.className = "campaignStory";
+    campaignStory.innerHTML = campaignData[i].story.replace(/\r\n/g, "<br/>");
+    campaign.appendChild(campaignStory);
+
+    // keyVisualSection.insertBefore(campaign, campaignStep);
+    keyVisualSection.appendChild(campaign);
+  }
+
+  // @todo set circle counts to campaignData.length
+  // @todo move circles outside of the loop
+  // @todo set click function to circle, to direct to desired campaign <div>
+  let campaignStep = document.createElement("div");
+  campaignStep.className = "campaignStep";
+  for (let i = 0; i < campaignData.length; i++) {
+    let campaignCircle = document.createElement("a");
+    campaignCircle.className = "campaignCircle";
+    campaignStep.appendChild(campaignCircle);
+    keyVisualSection.appendChild(campaignStep);
+  }
+    
+console.log(campaignData.length);
+console.log("id: "+data.data[1].id);
+console.log("product_id: "+`${HOST}/product.html?id=${campaignData[1].product_id}`)
+console.log("pic: "+`${HOST}${campaignData[1].picture}`)
+console.log(`${campaignData[1].story}`)
+}
 
 // === Remove existing elements when loading new category
 function removeElement(className){
@@ -59,8 +109,8 @@ function renderProduct(data) {
       productContainer.setAttribute("class", "productContainer");
   
     // div.productImage
-    let productImage = document.createElement("img")
-    productImage.setAttribute("class", "productImage")
+    let productImage = document.createElement("img");
+    productImage.setAttribute("class", "productImage");
     productImage.setAttribute("src", `${product[i].main_image}`);
     productContainer.appendChild(productImage);
 
@@ -75,7 +125,7 @@ function renderProduct(data) {
       colorChip.setAttribute("title", product[i].colors[j].name);
       colorChip.setAttribute("style", `background-color:#${product[i].colors[j].code};`);
       allColors.appendChild(colorChip);
-      };
+    };
       /* ------- forEach also works for colorChip
       product[i].colors.forEach(color => {
       colorChip = document.createElement("div");
@@ -161,4 +211,4 @@ function setExtProduct(data) {
   }
   window.addEventListener("scroll", handleScroll);
   renderProduct(data);
-}
+};

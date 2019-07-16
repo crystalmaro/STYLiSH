@@ -166,27 +166,55 @@ footer {
 /* ====================  
 Main: Campaign + Product Dispaly
 ====================  */
+/* .keyVisualSection {
+    width: 100%;
+    height: 30rem;
+
+} */
 .campaign {
+    width: 100%;
     height: 30rem;
     /* background color placeholder */
     /* background: pink; */
-    background: url("https://api.appworks-school.tw/assets/keyvisuals/201807242228.jpg");
+    /* background: url("https://api.appworks-school.tw/assets/keyvisuals/201807242228.jpg"); */
     background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
     position: relative;
     /* overflow: hidden;
     display: block; */
 }
 
+.campaignLink {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
 .campaignStory {
-    width: 250px;
+    width: 300px;
     height: 200px;
     font-size: 1.5rem;
     line-height: 1.9;
     position: absolute;
     left: 20%;
     bottom: 20%;
-    /* top: 30%; */
-    /* right: 60%; */
+}
+
+.campaignStep {
+    /* position:absolute; */
+	text-align:center;
+}
+
+
+.campaignCircle {
+    width: 10px;
+    height: 10px;
+    margin: 0px 10px;
+    border-radius: 50%;
+    background-color: red;
+    display: inline-block;
+    vertical-align: middle;
 }
 
 main .allProducts {
