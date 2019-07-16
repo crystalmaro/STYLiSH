@@ -166,12 +166,16 @@ footer {
 /* ====================  
 Main: Campaign + Product Dispaly
 ====================  */
-/* .keyVisualSection {
+.keyVisualSection {
     width: 100%;
     height: 30rem;
-
-} */
+    position: relative;
+}
 .campaign {
+    display: none
+}
+.campaign.current {
+    display: block;
     width: 100%;
     height: 30rem;
     /* background color placeholder */
@@ -180,7 +184,7 @@ Main: Campaign + Product Dispaly
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
-    position: relative;
+    position: absolute;
     /* overflow: hidden;
     display: block; */
 }
@@ -202,10 +206,9 @@ Main: Campaign + Product Dispaly
 }
 
 .campaignStep {
-    /* position:absolute; */
+    position:absolute;
 	text-align:center;
 }
-
 
 .campaignCircle {
     width: 10px;
@@ -216,7 +219,9 @@ Main: Campaign + Product Dispaly
     display: inline-block;
     vertical-align: middle;
 }
-
+.campaignCircle.current {
+    background-color: black;
+}
 main .allProducts {
     font-family: NotoSansCJKtc;
     display: flex;

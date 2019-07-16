@@ -24,55 +24,69 @@ WEEK 1 PART 3
 // === Render & display /products/all on homePage initial loading
 // another method: window.addEventListener()
 ajax(`${API_HOST_Products}/${type}`, renderProduct);
-
 ajax(`${API_HOST}/marketing/campaigns`, renderCampaign)
+
+// @todo display next campaign every 5 seconds
+
+// @todo apply display classList to campaign
+// let index = 0;
+let campaignSlider = (index) => {
+  // i = (index + 1) % 3;
+  
+  let campaign = document.getElementsByClassName("campaign");
+  let campaignCircle = document.getElementsByClassName("campaignCircle");
+  for (_______________) {
+    if (campaign[i].className === "campaign" && campaignCircle[i].className === "campaignCircle" ) {
+      campaign[i].classList.add("current");
+      campaignCircle[i].classList.add("current");
+    } else  {
+      campaign[i].classList.remove("current");
+      campaignCircle[i].classList.remove("current");
+    }
+  }
+
+}
 
 
 // === Render Marketing Campaign
+// (initial display:hide - show using setInterval)
 function renderCampaign (data) {
   let campaignData = data.data
   let keyVisualSection = document.querySelector(".keyVisualSection");
   keyVisualSection.className = "keyVisualSection";
-  
-  // removeElement("")
-
   for (let i = 0; i < campaignData.length; i++) {
-
+    // campaign container
     let campaign = document.createElement("div");
     campaign.className = "campaign";
     campaign.setAttribute("style", `background:url(${HOST}${campaignData[i].picture})`);
-    
+    // campaign clickable background image
     let campaignLink = document.createElement("a");
     campaignLink.className = "campaignLink";
     campaignLink.setAttribute("href", `${HOST}/product.html?id=${campaignData[i].product_id}`)
     campaign.appendChild(campaignLink);
-    
+    // campaign story text
     let campaignStory = document.createElement("div");
     campaignStory.className = "campaignStory";
     campaignStory.innerHTML = campaignData[i].story.replace(/\r\n/g, "<br/>");
     campaign.appendChild(campaignStory);
 
-    // keyVisualSection.insertBefore(campaign, campaignStep);
     keyVisualSection.appendChild(campaign);
   }
-
-  // @todo set circle counts to campaignData.length
-  // @todo move circles outside of the loop
   // @todo set click function to circle, to direct to desired campaign <div>
   let campaignStep = document.createElement("div");
   campaignStep.className = "campaignStep";
   for (let i = 0; i < campaignData.length; i++) {
     let campaignCircle = document.createElement("a");
+    campaignCircle.setAttribute("onClick", `campaignSlider(${i})`);
     campaignCircle.className = "campaignCircle";
     campaignStep.appendChild(campaignCircle);
     keyVisualSection.appendChild(campaignStep);
   }
-    
-console.log(campaignData.length);
-console.log("id: "+data.data[1].id);
-console.log("product_id: "+`${HOST}/product.html?id=${campaignData[1].product_id}`)
-console.log("pic: "+`${HOST}${campaignData[1].picture}`)
-console.log(`${campaignData[1].story}`)
+  console.log(campaignData.length);
+  console.log("id: "+data.data[1].id);
+  console.log("product_id: "+`${HOST}/product.html?id=${campaignData[1].product_id}`)
+  console.log("pic: "+`${HOST}${campaignData[1].picture}`)
+  console.log(`${campaignData[1].story}`)
 }
 
 // === Remove existing elements when loading new category
@@ -157,7 +171,7 @@ WEEK 1 PART 4: Search Function
 ================== */
 const search = () => { 
   let input = document.querySelector(".searchInput").value;
-  let searchResult = API_HOST_Products + "search?keyword=" + input;
+  let searchResult = API_HOST_Products + "/search?keyword=" + input;
   // 先移除目前的東西，再render搜尋結果
   removeElement("allProducts");
   ajax(searchResult, renderProduct);
@@ -169,12 +183,12 @@ const search = () => {
 let showMobileSearch = () => {
   let searchInput = document.querySelector(".searchInput");
   let navFeature = document.querySelector(".navFeature");
-  let nav = document.querySelector("nav");
+  // let nav = document.querySelector("nav");
   if (searchInput.className === "searchInput" && navFeature.className === "navFeature") {
-    searchInput.className += " open";
+    searchInput.classList.add("open");
     navFeature.className += " open";
   } else {
-    searchInput.className = "searchInput"
+    searchInput.classList.remove("open");
     navFeature.className = "navFeature";
   }
 }
