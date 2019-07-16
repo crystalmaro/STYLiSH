@@ -1,6 +1,6 @@
 
 const API_HOST = "https://api.appworks-school.tw/api/1.0";
-const API_HOST_Products = "https://api.appworks-school.tw/api/1.0/products/";
+const API_HOST_Products = "https://api.appworks-school.tw/api/1.0/products";
 let type = "all";
 let pageNumber;
 let pagingURL;
@@ -22,9 +22,10 @@ WEEK 1 PART 3
 ================== */
 // === Render & display /products/all on homePage initial loading
 // another method: window.addEventListener()
-ajax(`${API_HOST_Products}${type}`, render);
+ajax(`${API_HOST_Products}/${type}`, renderProduct);
+// ajax(`${API_HOST}/marketing/campaigns`, renderCampaign);
 
-// Remove existing elements when loading new category
+// === Remove existing elements when loading new category
 function removeElement(className){
   let elements = document.querySelector("."+className);
     while(elements.firstChild){
@@ -36,17 +37,17 @@ function removeElement(className){
 const getProducts = (inputType) => {
   type = inputType;
   removeElement("allProducts");
-    ajax(`${API_HOST_Products}${inputType}`, render);
+    ajax(`${API_HOST_Products}/${inputType}`, renderProduct);
 };
 
 // === Product display rendering dynamically (createElement)
-function render(data) {
+function renderProduct(data) {
   let allProducts = document.querySelector(".allProducts");
   let product = data.data;
-  
-  // pagingURL for ajax
+
+  // pagingURL for scroll event
   if (data.paging !== undefined) {
-    pagingURL = `${API_HOST_Products}${type}?paging=${data.paging}`;
+    pagingURL = `${API_HOST_Products}/${type}?paging=${data.paging}`;
     window.addEventListener("scroll", handleScroll);
   } else {
     pagingURL = "";
@@ -109,7 +110,7 @@ const search = () => {
   let searchResult = API_HOST_Products + "search?keyword=" + input;
   // 先移除目前的東西，再render搜尋結果
   removeElement("allProducts");
-  ajax(searchResult, render);
+  ajax(searchResult, renderProduct);
   // 模擬使用者點擊 stimulate user click to close search bar on mobile
   let searchInput = document.querySelector(".searchInput");
   searchInput.click();
@@ -142,7 +143,7 @@ function handleScroll(e) {
     }
     ticking = true;
   }
-
+// 真測是不是快滑到最下面
 let endlessScroll = () => {
   let windowHeight = window.innerHeight;
   let remainingFooter = document.querySelector("footer").getBoundingClientRect().top;
@@ -159,5 +160,5 @@ function setExtProduct(data) {
     pageNumber = data.paging;
   }
   window.addEventListener("scroll", handleScroll);
-  render(data);
+  renderProduct(data);
 }
