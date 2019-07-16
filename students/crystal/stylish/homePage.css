@@ -169,17 +169,15 @@ Main: Campaign + Product Dispaly
 .campaign {
     height: 30rem;
     /* background color placeholder */
-    background: pink;
+    /* background: pink; */
+    background: url("https://api.appworks-school.tw/assets/keyvisuals/201807242228.jpg");
+    background-size: cover;
     position: relative;
     /* overflow: hidden;
     display: block; */
 }
 
-.campaign img {
-    width: 100%;
-}
-
-.campaign_text {
+.campaignStory {
     width: 250px;
     height: 200px;
     font-size: 1.5rem;
