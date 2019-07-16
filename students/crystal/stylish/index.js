@@ -1,26 +1,28 @@
 
 const API_HOST = "https://api.appworks-school.tw/api/1.0";
+const API_HOST_Products = "https://api.appworks-school.tw/api/1.0/products/";
+let type = "all";
+let pageNumber;
+let pagingURL;
 
-// AJAX 
-function getProductCategory(src, callback) { 
-    let xhr = new XMLHttpRequest();
-      xhr.onreadystatechange = function () {
-        if (this.readyState === 4 && this.status === 200) {
-          callback(xhr.response);
-        }
+// === AJAX 
+function ajax(src, callback) { 
+  let xhr = new XMLHttpRequest();
+  xhr.onreadystatechange = function () {
+    if (this.readyState === 4 && this.status === 200) {
+      callback(JSON.parse(xhr.response));
+    }
   }
-    xhr.open("GET", src);
-    xhr.send();
-  }
+  xhr.open("GET", src);
+  xhr.send();
+}
 
 /* ==================
 WEEK 1 PART 3
 ================== */
-// Render & display /products/all on homePage initial loading
+// === Render & display /products/all on homePage initial loading
 // another method: window.addEventListener()
-getProductCategory(API_HOST+"/products/all", function(response) {
-  render(response);
-});
+ajax(`${API_HOST_Products}${type}`, render);
 
 // Remove existing elements when loading new category
 function removeElement(className){
@@ -30,65 +32,132 @@ function removeElement(className){
     }
 };
 
-// Render & display based on clicked category
-const getProducts = (type) => {
-  let productSRC = API_HOST + "/products/" + type;
-    removeElement("all_products");
-    getProductCategory(productSRC, render);
+// === Render & display based on clicked category
+const getProducts = (inputType) => {
+  type = inputType;
+  removeElement("allProducts");
+    ajax(`${API_HOST_Products}${inputType}`, render);
 };
 
- // Product display rendering dynamically
+// === Product display rendering dynamically (createElement)
 function render(data) {
-  let all_products = document.querySelector(".all_products");
-  let obj = JSON.parse(data);
-  let product = obj.data;
+  let allProducts = document.querySelector(".allProducts");
+  let product = data.data;
+  
+  // pagingURL for ajax
+  if (data.paging !== undefined) {
+    pagingURL = `${API_HOST_Products}${type}?paging=${data.paging}`;
+    window.addEventListener("scroll", handleScroll);
+  } else {
+    pagingURL = "";
+    window.removeEventListener("scroll", handleScroll);
+  }
 
-    for (let i = 0; i < product.length; i++) {
-      let product_container = document.createElement("div");
-        product_container.setAttribute("class", "product_container");
+  for (let i = 0; i < product.length; i++) {
+    let productContainer = document.createElement("div");
+      productContainer.setAttribute("class", "productContainer");
+  
+    // div.productImage
+    let productImage = document.createElement("img")
+    productImage.setAttribute("class", "productImage")
+    productImage.setAttribute("src", `${product[i].main_image}`);
+    productContainer.appendChild(productImage);
+
+    // div.allColors
+    let allColors = document.createElement("div");
+    allColors.setAttribute("class", "allColors");
+    productContainer.appendChild(allColors);
+    // div.allColors (individual color chip)
+    for (let j = 0; j < product[i].colors.length; j++) { 
+      let colorChip = document.createElement("div");
+      colorChip.setAttribute("class", "colorChip");
+      colorChip.setAttribute("title", product[i].colors[j].name);
+      colorChip.setAttribute("style", `background-color:#${product[i].colors[j].code};`);
+      allColors.appendChild(colorChip);
+      };
+      /* ------- forEach also works for colorChip
+      product[i].colors.forEach(color => {
+      colorChip = document.createElement("div");
+      colorChip.setAttribute("class", "color");
+      colorChip.setAttribute("style", "background-color:#" + color.code);
+      colorChip.title = color.name;
+      allColors.appendChild(colorChip);
+      });
+      ------- */
     
-      // div.product_main_img
-      let product_main_img = document.createElement("img")
-      product_main_img.setAttribute("class", "product_main_img")
-      product_main_img.setAttribute("src", `${product[i].main_image}`);
-      product_container.appendChild(product_main_img);
+    // div.productName
+    let productName = document.createElement("div");
+    productName.setAttribute("class", "productName");
+    productName.innerHTML = product[i].title;
+    productContainer.appendChild(productName);
 
-      // div.all_colors
-      let all_colors = document.createElement("div");
-        all_colors.setAttribute("class", "all_colors");
-        product_container.appendChild(all_colors);
-        // div.all_colors (individual color chip)
-        for (let j = 0; j < product[i].colors.length; j++) { 
-        let colorChip = document.createElement("div");
-        colorChip.setAttribute("class", "colorChip");
-        colorChip.setAttribute("title", product[i].colors[j].name);
-        colorChip.setAttribute("style", `background-color:#${product[i].colors[j].code};`);
-        all_colors.appendChild(colorChip);
-        };
-        /* ------- forEach also works for colorChip
-        product[i].colors.forEach(color => {
-        colorChip = document.createElement("div");
-        colorChip.setAttribute("class", "color");
-        colorChip.setAttribute("style", "background-color:#" + color.code);
-        colorChip.title = color.name;
-        all_colors.appendChild(colorChip);
-        });
-        ------- */
-      
-        // div.product_name
-      let product_name = document.createElement("div");
-      product_name.setAttribute("class", "product_name");
-      product_name.innerHTML = product[i].title;
-      product_container.appendChild(product_name);
+    // div.productPrice
+    let productPrice = document.createElement("div");
+    productPrice.setAttribute("class", "productPrice");
+    productPrice.appendChild(document.createTextNode(`TWD.${product[i].price}`))
+    productContainer.appendChild(productPrice);
 
-        // div.product_price
-      let product_price = document.createElement("div");
-      product_price.setAttribute("class", "product_price");
-      product_price.appendChild(document.createTextNode(`TWD.${product[i].price}`))
-      product_container.appendChild(product_price);
-
-      all_products.appendChild(product_container);
-    }
+    allProducts.appendChild(productContainer);
+  }
 };
 
+/* ==================
+WEEK 1 PART 4: Search Function
+================== */
+const search = () => { 
+  let input = document.querySelector(".searchInput").value;
+  let searchResult = API_HOST_Products + "search?keyword=" + input;
+  // 先移除目前的東西，再render搜尋結果
+  removeElement("allProducts");
+  ajax(searchResult, render);
+  // 模擬使用者點擊 stimulate user click to close search bar on mobile
+  let searchInput = document.querySelector(".searchInput");
+  searchInput.click();
+}
 
+let showMobileSearch = () => {
+  let searchInput = document.querySelector(".searchInput");
+  let navFeature = document.querySelector(".navFeature");
+  let nav = document.querySelector("nav");
+  if (searchInput.className === "searchInput" && navFeature.className === "navFeature") {
+    searchInput.className += " open";
+    navFeature.className += " open";
+  } else {
+    searchInput.className = "searchInput"
+    navFeature.className = "navFeature";
+  }
+}
+/* ==================
+WEEK 1 PART 4: Scrolling & Paging Feature
+================== */
+window.addEventListener("scroll", handleScroll);
+
+function handleScroll(e) {
+    let ticking = false;
+    if (!ticking) {
+      window.requestAnimationFrame(function () {
+        endlessScroll();
+        ticking = false;
+      });
+    }
+    ticking = true;
+  }
+
+let endlessScroll = () => {
+  let windowHeight = window.innerHeight;
+  let remainingFooter = document.querySelector("footer").getBoundingClientRect().top;
+    if (remainingFooter - windowHeight < 0) {
+      ajax(pagingURL, setExtProduct);
+      window.removeEventListener("scroll", handleScroll);
+    }
+}
+
+function setExtProduct(data) {
+  if (data.paging !== undefined) {
+    pageNumber ++;
+    // setting data.paging(right) to the global pageNumber(left);
+    pageNumber = data.paging;
+  }
+  window.addEventListener("scroll", handleScroll);
+  render(data);
+}

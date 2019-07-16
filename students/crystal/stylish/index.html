@@ -11,27 +11,27 @@
 </head>
 <body>
     <nav>
-        <a href="#" onClick="getProducts('all')"><img class="btn_logo01" src="images/logo.png" alt="logo"></a>
+        <a href="#" onClick="getProducts('all')"><img class="logo" src="images/logo.png" alt="logo"></a>
         <!-- href="./" -->
-        <div class="nav_product_category">
+        <div class="navProductCategory">
             <a href="#" onClick="getProducts('women')">女裝</a>
             <!-- "./?tag=women" -->
             <a href="#" onClick="getProducts('men')">男裝</a>
             <a href="#" onClick="getProducts('accessories')">配件</a>
         </div>
 
-        <div class="nav_feature">
-            <div class="search_container">
-                <input class="search_input" type="text" />
-                <!-- <button type="submit"><img src="images/search.png" alt="Search" /></button> -->
-            <!-- button form ref http://jsfiddle.net/whmDY/1/ -->
-            </div>
-            <a href="#"><img class="btn_shopping-cart" src="images/btn-shopping-cart-01-add_2019-07-10/btn-shopping-cart-01-add@3x.png" alt=""></a>
-            <a href="#"><img class="btn_member" src="images/btn-member-01-normal_2019-07-10/btn-member-01-normal@3x.png" alt=""></a>
+        <div class="navFeature">
+            <form class="searchContainer" onSubmit="search();return false;" >
+                <!-- add ;return false; so the page doesn't reload onSubmit -->
+                <input class="searchInput" type="text" onClick="showMobileSearch()"/>
+                <input class="searchSubmit" type="submit">
+            </form>
+            <a href="#"><img class="iconCart" src="images/btn-shopping-cart-01-add_2019-07-10/btn-shopping-cart-01-add@3x.png" alt=""></a method="GET" action="/search">
+            <a href="#"><img class="iconMember" src="images/btn-member-01-normal_2019-07-10/btn-member-01-normal@3x.png" alt=""></a>
         </div>
     </nav>
 
-    <div class="nav_product_category-mobile">
+    <div class="navProductCategory-mobile">
         <a href="#" onClick="getProducts('women')">女裝</a>
         <a href="#" onClick="getProducts('men')">男裝</a>
         <a href="#" onClick="getProducts('accessories')">配件</a>
@@ -46,7 +46,7 @@
         </div>
     </div>
 
-    <div class="nav_feature-mobile">
+    <div class="navFeature-mobile">
         <a href="#">
             <img src="images/btn-shopping-cart-02-normal_2019-07-11/btn-shopping-cart-02-normal.png" alt="">
             購物車
@@ -58,23 +58,23 @@
     </div>
 
     <main>
-        <div class="all_products">
+        <div class="allProducts">
 
-            <!-- <div class="product_container">
+            <!-- <div class="productContainer">
                 <img src="https://api.appworks-school.tw/assets/201902191247/main.jpg">
-                <div class="all_colors">
+                <div class="allColors">
                     <div class="colorChip" style="background-color:pink;"></div>
                     <div class="colorChip" style="background-color:skyblue;"></div>
                 </div>
-                <div class="product_name">後鬆緊牛仔落地寬褲</div>
-                <div class="product_price">TWD.590</div>
+                <div class="productName">後鬆緊牛仔落地寬褲</div>
+                <div class="productPrice">TWD.590</div>
             </div> -->
 
         </div>
     </main>
 
     <footer>
-        <div class="footer_contents">
+        <div class="footerContents">
             <div class="footer_resources">
                 <a href="#">關於 Stylish</a>
                 <a href="#">服務條款</a>
@@ -83,7 +83,7 @@
                 <a href="#">FAQ</a>
             </div>
 
-            <div class="footer_social-links">
+            <div class="footerSocialLinks">
                 <a href="#"><img src="images/line.png" alt="Line"></a>
                 <a href="#"><img src="images/twitter.png" alt="Twitter"></a>
                 <a href="#"><img src="images/facebook.png" alt="Facebook"></a>
@@ -91,22 +91,22 @@
             </div>
         </div>
 
-        <div class="footer_contents-mobile">
-            <div class="footer_resources-mobile_part1">
+        <div class="footerContents-mobile">
+            <div class="footerResource_mobile1">
                 <a href="#">關於 Stylish</a>
                 <a href="#">服務條款</a>
                 <a href="#">隱私政策</a>
             </div>
-            <div class="footer_resources-mobile_part2">
+            <div class="footerResource_mobile2">
                 <a href="#">聯絡我們</a>
                 <a href="#">FAQ</a>
             </div>
-            <div class="footer_social-links">
+            <div class="footerSocialLinks">
                 <a href="#"><img src="images/line.png" alt="Line"></a>
                 <a href="#"><img src="images/twitter.png" alt="Twitter"></a>
                 <a href="#"><img src="images/facebook.png" alt="Facebook"></a>
             </div>
-            <div class="footer_copyright">@2018, All rights reserved.</div>
+            <div class="footerCopyright">@2018, All rights reserved.</div>
         </div>
     </footer>
 </body>
