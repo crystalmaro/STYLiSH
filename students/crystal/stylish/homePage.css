@@ -207,7 +207,9 @@ Main: Campaign + Product Dispaly
 
 .campaignStep {
     position:absolute;
-	text-align:center;
+    text-align:center;
+    bottom: 5px;
+    width: 100%;
 }
 
 .campaignCircle {
@@ -215,7 +217,7 @@ Main: Campaign + Product Dispaly
     height: 10px;
     margin: 0px 10px;
     border-radius: 50%;
-    background-color: red;
+    background-color: #979797;
     display: inline-block;
     vertical-align: middle;
 }

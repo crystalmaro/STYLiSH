@@ -5,8 +5,12 @@ const API_HOST_Products = "https://api.appworks-school.tw/api/1.0/products";
 let type = "all";
 let pageNumber;
 let pagingURL;
+let ind = 0;
 
-// === AJAX 
+
+/* ==================
+AJAX
+================== */
 function ajax(src, callback) { 
   let xhr = new XMLHttpRequest();
   xhr.onreadystatechange = function () {
@@ -18,78 +22,81 @@ function ajax(src, callback) {
   xhr.send();
 }
 
-/* ==================
-WEEK 1 PART 3
-================== */
-// === Render & display /products/all on homePage initial loading
+
+// === Render & display on initial loading
 // another method: window.addEventListener()
 ajax(`${API_HOST_Products}/${type}`, renderProduct);
 ajax(`${API_HOST}/marketing/campaigns`, renderCampaign)
 
-// @todo display next campaign every 5 seconds
-
-// @todo apply display classList to campaign
-// let index = 0;
+/* ==================
+Marketing Campaign
+================== */
 let campaignSlider = (index) => {
-  // i = (index + 1) % 3;
-  
   let campaign = document.getElementsByClassName("campaign");
   let campaignCircle = document.getElementsByClassName("campaignCircle");
-  for (_______________) {
-    if (campaign[i].className === "campaign" && campaignCircle[i].className === "campaignCircle" ) {
-      campaign[i].classList.add("current");
-      campaignCircle[i].classList.add("current");
-    } else  {
-      campaign[i].classList.remove("current");
-      campaignCircle[i].classList.remove("current");
-    }
+
+  for (let i = 0; i < 3; i++) {
+    campaign[i].classList.remove("current");
+    campaignCircle[i].classList.remove("current");
   }
+  // check if index is undefined (param passed by onClick action)
+  if (index !== undefined) {
+    campaign[index].classList.add("current");
+    campaignCircle[index].classList.add("current");
+  } else {
+  // if undefined, then (ind++ % 3)
+    campaign[ind].classList.add("current");
+    campaignCircle[ind].classList.add("current");
+    ind += 1;
+  }
+};
 
-}
-
-
-// === Render Marketing Campaign
-// (initial display:hide - show using setInterval)
+// === (initial display:hide - show using campaignSlider()
 function renderCampaign (data) {
   let campaignData = data.data
   let keyVisualSection = document.querySelector(".keyVisualSection");
   keyVisualSection.className = "keyVisualSection";
   for (let i = 0; i < campaignData.length; i++) {
+
     // campaign container
     let campaign = document.createElement("div");
     campaign.className = "campaign";
-    campaign.setAttribute("style", `background:url(${HOST}${campaignData[i].picture})`);
+    campaign.setAttribute("style", `background-image:url(${HOST}${campaignData[i].picture})`);
+    
     // campaign clickable background image
     let campaignLink = document.createElement("a");
     campaignLink.className = "campaignLink";
     campaignLink.setAttribute("href", `${HOST}/product.html?id=${campaignData[i].product_id}`)
     campaign.appendChild(campaignLink);
+    
     // campaign story text
     let campaignStory = document.createElement("div");
     campaignStory.className = "campaignStory";
     campaignStory.innerHTML = campaignData[i].story.replace(/\r\n/g, "<br/>");
+    console.log
     campaign.appendChild(campaignStory);
 
     keyVisualSection.appendChild(campaign);
   }
-  // @todo set click function to circle, to direct to desired campaign <div>
+    // campaign circle toggle
   let campaignStep = document.createElement("div");
   campaignStep.className = "campaignStep";
   for (let i = 0; i < campaignData.length; i++) {
-    let campaignCircle = document.createElement("a");
-    campaignCircle.setAttribute("onClick", `campaignSlider(${i})`);
-    campaignCircle.className = "campaignCircle";
-    campaignStep.appendChild(campaignCircle);
-    keyVisualSection.appendChild(campaignStep);
+      let campaignCircle = document.createElement("a");
+      campaignCircle.setAttribute("onClick", `campaignSlider(${i})`);
+      campaignCircle.className = "campaignCircle";
+      campaignStep.appendChild(campaignCircle);
+      keyVisualSection.appendChild(campaignStep);
   }
-  console.log(campaignData.length);
-  console.log("id: "+data.data[1].id);
-  console.log("product_id: "+`${HOST}/product.html?id=${campaignData[1].product_id}`)
-  console.log("pic: "+`${HOST}${campaignData[1].picture}`)
-  console.log(`${campaignData[1].story}`)
-}
+  // load the first campaign data on loading
+  campaignSlider(0);
+  // display next campaign every 5 seconds
+  setInterval(campaignSlider, 10000) 
+};
 
-// === Remove existing elements when loading new category
+/* ==================
+Remove Element
+================== */
 function removeElement(className){
   let elements = document.querySelector("."+className);
     while(elements.firstChild){
@@ -97,7 +104,9 @@ function removeElement(className){
     }
 };
 
-// === Render & display based on clicked category
+/* ==================
+Render Products
+================== */
 const getProducts = (inputType) => {
   type = inputType;
   removeElement("allProducts");
@@ -167,7 +176,7 @@ function renderProduct(data) {
 };
 
 /* ==================
-WEEK 1 PART 4: Search Function
+Search Function
 ================== */
 const search = () => { 
   let input = document.querySelector(".searchInput").value;
@@ -192,8 +201,9 @@ let showMobileSearch = () => {
     navFeature.className = "navFeature";
   }
 }
+
 /* ==================
-WEEK 1 PART 4: Scrolling & Paging Feature
+Scrolling & Paging Feature
 ================== */
 window.addEventListener("scroll", handleScroll);
 
