@@ -22,7 +22,9 @@
 
         <div class="navFeature">
             <form class="searchContainer" onSubmit="search();return false;" >
-                <!-- add ;return false; so the page doesn't reload onSubmit -->
+                <!-- add ;return false; to onSubmit 
+                    to render the search result dynamically,
+                    without reloading the whole page altogether. -->
                 <input class="searchInput" type="text" onClick="showMobileSearch()"/>
                 <input class="searchSubmit" type="submit">
             </form>
