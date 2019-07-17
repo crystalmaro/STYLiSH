@@ -1,4 +1,3 @@
-
 const HOST = "https://api.appworks-school.tw";
 const API_HOST = "https://api.appworks-school.tw/api/1.0";
 const API_HOST_Products = "https://api.appworks-school.tw/api/1.0/products";
@@ -48,6 +47,7 @@ let campaignSlider = (index) => {
     campaign[ind].classList.add("current");
     campaignCircle[ind].classList.add("current");
     ind += 1;
+    ind %= 3;
   }
 };
 
