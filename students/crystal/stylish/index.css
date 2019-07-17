@@ -12,6 +12,15 @@ a {
     text-decoration: none;
 }
 
+main {
+    padding-top: 20px;
+}
+
+.pointer,
+a {
+    cursor: pointer;
+}
+
 /* ====================
 Nav Bar
 ==================== */
@@ -23,7 +32,7 @@ nav {
     align-items: center;
 }
 
-.logo {
+nav .logo {
     height: 3rem;
 }
 
@@ -50,7 +59,7 @@ nav {
 }
 
 .navProductCategory-mobile a,
-.footerContents-mobile,
+.myFooter-mobile,
 .navFeature-mobile {
     display: none;
 }
@@ -68,7 +77,6 @@ nav {
     display: flex;
     padding: 0 5px;
     height: 40px;
-    cursor: pointer;
 }
 .searchInput {
     border: solid 1px #979797;
@@ -85,15 +93,6 @@ nav {
 .searchSubmit {
     display: none;
 }
-/* .search_button {
-    flex-grow: 1;
-    border: none;
-    background-image: url("images/search.png");
-    background-position: right;
-    background-repeat: no-repeat;
-    background-color: transparent;
-    width: 40px;
-} */
 
 .iconCart,
 .iconMember {
@@ -105,7 +104,7 @@ nav {
 
 .navProductCategory-mobile {
     width: 100%;
-    height: 40px;
+    height: 20px;
     background-color: rgb(49,53,56);
     border: 0;
     margin: 0;
@@ -121,7 +120,7 @@ footer {
     bottom: 0;
 }
 
-.footerContents {
+.myFooter {
     height: 100%;
     max-width: 1000px;
     width: 90%;
@@ -130,13 +129,13 @@ footer {
     align-items: center;
     justify-content: space-between;
 }
-.footerContents .footer_resources {
+.myFooter .footerResource {
     display: inline-flex;
     justify-content: space-evenly;
     align-items: baseline;
 }
 
-.footerContents .footer_resources a {
+.myFooter .footerResource a {
     text-align: center;
     width: 120px;
     text-decoration: none;
@@ -144,27 +143,170 @@ footer {
     color: #f5f5f5;
 }
 
-.footerContents .footer_resources a:not(:last-child) {
+.myFooter .footerResource a:not(:last-child) {
     border-right: 1px solid #f5f5f5;
 }
 
-.footerContents .footerSocialLinks {
+.myFooter .footerSocialLinks {
     display: flex;
     justify-content: flex-end;
 }
 
-.footerContents .footerSocialLinks a {
+.myFooter .footerSocialLinks a {
     padding-right: 1rem;
 }
 
-.footerContents .footerSocialLinks p {
+.myFooter .footerSocialLinks p {
     font-family: PingFangTC;
     font-size: 12px;
     color: #828282;
 }
 
 /* ====================  
-Main Home Page: Campaign + Product Dispaly
+Product Page
+====================  */
+main>.itemContainer {
+    vertical-align: middle;
+    display: flex;
+    max-width: 900px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: auto;
+    font-family: NotoSansCJKtc;
+}
+
+main>.itemContainer .itemMainImg,
+main>.itemContainer .itemDetails {
+    width: 45%;
+    margin: 2%;
+}
+
+main>.itemContainer .itemDetails .itemName {
+    letter-spacing: 4px;
+    font-size: 2rem;
+}
+
+main>.itemContainer .itemDetails .itemID {
+    letter-spacing: 2px;
+    font-size: 1.25rem;
+    color: #bababa;
+    margin: 5px 0 25px 0;
+}
+
+main>.itemContainer .itemDetails .itemPrice {
+    font-size: 1.5rem;
+    padding-bottom: 10px;
+    border-bottom: 1px solid black;
+    margin-bottom: 30px;
+    vertical-align: middle;
+}
+
+main>.itemContainer .itemDetails .itemTitle {
+    display: inline-block;
+    padding-right: 15px;
+    border-right: 1px solid black;
+    margin-right: 20px;
+    vertical-align: middle;
+}
+
+main>.itemContainer .itemDetails .itemColors,
+main>.itemContainer .itemDetails .itemSizes,
+main>.itemContainer .itemDetails .itemQty,
+main>.itemContainer .itemDetails .addCart {
+    margin-bottom: 20px;
+    vertical-align: middle;
+}
+
+main>.itemContainer .itemDetails .itemColors .itemColorChip {
+    box-shadow: 0 0 1px #bbbbbb;
+    vertical-align: middle;
+    border: 3px solid white;
+}
+/* below is reserved for onClick classList styling */
+main>.itemContainer .itemDetails .itemColors .itemColorChip.current {
+    outline: 1px solid #979797;
+}
+
+/* vertically align colorChips and sizeCirlces */
+main>.itemContainer .itemDetails .itemColors .itemColorChip,
+main>.itemContainer .itemDetails .itemSizes .sizeCircle {
+    display: inline-block;
+    height: 25px;
+    width: 25px;
+    margin: 0 5px;
+}
+
+main>.itemContainer .itemDetails .itemSizes .sizeCircle {
+    line-height: 25px;
+    background-color: #ececec;
+    border-radius: 50%;
+    text-align: center;
+    vertical-align: middle;
+}
+/* below is reserved for onClick classList styling */
+main>.itemContainer .itemDetails .itemSizes .sizeCircle.current {
+    background-color: black;
+    color: white;
+}
+
+main>.itemContainer .itemDetails .itemQty .qtySelect {
+    display: inline-flex;
+    width: 130px;
+    padding: 5px;
+    border: 1px solid #979797;
+    margin: 0 5px;
+    text-align: center;
+}
+main>.itemContainer .itemDetails .itemQty .qtySelect .qtyModify {
+    flex: none; /* grow:0 shrink:0 basis:auto */
+    width: 25px;
+}
+
+main>.itemContainer .itemDetails .itemQty .qtySelect .qtyValue {
+    flex: auto; /* grow:1 shrink:1 basis:auto */
+    color: #8b572a;
+}
+
+main>.itemContainer .itemDetails .addCart .addCartButton {
+    width: 300px;
+    max-width: 100%;
+    padding: 10px;
+    color: white;
+    background-color: black;
+    font-size: 1rem;
+    letter-spacing: 4px;
+}
+
+main>.itemContainer .itemSeparator,
+main>.itemContainer .itemStory,
+main>.itemContainer .itemDescImg {
+    width: 94%;
+}
+
+main>.itemContainer .itemSeparator,
+main>.itemContainer .itemDescImg {
+    margin: 30px 0;
+}
+
+main>.itemContainer .itemSeparator {
+    display: flex;
+    align-items: center;
+    color: #8b572a;
+    
+}
+
+main>.itemContainer .itemSeparator hr {
+    width: 80%;
+    margin-right: 0;
+}
+
+main>.itemContainer .itemDescImg img {
+    margin-bottom: 30px;
+}
+
+
+/* ====================  
+Home Page: Campaign + Product Dispaly
 ====================  */
 .keyVisualSection {
     width: 100%;
@@ -235,7 +377,6 @@ main>.allProducts {
     align-items: flex-start;
     line-height: 2rem;
     letter-spacing: 0.25rem;
-    margin-top: 2%;
 }
 main>.allProducts .productContainer {
     width: 28%;
@@ -268,7 +409,7 @@ Media Query
         justify-content: center;
         height: 90px;
     }
-    .logo {
+    nav .logo {
         flex: auto;
         margin: auto;
         height: 2.5rem;
@@ -339,7 +480,7 @@ Media Query
         width: 100%;
         padding: 50px 0 100px 0;
     }
-    .footerContents .footer_resources {
+    .myFooter .footerResource {
         width: 55%;
     }
 }
@@ -353,7 +494,7 @@ Media Query
         height: 150px;
         font-size: 1.25rem;
     }
-    .footerContents {
+    .myFooter {
         display: none;
     }
     main .allProducts .productContainer {
@@ -367,7 +508,7 @@ Media Query
         padding-top: 20px;
         padding-bottom: 150px;
     }
-    .footerContents-mobile {
+    .myFooter-mobile {
         max-width: 75%;
         margin: auto;
         display: flex;
@@ -375,39 +516,39 @@ Media Query
         justify-content: space-evenly;
         line-height: 2em;
     }
-    .footerContents-mobile .footerResource_mobile1 a,
-    .footerContents-mobile .footerResource_mobile2 a {
+    .myFooter-mobile .footerResource-mobile1 a,
+    .myFooter-mobile .footerResource-mobile2 a {
         text-decoration: none;
         font-family: PingFangTC;
         color: #f5f5f5;
     }
-    .footerContents-mobile .footerResource_mobile1,
-    .footerContents-mobile .footerResource_mobile2 {
+    .myFooter-mobile .footerResource-mobile1,
+    .myFooter-mobile .footerResource-mobile2 {
         display: flex;
         flex-direction: column;
         margin: 0 auto;
     }
-    .footerContents-mobile .footerResource_mobile1 {
+    .myFooter-mobile .footerResource-mobile1 {
         order: 1;
         width: 30%;;
     }
-    .footerContents-mobile .footerResource_mobile2 {
+    .myFooter-mobile .footerResource-mobile2 {
         order: 2;
         width: 33%;
     }
-    .footerContents-mobile .footerSocialLinks {
+    .myFooter-mobile .footerSocialLinks {
         display: flex;
         order: 3;
         align-items: center;
         width: 33%;
     }
-    .footerContents-mobile .footerSocialLinks a {
+    .myFooter-mobile .footerSocialLinks a {
         padding: 8px;
     }
-    .footerContents-mobile .footerSocialLinks img {
+    .myFooter-mobile .footerSocialLinks img {
         height: 1.25rem;
     }
-    .footerContents-mobile .footerCopyright {
+    .myFooter-mobile .footerCopyright {
         width: 100%;
         font-family: PingFangTC;
         color: #828282;
