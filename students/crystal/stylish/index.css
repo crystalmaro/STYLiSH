@@ -12,6 +12,14 @@ a {
     text-decoration: none;
 }
 
+.pointer,
+a {
+    cursor: pointer;
+}
+
+.flex {
+    display: flex;
+}
 /* ====================
 Nav Bar
 ==================== */
@@ -19,17 +27,16 @@ nav {
     padding: 1.5rem 3rem;
     width: 100%;
     height: 80px;
-    display: flex;
     align-items: center;
+    background-color: white;
 }
 
-.logo {
+nav .logo {
     height: 3rem;
 }
 
 .navProductCategory {
     padding-left: 50px;
-    display: flex;
     font-size: 1.25rem;
     letter-spacing: 1.5rem;
     
@@ -50,25 +57,21 @@ nav {
 }
 
 .navProductCategory-mobile a,
-.footerContents-mobile,
+.myFooter-mobile,
 .navFeature-mobile {
     display: none;
 }
 
 .navFeature {
-    /* margin-left: auto; */
     right: 15px;
     position: absolute;
-    display: flex;
     justify-content: flex-end;
     align-items: center;
   }
 
 .searchContainer {
-    display: flex;
     padding: 0 5px;
     height: 40px;
-    cursor: pointer;
 }
 .searchInput {
     border: solid 1px #979797;
@@ -85,15 +88,6 @@ nav {
 .searchSubmit {
     display: none;
 }
-/* .search_button {
-    flex-grow: 1;
-    border: none;
-    background-image: url("images/search.png");
-    background-position: right;
-    background-repeat: no-repeat;
-    background-color: transparent;
-    width: 40px;
-} */
 
 .iconCart,
 .iconMember {
@@ -105,7 +99,7 @@ nav {
 
 .navProductCategory-mobile {
     width: 100%;
-    height: 40px;
+    height: 20px;
     background-color: rgb(49,53,56);
     border: 0;
     margin: 0;
@@ -121,22 +115,20 @@ footer {
     bottom: 0;
 }
 
-.footerContents {
+.myFooter {
     height: 100%;
     max-width: 1000px;
     width: 90%;
     margin: auto;
-    display: flex;
     align-items: center;
     justify-content: space-between;
 }
-.footerContents .footer_resources {
-    display: inline-flex;
+.myFooter>.footerResource {
     justify-content: space-evenly;
     align-items: baseline;
 }
 
-.footerContents .footer_resources a {
+.myFooter .footerResource a {
     text-align: center;
     width: 120px;
     text-decoration: none;
@@ -144,49 +136,189 @@ footer {
     color: #f5f5f5;
 }
 
-.footerContents .footer_resources a:not(:last-child) {
+.myFooter .footerResource a:not(:last-child) {
     border-right: 1px solid #f5f5f5;
 }
 
-.footerContents .footerSocialLinks {
-    display: flex;
+.myFooter .footerSocialLinks {
     justify-content: flex-end;
 }
 
-.footerContents .footerSocialLinks a {
+.myFooter .footerSocialLinks a {
     padding-right: 1rem;
 }
 
-.footerContents .footerSocialLinks p {
+.myFooter .footerSocialLinks p {
     font-family: PingFangTC;
     font-size: 12px;
     color: #828282;
 }
 
 /* ====================  
-Main: Campaign + Product Dispaly
+Product Page
+====================  */
+main>.itemContainer {
+    display: flex;
+    max-width: 900px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: auto;
+}
+
+main>.itemContainer .itemMainImg {
+    width: 50%;
+    margin: 2%;
+}
+
+main>.itemContainer .itemDetails {
+    width: 40%;
+    margin: 2%;
+}
+
+main>.itemContainer .itemMainImg img {
+    width: 100%;
+}
+
+main>.itemContainer .itemDetails .itemName {
+    letter-spacing: 4px;
+    font-size: 1.25rem;
+}
+
+main>.itemContainer .itemDetails .itemID {
+    letter-spacing: 2px;
+    font-size: 12px;
+    color: #bababa;
+    margin: 5px 0 15px 0;
+}
+
+main>.itemContainer .itemDetails .itemPrice {
+    padding-bottom: 5px;
+    border-bottom: 1px solid black;
+    margin-bottom: 20px;
+}
+
+main>.itemContainer .itemDetails .itemDetailTitle {
+    display: inline-block;
+    padding-right: 15px;
+    border-right: 1px solid black;
+    margin-right: 20px;
+    vertical-align: middle;
+}
+
+main>.itemContainer .itemDetails .itemColors,
+main>.itemContainer .itemDetails .itemSizes,
+main>.itemContainer .itemDetails .itemQty,
+main>.itemContainer .itemDetails .addCart {
+    margin-bottom: 20px;
+    vertical-align: middle;
+}
+
+main>.itemContainer .itemDetails .itemColors .itemColorChip {
+    box-shadow: 0 0 1px #bbbbbb;
+    vertical-align: middle;
+    border: 3px solid white;
+}
+/* below is reserved for onClick classList styling */
+main>.itemContainer .itemDetails .itemColors .itemColorChip.current {
+    outline: 1px solid #979797;
+}
+
+/* vertically align colorChips and sizeCirlces */
+main>.itemContainer .itemDetails .itemColors .itemColorChip,
+main>.itemContainer .itemDetails .itemSizes .sizeCircle {
+    display: inline-block;
+    height: 25px;
+    width: 25px;
+    margin: 0 5px;
+}
+
+main>.itemContainer .itemDetails .itemSizes .sizeCircle {
+    line-height: 25px;
+    background-color: #ececec;
+    border-radius: 50%;
+    text-align: center;
+}
+/* below is reserved for onClick classList styling */
+main>.itemContainer .itemDetails .itemSizes .sizeCircle.current {
+    background-color: black;
+    color: white;
+}
+
+main>.itemContainer .itemDetails .itemQty .qtySelect {
+    display: inline-flex;
+    width: 130px;
+    padding: 5px;
+    border: 1px solid #979797;
+    margin: 0 5px;
+    text-align: center;
+}
+main>.itemContainer .itemDetails .itemQty .qtySelect .qtyModify {
+    flex: none; /* grow:0 shrink:0 basis:auto */
+    width: 25px;
+}
+
+main>.itemContainer .itemDetails .itemQty .qtySelect .qtyValue {
+    flex: auto; /* grow:1 shrink:1 basis:auto */
+    color: #8b572a;
+}
+
+main>.itemContainer .itemDetails .addCart .addCartButton {
+    width: 300px;
+    max-width: 100%;
+    padding: 10px;
+    color: white;
+    background-color: black;
+    font-size: 1rem;
+    letter-spacing: 4px;
+}
+
+main>.itemContainer .itemSeparator,
+main>.itemContainer .itemInfo {
+    width: 94%;
+}
+
+main>.itemContainer .itemSeparator {
+    margin: 30px 0;
+}
+
+main>.itemContainer .itemSeparator {
+    display: flex;
+    align-items: center;
+    color: #8b572a;
+}
+
+main>.itemContainer .itemSeparator hr {
+    width: 80%;
+    margin-right: 0;
+}
+
+main>.itemContainer .itemInfoImg img {
+    margin: 30px 0;
+    width: 45%;
+    display: block;
+}
+
+/* ====================  
+Home Page: Campaign
 ====================  */
 .keyVisualSection {
     width: 100%;
     height: 30rem;
     position: relative;
 }
+
 .campaign {
     display: none
 }
+
 .campaign.current {
     display: block;
     width: 100%;
     height: 30rem;
-    /* background color placeholder */
-    /* background: pink; */
-    /* background: url("https://api.appworks-school.tw/assets/keyvisuals/201807242228.jpg"); */
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
     position: absolute;
-    /* overflow: hidden;
-    display: block; */
 }
 
 .campaignLink {
@@ -224,29 +356,29 @@ Main: Campaign + Product Dispaly
 .campaignCircle.current {
     background-color: black;
 }
-main .allProducts {
-    font-family: NotoSansCJKtc;
+
+/* ====================  
+Home Page: Product Dispaly
+====================  */
+main>.allProducts {
     display: flex;
     flex-wrap: wrap;
-    width: 100%;
     max-width: 1200px;
-    margin: 0 auto;
+    margin: 20px auto;
     justify-content: center;
-    align-items: flex-start;
     line-height: 2rem;
     letter-spacing: 0.25rem;
-    margin-top: 2%;
 }
-main .allProducts .productContainer {
+main>.allProducts .productContainer {
     width: 28%;
     margin: 2%;
 }
 
-main .allProducts .productContainer .productImage {
+main>.allProducts .productContainer .productImage {
     width: 100%;
 }
 
-main .allProducts .productContainer .allColors .colorChip {
+main>.allProducts .productContainer .allColors .colorChip {
     width: 1rem;
     height: 1rem;
     display: inline-block;
@@ -258,6 +390,11 @@ main .allProducts .productContainer .allColors .colorChip {
 Media Query 
 ====================  */
 @media (max-width: 1000px) {
+/* Changes:
+1. Product Category
+2. Search Bar
+3. Shopping Cart & Member
+*/
     .navProductCategory,
     .iconCart,
     .iconMember{
@@ -268,7 +405,7 @@ Media Query
         justify-content: center;
         height: 90px;
     }
-    .logo {
+    nav .logo {
         flex: auto;
         margin: auto;
         height: 2.5rem;
@@ -290,14 +427,11 @@ Media Query
         right: auto;
     }
     .navProductCategory-mobile {
-        display: flex;
-        justify-content: space-evenly;
         align-items: center;
         height: 50px;
     }
     .navProductCategory-mobile a{
         font-family: PingFangTC;
-        font-size: 1rem;
         display: inline;
         color: #828282;
         border-right: 1px solid #828282;
@@ -336,15 +470,19 @@ Media Query
     }
     footer {
         font-size: .8rem;
-        width: 100%;
+        /* width: 100%; */
         padding: 50px 0 100px 0;
     }
-    .footerContents .footer_resources {
+    .myFooter .footerResource {
         width: 55%;
     }
 }
 
 @media (max-width: 800px) {
+/* Changes:
+1. Product Display Row
+(from 3 -> 2 items)
+*/
     .campaign {
         height: 20rem;
     }
@@ -353,7 +491,7 @@ Media Query
         height: 150px;
         font-size: 1.25rem;
     }
-    .footerContents {
+    .myFooter {
         display: none;
     }
     main .allProducts .productContainer {
@@ -361,13 +499,11 @@ Media Query
         margin: 1%;
     }
     footer {
-        /* font-size: .8rem; */
-        /* width: 100%; */
         height: 200px;
         padding-top: 20px;
         padding-bottom: 150px;
     }
-    .footerContents-mobile {
+    .myFooter-mobile {
         max-width: 75%;
         margin: auto;
         display: flex;
@@ -375,39 +511,39 @@ Media Query
         justify-content: space-evenly;
         line-height: 2em;
     }
-    .footerContents-mobile .footerResource_mobile1 a,
-    .footerContents-mobile .footerResource_mobile2 a {
+    .myFooter-mobile .footerResource-mobile1 a,
+    .myFooter-mobile .footerResource-mobile2 a {
         text-decoration: none;
         font-family: PingFangTC;
         color: #f5f5f5;
     }
-    .footerContents-mobile .footerResource_mobile1,
-    .footerContents-mobile .footerResource_mobile2 {
-        display: flex;
+    .myFooter-mobile .footerResource-mobile1,
+    .myFooter-mobile .footerResource-mobile2 {
+        /* display: flex; */
         flex-direction: column;
         margin: 0 auto;
     }
-    .footerContents-mobile .footerResource_mobile1 {
+    .myFooter-mobile .footerResource-mobile1 {
         order: 1;
         width: 30%;;
     }
-    .footerContents-mobile .footerResource_mobile2 {
+    .myFooter-mobile .footerResource-mobile2 {
         order: 2;
         width: 33%;
     }
-    .footerContents-mobile .footerSocialLinks {
+    .myFooter-mobile .footerSocialLinks {
         display: flex;
         order: 3;
         align-items: center;
         width: 33%;
     }
-    .footerContents-mobile .footerSocialLinks a {
+    .myFooter-mobile .footerSocialLinks a {
         padding: 8px;
     }
-    .footerContents-mobile .footerSocialLinks img {
+    .myFooter-mobile .footerSocialLinks img {
         height: 1.25rem;
     }
-    .footerContents-mobile .footerCopyright {
+    .myFooter-mobile .footerCopyright {
         width: 100%;
         font-family: PingFangTC;
         color: #828282;
@@ -417,11 +553,41 @@ Media Query
 }
 
 @media (max-width: 600px) {
+/* Changes:
+1. onClick Search Bar Width
+2. CampaignStory Position
+*/
     .searchInput.open {
         width: 300px;
     }
-    .campaign_text {
+    .campaignStory {
         left: 10%;
         bottom: 30%;
     }
+    main>.itemContainer .itemMainImg {
+        width: 100%;
+        margin: 0;
+    }
+    main>.itemContainer .itemDetails,
+    main>.itemContainer .itemSeparator,
+    main>.itemContainer .itemInfo {
+        width: 90%;
+    }
+    main>.itemContainer .itemDetails .itemQty>.itemDetailTitle {
+        display: none;
+    }
+    main>.itemContainer .itemDetails .itemQty .qtySelect {
+        width: 100%;
+        margin: 0;
+    }
+    main>.itemContainer .itemDetails .addCart .addCartButton {
+        width: 100%;
+    }
+    main>.itemContainer .itemInfoImg img {
+        margin: 30px 0;
+        width: 100%;
+        display: block;
+        justify-content: center;
+    }
 }
+
