@@ -22,7 +22,9 @@
 
         <div class="navFeature">
             <form class="searchContainer" onSubmit="search();return false;" >
-                <!-- add ;return false; so the page doesn't reload onSubmit -->
+                <!-- add ;return false; to onSubmit 
+                    to render the search result dynamically,
+                    without reloading the whole page altogether. -->
                 <input class="searchInput" type="text" onClick="showMobileSearch()"/>
                 <input class="searchSubmit" type="submit">
             </form>
@@ -36,14 +38,19 @@
         <a href="#" onClick="getProducts('men')">男裝</a>
         <a href="#" onClick="getProducts('accessories')">配件</a>
     </div>
-    <div class="campaign">
-        <img src="" alt="">
-        <div class="campaign_text">
-            於是
-            我也想要給你
-            一個那麼美好的自己。 
-            不朽《與自己和好如初》
+
+    <div class="keyVisualSection">
+      <!-- <div class="campaign" style="background:url(https://api.appworks-school.tw/assets/keyvisuals/201807242228.jpg)">
+        <a class ="campaignLink" href="product_id"></a>
+        <div class="campaignStory">
+            message 1111111
         </div>
+     </div>-->
+      <!-- <div class="campaignStep">
+        <a onClick="campaignSlider()" style="background-color: green" class="campaignCircle"></a>
+        <a class="campaignCircle"></a>
+        <a class="campaignCircle"></a>
+      </div>  -->
     </div>
 
     <div class="navFeature-mobile">
