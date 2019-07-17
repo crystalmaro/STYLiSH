@@ -1,4 +1,3 @@
-
 const HOST = "https://api.appworks-school.tw";
 const API_HOST = "https://api.appworks-school.tw/api/1.0";
 const API_HOST_Products = "https://api.appworks-school.tw/api/1.0/products";
@@ -92,7 +91,7 @@ function renderCampaign (data) {
   // load the first campaign data on loading
   campaignSlider(0);
   // display next campaign every 5 seconds
-  setInterval(campaignSlider, 2000) 
+  setInterval(campaignSlider, 10000) 
 };
 
 /* ==================
