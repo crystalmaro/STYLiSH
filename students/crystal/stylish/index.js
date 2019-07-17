@@ -48,6 +48,7 @@ let campaignSlider = (index) => {
     campaign[ind].classList.add("current");
     campaignCircle[ind].classList.add("current");
     ind += 1;
+    ind %= 3;
   }
 };
 
@@ -91,7 +92,7 @@ function renderCampaign (data) {
   // load the first campaign data on loading
   campaignSlider(0);
   // display next campaign every 5 seconds
-  setInterval(campaignSlider, 10000) 
+  setInterval(campaignSlider, 2000) 
 };
 
 /* ==================
