@@ -21,6 +21,9 @@ a {
     cursor: pointer;
 }
 
+.flex {
+    display: flex;
+}
 /* ====================
 Nav Bar
 ==================== */
@@ -28,7 +31,7 @@ nav {
     padding: 1.5rem 3rem;
     width: 100%;
     height: 80px;
-    display: flex;
+    /* display: flex; */
     align-items: center;
     background-color: white;
 }
@@ -39,7 +42,7 @@ nav .logo {
 
 .navProductCategory {
     padding-left: 50px;
-    display: flex;
+    /* display: flex; */
     font-size: 1.25rem;
     letter-spacing: 1.5rem;
     
@@ -68,13 +71,13 @@ nav .logo {
 .navFeature {
     right: 15px;
     position: absolute;
-    display: flex;
+    /* display: flex; */
     justify-content: flex-end;
     align-items: center;
   }
 
 .searchContainer {
-    display: flex;
+    /* display: flex; */
     padding: 0 5px;
     height: 40px;
 }
@@ -125,12 +128,12 @@ footer {
     max-width: 1000px;
     width: 90%;
     margin: auto;
-    display: flex;
+    /* display: flex; */
     align-items: center;
     justify-content: space-between;
 }
-.myFooter .footerResource {
-    display: inline-flex;
+.myFooter>.footerResource {
+    /* display: inline-flex; */
     justify-content: space-evenly;
     align-items: baseline;
 }
@@ -148,7 +151,7 @@ footer {
 }
 
 .myFooter .footerSocialLinks {
-    display: flex;
+    /* display: flex; */
     justify-content: flex-end;
 }
 
@@ -379,7 +382,7 @@ main>.allProducts {
     flex-wrap: wrap;
     width: 100%;
     max-width: 1200px;
-    margin: 0 auto;
+    margin: 20px auto;
     justify-content: center;
     align-items: flex-start;
     line-height: 2rem;
@@ -421,9 +424,6 @@ Media Query
         justify-content: center;
         height: 90px;
     }
-    .navProductCategory-mobile {
-
-    }
     nav .logo {
         flex: auto;
         margin: auto;
@@ -446,14 +446,14 @@ Media Query
         right: auto;
     }
     .navProductCategory-mobile {
-        display: flex;
-        justify-content: space-evenly;
+        /* display: flex; */
+        /* justify-content: space-evenly; */
         align-items: center;
         height: 50px;
     }
     .navProductCategory-mobile a{
         font-family: PingFangTC;
-        font-size: 1rem;
+        /* font-size: 1rem; */
         display: inline;
         color: #828282;
         border-right: 1px solid #828282;
@@ -492,7 +492,7 @@ Media Query
     }
     footer {
         font-size: .8rem;
-        width: 100%;
+        /* width: 100%; */
         padding: 50px 0 100px 0;
     }
     .myFooter .footerResource {
@@ -541,7 +541,7 @@ Media Query
     }
     .myFooter-mobile .footerResource-mobile1,
     .myFooter-mobile .footerResource-mobile2 {
-        display: flex;
+        /* display: flex; */
         flex-direction: column;
         margin: 0 auto;
     }
