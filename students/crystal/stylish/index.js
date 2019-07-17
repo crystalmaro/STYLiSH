@@ -90,7 +90,7 @@ function renderCampaign (data) {
   }
   // load the first campaign data on loading
   campaignSlider(0);
-  // display next campaign every 5 seconds
+  // display next campaign every 10 seconds
   setInterval(campaignSlider, 10000) 
 };
 
