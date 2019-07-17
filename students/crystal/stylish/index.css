@@ -12,10 +12,6 @@ a {
     text-decoration: none;
 }
 
-/* main {
-    padding-top: 20px;
-} */
-
 .pointer,
 a {
     cursor: pointer;
@@ -31,7 +27,6 @@ nav {
     padding: 1.5rem 3rem;
     width: 100%;
     height: 80px;
-    /* display: flex; */
     align-items: center;
     background-color: white;
 }
@@ -42,7 +37,6 @@ nav .logo {
 
 .navProductCategory {
     padding-left: 50px;
-    /* display: flex; */
     font-size: 1.25rem;
     letter-spacing: 1.5rem;
     
@@ -71,13 +65,11 @@ nav .logo {
 .navFeature {
     right: 15px;
     position: absolute;
-    /* display: flex; */
     justify-content: flex-end;
     align-items: center;
   }
 
 .searchContainer {
-    /* display: flex; */
     padding: 0 5px;
     height: 40px;
 }
@@ -128,12 +120,10 @@ footer {
     max-width: 1000px;
     width: 90%;
     margin: auto;
-    /* display: flex; */
     align-items: center;
     justify-content: space-between;
 }
 .myFooter>.footerResource {
-    /* display: inline-flex; */
     justify-content: space-evenly;
     align-items: baseline;
 }
@@ -151,7 +141,6 @@ footer {
 }
 
 .myFooter .footerSocialLinks {
-    /* display: flex; */
     justify-content: flex-end;
 }
 
@@ -169,13 +158,11 @@ footer {
 Product Page
 ====================  */
 main>.itemContainer {
-    vertical-align: middle;
     display: flex;
     max-width: 900px;
     flex-wrap: wrap;
     justify-content: center;
     margin: auto;
-    font-family: NotoSansCJKtc;
 }
 
 main>.itemContainer .itemMainImg {
@@ -205,11 +192,9 @@ main>.itemContainer .itemDetails .itemID {
 }
 
 main>.itemContainer .itemDetails .itemPrice {
-    font-size: 1rem;
     padding-bottom: 5px;
     border-bottom: 1px solid black;
     margin-bottom: 20px;
-    vertical-align: middle;
 }
 
 main>.itemContainer .itemDetails .itemDetailTitle {
@@ -252,7 +237,6 @@ main>.itemContainer .itemDetails .itemSizes .sizeCircle {
     background-color: #ececec;
     border-radius: 50%;
     text-align: center;
-    vertical-align: middle;
 }
 /* below is reserved for onClick classList styling */
 main>.itemContainer .itemDetails .itemSizes .sizeCircle.current {
@@ -301,7 +285,6 @@ main>.itemContainer .itemSeparator {
     display: flex;
     align-items: center;
     color: #8b572a;
-    
 }
 
 main>.itemContainer .itemSeparator hr {
@@ -315,7 +298,6 @@ main>.itemContainer .itemDescImg img {
     display: block;
 }
 
-
 /* ====================  
 Home Page: Campaign
 ====================  */
@@ -324,9 +306,11 @@ Home Page: Campaign
     height: 30rem;
     position: relative;
 }
+
 .campaign {
     display: none
 }
+
 .campaign.current {
     display: block;
     width: 100%;
@@ -377,14 +361,11 @@ Home Page: Campaign
 Home Page: Product Dispaly
 ====================  */
 main>.allProducts {
-    font-family: NotoSansCJKtc;
     display: flex;
     flex-wrap: wrap;
-    width: 100%;
     max-width: 1200px;
     margin: 20px auto;
     justify-content: center;
-    align-items: flex-start;
     line-height: 2rem;
     letter-spacing: 0.25rem;
 }
@@ -446,14 +427,11 @@ Media Query
         right: auto;
     }
     .navProductCategory-mobile {
-        /* display: flex; */
-        /* justify-content: space-evenly; */
         align-items: center;
         height: 50px;
     }
     .navProductCategory-mobile a{
         font-family: PingFangTC;
-        /* font-size: 1rem; */
         display: inline;
         color: #828282;
         border-right: 1px solid #828282;

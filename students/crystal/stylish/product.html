@@ -11,41 +11,41 @@
 </head>
 <body>
     
-  <nav>
+  <nav class="flex">
     <a href="#" onClick="getProducts('all')"><img class="logo" src="images/logo.png" alt="logo"></a>
     <!-- href="./" -->
-    <div class="navProductCategory">
+    <div class="navProductCategory flex">
       <a href="#" onClick="getProducts('women')">女裝</a>
       <!-- "./?tag=women" -->
       <a href="#" onClick="getProducts('men')">男裝</a>
       <a href="#" onClick="getProducts('accessories')">配件</a>
     </div>
-
-    <div class="navFeature">
-      <form class="searchContainer" onSubmit="search();return false;" >
+        
+    <div class="navFeature flex">
+      <form class="searchContainer flex" onSubmit="search();return false;" >
         <!-- add ;return false; to onSubmit 
             to render the search result dynamically,
             without reloading the whole page altogether. -->
-          <input class="searchInput" type="text" onClick="showMobileSearch()"/>
-          <input class="searchSubmit" type="submit">
+        <input class="searchInput" type="text" onClick="showMobileSearch()"/>
+        <input class="searchSubmit" type="submit">
       </form>
       <a href="#"><img class="iconCart" src="images/btn-shopping-cart-01-add_2019-07-10/btn-shopping-cart-01-add@3x.png" alt=""></a method="GET" action="/search">
       <a href="#"><img class="iconMember" src="images/btn-member-01-normal_2019-07-10/btn-member-01-normal@3x.png" alt=""></a>
     </div>
   </nav>
 
-  <div class="navProductCategory-mobile">
+  <div class="navProductCategory-mobile flex">
     <a href="#" onClick="getProducts('women')">女裝</a>
     <a href="#" onClick="getProducts('men')">男裝</a>
     <a href="#" onClick="getProducts('accessories')">配件</a>
   </div>
 
-  <div class="navFeature-mobile">
-    <a class="pointer" href="#">
+  <div class="navFeature-mobile flex">
+    <a href="#">
       <img src="images/btn-shopping-cart-02-normal_2019-07-11/btn-shopping-cart-02-normal.png" alt="">
       購物車
     </a>
-    <a class="pointer" href="#">
+    <a href="#">
       <img src="images/member-mobile.png" alt="">
       會員
     </a>
@@ -121,8 +121,8 @@
 
 
   <footer>
-    <div class="myFooter">
-      <div class="footerResource">
+    <div class="myFooter flex">
+      <div class="footerResource flex">
         <a href="#">關於 Stylish</a>
         <a href="#">服務條款</a>
         <a href="#">隱私政策</a>
@@ -130,7 +130,7 @@
         <a href="#">FAQ</a>
       </div>
 
-      <div class="footerSocialLinks">
+      <div class="footerSocialLinks flex">
         <a href="#"><img src="images/line.png" alt="Line"></a>
         <a href="#"><img src="images/twitter.png" alt="Twitter"></a>
         <a href="#"><img src="images/facebook.png" alt="Facebook"></a>
@@ -138,17 +138,17 @@
       </div>
     </div>
 
-    <div class="myFooter-mobile">
-      <div class="footerResource-mobile1">
+    <div class="myFooter-mobile flex">
+      <div class="footerResource-mobile1 flex">
         <a href="#">關於 Stylish</a>
         <a href="#">服務條款</a>
         <a href="#">隱私政策</a>
       </div>
-      <div class="footerResource-mobile2">
+      <div class="footerResource-mobile2 flex">
         <a href="#">聯絡我們</a>
         <a href="#">FAQ</a>
       </div>
-      <div class="footerSocialLinks">
+      <div class="footerSocialLinks flex">
         <a href="#"><img src="images/line.png" alt="Line"></a>
         <a href="#"><img src="images/twitter.png" alt="Twitter"></a>
         <a href="#"><img src="images/facebook.png" alt="Facebook"></a>
