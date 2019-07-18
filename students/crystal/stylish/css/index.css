@@ -10,6 +10,7 @@ body {
 
 a {
     text-decoration: none;
+    color: inherit;
 }
 
 .pointer,
@@ -63,6 +64,7 @@ nav .logo {
 }
 
 .navFeature {
+    display: flex;
     right: 15px;
     position: absolute;
     justify-content: flex-end;
@@ -78,7 +80,7 @@ nav .logo {
     border-radius: 20px;
     color: #8b572a;
     font-size: 1rem;
-    background-image: url("images/search.png");
+    background-image: url("../images/search.png");
     background-position: right;
     background-repeat: no-repeat;
     background-color: transparent;
@@ -294,7 +296,7 @@ main>.itemContainer .itemSeparator hr {
 
 main>.itemContainer .itemInfoImg img {
     margin: 30px 0;
-    width: 45%;
+    width: 100%;
     display: block;
 }
 
@@ -425,6 +427,7 @@ Media Query
     }
     .navFeature.open {
         right: auto;
+        display: flex;
     }
     .navProductCategory-mobile {
         align-items: center;
@@ -590,4 +593,3 @@ Media Query
         justify-content: center;
     }
 }
-
