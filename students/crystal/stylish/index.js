@@ -26,38 +26,18 @@ function ajax(src, callback) {
 // another method: window.addEventListener()
 ajax(`${API_HOST_Products}/${type}`, renderProduct);
 ajax(`${API_HOST}/marketing/campaigns`, renderCampaign)
+// ajax(product/detailURL, renderItem);
 
 /* ==================
 Marketing Campaign
 ================== */
-let campaignSlider = (index) => {
-  let campaign = document.getElementsByClassName("campaign");
-  let campaignCircle = document.getElementsByClassName("campaignCircle");
-
-  for (let i = 0; i < 3; i++) {
-    campaign[i].classList.remove("current");
-    campaignCircle[i].classList.remove("current");
-  }
-  // check if index is undefined (param passed by onClick action)
-  if (index !== undefined) {
-    campaign[index].classList.add("current");
-    campaignCircle[index].classList.add("current");
-  } else {
-  // if undefined, then (ind++ % 3)
-    campaign[ind].classList.add("current");
-    campaignCircle[ind].classList.add("current");
-    ind += 1;
-    ind %= 3;
-  }
-};
-
-// === (initial display:hide - show using campaignSlider()
+// === initial display:hide - show using campaignSlider()
 function renderCampaign (data) {
   let campaignData = data.data
   let keyVisualSection = document.querySelector(".keyVisualSection");
   keyVisualSection.className = "keyVisualSection";
-  for (let i = 0; i < campaignData.length; i++) {
 
+  for (let i = 0; i < campaignData.length; i++) {
     // campaign container
     let campaign = document.createElement("div");
     campaign.className = "campaign";
@@ -73,25 +53,52 @@ function renderCampaign (data) {
     let campaignStory = document.createElement("div");
     campaignStory.className = "campaignStory";
     campaignStory.innerHTML = campaignData[i].story.replace(/\r\n/g, "<br/>");
-    console.log
     campaign.appendChild(campaignStory);
 
     keyVisualSection.appendChild(campaign);
   }
+
     // campaign circle toggle
   let campaignStep = document.createElement("div");
   campaignStep.className = "campaignStep";
   for (let i = 0; i < campaignData.length; i++) {
-      let campaignCircle = document.createElement("a");
-      campaignCircle.setAttribute("onClick", `campaignSlider(${i})`);
-      campaignCircle.className = "campaignCircle";
-      campaignStep.appendChild(campaignCircle);
-      keyVisualSection.appendChild(campaignStep);
+    let campaignCircle = document.createElement("a");
+    // add onClick func to campaignCircle
+    // assign index i into campaignSlider()
+    campaignCircle.setAttribute("onClick", `campaignSlider(${i})`);
+    campaignCircle.className = "campaignCircle";
+    campaignStep.appendChild(campaignCircle);
+    keyVisualSection.appendChild(campaignStep);
   }
   // load the first campaign data on loading
   campaignSlider(0);
   // display next campaign every 10 seconds
   setInterval(campaignSlider, 10000) 
+};
+
+// onClick function for campaignCicle
+const campaignSlider = (index) => {
+  let campaign = document.getElementsByClassName("campaign");
+  let campaignCircle = document.getElementsByClassName("campaignCircle");
+  // initially, remove all 'current' CSS styling
+  for (let i = 0; i < 3; i++) {
+    campaign[i].classList.remove("current");
+    campaignCircle[i].classList.remove("current");
+  }
+  // check if there's an index 0,1,2 (param passed by onClick action)
+  if (index !== undefined) {
+    // display campaign image and story
+    campaign[index].classList.add("current");
+    // indicate current campaignCircle by changing circle color
+    campaignCircle[index].classList.add("current");
+  } else {
+  // if undefined (no click action), then add to the globally defined ind
+  // (ind++ % 3) to make endless loop, because campaign.length < 3
+    campaign[ind].classList.add("current");
+    campaignCircle[ind].classList.add("current");
+    ind += 1;
+    ind %= 3;
+  }
 };
 
 /* ==================
@@ -132,7 +139,6 @@ function renderProduct(data) {
       productContainer.setAttribute("class", "productContainer");
       productContainer.setAttribute("href", `product.html?id=${product[i].id}`);
 
-  
     // div.productImage
     let productImage = document.createElement("img");
     productImage.setAttribute("class", "productImage");
