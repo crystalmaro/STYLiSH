@@ -31,7 +31,6 @@ function renderItem (data) {
   // itemContainer.appendChild(itemSeparator)
   // itemMainImg.appendChild("itemSeparator")
 
-
   // @todo A) itemMainImg
   let itemMainImg = document.createElement("div");
   itemMainImg.className = "itemMainImg";
@@ -46,25 +45,49 @@ function renderItem (data) {
   let itemDetails = document.createElement("div");
   itemDetails.className = "itemDetails";
   itemContainer.appendChild(itemDetails);
-
+  // 產品標題
   let itemName = document.createElement("div")
   itemName.className = "itemName";
   itemName.innerHTML = item.title;
- itemDetails.appendChild(itemName);
-
+  itemDetails.appendChild(itemName);
+  // 產品 ID#
   let itemID = document.createElement("div");
   itemID.className = "itemID";
   itemID.innerHTML = item.id;
   itemDetails.appendChild(itemID);
-
+  // 產品價格
   let itemPrice = document.createElement("div");
   itemPrice.className = "itemPrice";
-
-    console.log("3. itemPrice: " + item.price);
-    // create parent color element
-    // loop itemColors to create individual itemColorChip
-    console.log("4. itemColors - itemColorChip: " + item.colors[0].code);    // create parent size element
-    // loop itemSizes to create individual sizeCircle
+  itemPrice.appendChild(document.createTextNode(`TWD. ${item.price}`));
+  itemDetails.appendChild(itemPrice);
+  // 產品顏色
+  let itemColors = document.createElement("div");
+  itemColors.className = "itemColors";
+//   itemColors.appendChild(document.createTextNode("顏色")).classList = "itemDetailTitle";
+  colorTitle = document.createElement("div")
+  colorTitle.appendChild(document.createTextNode(`顏色`));
+  colorTitle.className = "itemDetailTitle";
+  itemColors.appendChild(colorTitle);
+  itemDetails.appendChild(itemColors);
+  
+  // 產品顏色 loop
+  item.colors.forEach(color => {
+    itemColorChip = document.createElement("div");
+    itemColorChip.className = "itemColorChip pointer"
+    itemColorChip.setAttribute("style", "background-color:#" + color.code);
+    itemColors.appendChild(itemColorChip);
+  });
+  // 產品尺寸
+  let itemSizes = document.createElement("div");
+  itemSizes.className = "itemSizes";
+  itemDetails.appendChild(itemSizes);
+  // 產品尺寸 loop
+  item.sizes.forEach(sizing => {
+      sizeCircle = document.createElement("div");
+      sizeCircle.className = "sizeCircle pointer";
+      sizeCircle.innerHTML = sizing;
+      itemSizes.appendChild(sizeCircle);
+  });
     console.log("5. itemSizes - sizeCircle: " + item.sizes[0]);
     // create dummy 6. itemQty div for now
     // create dummy 7. addCart div for now
