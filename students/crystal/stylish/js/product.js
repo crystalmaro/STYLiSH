@@ -15,8 +15,8 @@ function getParamName(name, url) {
     if (!results[2]) return '';
     return decodeURIComponent(results[2].replace(/\+/g, ' '));
 }
-console.log(id);
-console.log(`${API_HOST_Item}${id}`)
+// console.log(id);
+// console.log(`${API_HOST_Item}${id}`)
 // https://api.appworks-school.tw/api/1.0/products/details?id=123456789
 
 
@@ -26,61 +26,26 @@ function renderItem (data) {
   let itemContainer = document.querySelector(".itemContainer");
   let item = data.data;
 
-  // @todo C) itemSeparator 
-  let itemSeparator = document.querySelector(".itemSeparator");
-  // itemContainer.appendChild(itemSeparator)
-  // itemMainImg.appendChild("itemSeparator")
-
   // @todo A) itemMainImg
-  let itemMainImg = document.createElement("div");
-  itemMainImg.className = "itemMainImg";
+  let itemMainImg = document.querySelector(".itemMainImg");
   let mainImg = document.createElement("img");
   mainImg.setAttribute("src", item.main_image);
   itemMainImg.appendChild(mainImg);
-  itemContainer.appendChild(itemMainImg);
-  // itemSeparator.insertBefore(itemMainImg, itemSeparator.childNodes[0]);
 
- /* @todo B) itemDetails
-    itemContainer.appendChild(itemDetails)*/
-  let itemDetails = document.createElement("div");
-  itemDetails.className = "itemDetails";
-  itemContainer.appendChild(itemDetails);
-  // 產品標題
-  let itemName = document.createElement("div")
-  itemName.className = "itemName";
-  itemName.innerHTML = item.title;
-  itemDetails.appendChild(itemName);
-  // 產品 ID#
-  let itemID = document.createElement("div");
-  itemID.className = "itemID";
-  itemID.innerHTML = item.id;
-  itemDetails.appendChild(itemID);
-  // 產品價格
-  let itemPrice = document.createElement("div");
-  itemPrice.className = "itemPrice";
-  itemPrice.appendChild(document.createTextNode(`TWD. ${item.price}`));
-  itemDetails.appendChild(itemPrice);
-  // 產品顏色
-  let itemColors = document.createElement("div");
-  itemColors.className = "itemColors";
-//   itemColors.appendChild(document.createTextNode("顏色")).classList = "itemDetailTitle";
-  colorTitle = document.createElement("div")
-  colorTitle.appendChild(document.createTextNode(`顏色`));
-  colorTitle.className = "itemDetailTitle";
-  itemColors.appendChild(colorTitle);
-  itemDetails.appendChild(itemColors);
-  
+ // @todo B) itemDetails (upper right section)
+  document.querySelector(".itemName").textContent = item.title;
+  document.querySelector(".itemID").textContent = item.id;
+  document.querySelector(".itemPrice").textContent = `TWD. ${item.price}`;
   // 產品顏色 loop
+  let itemColors = document.querySelector(".itemColors");
   item.colors.forEach(color => {
     itemColorChip = document.createElement("div");
     itemColorChip.className = "itemColorChip pointer"
     itemColorChip.setAttribute("style", "background-color:#" + color.code);
     itemColors.appendChild(itemColorChip);
   });
-  // 產品尺寸
-  let itemSizes = document.createElement("div");
-  itemSizes.className = "itemSizes";
-  itemDetails.appendChild(itemSizes);
+  // 產品尺寸 loop
+  let itemSizes = document.querySelector(".itemSizes");
   // 產品尺寸 loop
   item.sizes.forEach(sizing => {
       sizeCircle = document.createElement("div");
@@ -88,17 +53,22 @@ function renderItem (data) {
       sizeCircle.innerHTML = sizing;
       itemSizes.appendChild(sizeCircle);
   });
-    console.log("5. itemSizes - sizeCircle: " + item.sizes[0]);
-    // create dummy 6. itemQty div for now
-    // create dummy 7. addCart div for now
-    console.log("8. itemSummary: " + item.texture);
-    // app.get("#product-summary").innerHTML=product.note+"<br/><br/>"+product.texture+"<br/>"+product.description.replace(/\r\n/g, "<br/>")+"<br/><br/>清洗："+product.wash+"<br/>產地："+product.place;
-
+  
+  document.querySelector(".itemNote").innerHTML = `*${item.note}`;
+  document.querySelector(".itemTexture").innerHTML = item.texture;
+  document.querySelector(".itemDesc").innerHTML = item.description.replace(/\r\n/g, "<br/>");;
+  document.querySelector(".itemWash").innerHTML = `清洗：${item.wash}`;
+  document.querySelector(".itemPlace").innerHTML = `產地：${item.place}`;
    
+  // @todo D) itemInfo
+  document.querySelector(".itemInfoStory").innerHTML = item.story;
+  let itemInfoImg = document.querySelector(".itemInfoImg");
+  item.images.forEach(img => {
+    itemImg = document.createElement("img");
+    itemImg.setAttribute("src", img)
+    itemInfoImg.appendChild(itemImg);
+  });
 
-    /* @todo D) itemInfo
-        itemContainer.appendChild(itemInfo)*/
-
-}
+};
 
 
