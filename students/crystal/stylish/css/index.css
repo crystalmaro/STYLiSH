@@ -1,0 +1,595 @@
+/* ====== Basic Layout ====== */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: auto;
+    /* expands background color width */
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.pointer,
+a {
+    cursor: pointer;
+}
+
+.flex {
+    display: flex;
+}
+/* ====================
+Nav Bar
+==================== */
+nav {
+    padding: 1.5rem 3rem;
+    width: 100%;
+    height: 80px;
+    align-items: center;
+    background-color: white;
+}
+
+nav .logo {
+    height: 3rem;
+}
+
+.navProductCategory {
+    padding-left: 50px;
+    font-size: 1.25rem;
+    letter-spacing: 1.5rem;
+    
+  }
+.navProductCategory a:not(:last-child) {
+    border-right: 1px solid #3f3a3a;
+}
+
+.navProductCategory a {
+    color: #3f3a3a;
+    font-family: PingFangTC;
+    margin-left: 25px;
+}
+
+.navProductCategory a,
+.navProductCategory-mobile a {
+    font-family: PingFangTC;
+}
+
+.navProductCategory-mobile a,
+.myFooter-mobile,
+.navFeature-mobile {
+    display: none;
+}
+
+.navFeature {
+    display: flex;
+    right: 15px;
+    position: absolute;
+    justify-content: flex-end;
+    align-items: center;
+  }
+
+.searchContainer {
+    padding: 0 5px;
+    height: 40px;
+}
+.searchInput {
+    border: solid 1px #979797;
+    border-radius: 20px;
+    color: #8b572a;
+    font-size: 1rem;
+    background-image: url("../images/search.png");
+    background-position: right;
+    background-repeat: no-repeat;
+    background-color: transparent;
+    width: 200px;
+    padding-left: 10px;
+}
+.searchSubmit {
+    display: none;
+}
+
+.iconCart,
+.iconMember {
+    margin-left: 10px;
+    width: 44px;
+    height: 44px;
+    object-fit: contain;
+}
+
+.navProductCategory-mobile {
+    width: 100%;
+    height: 20px;
+    background-color: rgb(49,53,56);
+    border: 0;
+    margin: 0;
+}
+
+/* ==================== 
+Footer
+==================== */
+footer {
+    width: 100%;
+    height: 115px;
+    background-color: rgb(49,53,56);
+    bottom: 0;
+}
+
+.myFooter {
+    height: 100%;
+    max-width: 1000px;
+    width: 90%;
+    margin: auto;
+    align-items: center;
+    justify-content: space-between;
+}
+.myFooter>.footerResource {
+    justify-content: space-evenly;
+    align-items: baseline;
+}
+
+.myFooter .footerResource a {
+    text-align: center;
+    width: 120px;
+    text-decoration: none;
+    font-family: PingFangTC;
+    color: #f5f5f5;
+}
+
+.myFooter .footerResource a:not(:last-child) {
+    border-right: 1px solid #f5f5f5;
+}
+
+.myFooter .footerSocialLinks {
+    justify-content: flex-end;
+}
+
+.myFooter .footerSocialLinks a {
+    padding-right: 1rem;
+}
+
+.myFooter .footerSocialLinks p {
+    font-family: PingFangTC;
+    font-size: 12px;
+    color: #828282;
+}
+
+/* ====================  
+Product Page
+====================  */
+main>.itemContainer {
+    display: flex;
+    max-width: 900px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: auto;
+}
+
+main>.itemContainer .itemMainImg {
+    width: 50%;
+    margin: 2%;
+}
+
+main>.itemContainer .itemDetails {
+    width: 40%;
+    margin: 2%;
+}
+
+main>.itemContainer .itemMainImg img {
+    width: 100%;
+}
+
+main>.itemContainer .itemDetails .itemName {
+    letter-spacing: 4px;
+    font-size: 1.25rem;
+}
+
+main>.itemContainer .itemDetails .itemID {
+    letter-spacing: 2px;
+    font-size: 12px;
+    color: #bababa;
+    margin: 5px 0 15px 0;
+}
+
+main>.itemContainer .itemDetails .itemPrice {
+    padding-bottom: 5px;
+    border-bottom: 1px solid black;
+    margin-bottom: 20px;
+}
+
+main>.itemContainer .itemDetails .itemDetailTitle {
+    display: inline-block;
+    padding-right: 15px;
+    border-right: 1px solid black;
+    margin-right: 20px;
+    vertical-align: middle;
+}
+
+main>.itemContainer .itemDetails .itemColors,
+main>.itemContainer .itemDetails .itemSizes,
+main>.itemContainer .itemDetails .itemQty,
+main>.itemContainer .itemDetails .addCart {
+    margin-bottom: 20px;
+    vertical-align: middle;
+}
+
+main>.itemContainer .itemDetails .itemColors .itemColorChip {
+    box-shadow: 0 0 1px #bbbbbb;
+    vertical-align: middle;
+    border: 3px solid white;
+}
+/* below is reserved for onClick classList styling */
+main>.itemContainer .itemDetails .itemColors .itemColorChip.current {
+    outline: 1px solid #979797;
+}
+
+/* vertically align colorChips and sizeCirlces */
+main>.itemContainer .itemDetails .itemColors .itemColorChip,
+main>.itemContainer .itemDetails .itemSizes .sizeCircle {
+    display: inline-block;
+    height: 25px;
+    width: 25px;
+    margin: 0 5px;
+}
+
+main>.itemContainer .itemDetails .itemSizes .sizeCircle {
+    line-height: 25px;
+    background-color: #ececec;
+    border-radius: 50%;
+    text-align: center;
+}
+/* below is reserved for onClick classList styling */
+main>.itemContainer .itemDetails .itemSizes .sizeCircle.current {
+    background-color: black;
+    color: white;
+}
+
+main>.itemContainer .itemDetails .itemQty .qtySelect {
+    display: inline-flex;
+    width: 130px;
+    padding: 5px;
+    border: 1px solid #979797;
+    margin: 0 5px;
+    text-align: center;
+}
+main>.itemContainer .itemDetails .itemQty .qtySelect .qtyModify {
+    flex: none; /* grow:0 shrink:0 basis:auto */
+    width: 25px;
+}
+
+main>.itemContainer .itemDetails .itemQty .qtySelect .qtyValue {
+    flex: auto; /* grow:1 shrink:1 basis:auto */
+    color: #8b572a;
+}
+
+main>.itemContainer .itemDetails .addCart .addCartButton {
+    width: 300px;
+    max-width: 100%;
+    padding: 10px;
+    color: white;
+    background-color: black;
+    font-size: 1rem;
+    letter-spacing: 4px;
+}
+
+main>.itemContainer .itemSeparator,
+main>.itemContainer .itemInfo {
+    width: 94%;
+}
+
+main>.itemContainer .itemSeparator {
+    margin: 30px 0;
+}
+
+main>.itemContainer .itemSeparator {
+    display: flex;
+    align-items: center;
+    color: #8b572a;
+}
+
+main>.itemContainer .itemSeparator hr {
+    width: 80%;
+    margin-right: 0;
+}
+
+main>.itemContainer .itemInfoImg img {
+    margin: 30px 0;
+    width: 45%;
+    display: block;
+}
+
+/* ====================  
+Home Page: Campaign
+====================  */
+.keyVisualSection {
+    width: 100%;
+    height: 30rem;
+    position: relative;
+}
+
+.campaign {
+    display: none
+}
+
+.campaign.current {
+    display: block;
+    width: 100%;
+    height: 30rem;
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    position: absolute;
+}
+
+.campaignLink {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.campaignStory {
+    width: 300px;
+    height: 200px;
+    font-size: 1.5rem;
+    line-height: 1.9;
+    position: absolute;
+    left: 20%;
+    bottom: 20%;
+}
+
+.campaignStep {
+    position:absolute;
+    text-align:center;
+    bottom: 5px;
+    width: 100%;
+}
+
+.campaignCircle {
+    width: 10px;
+    height: 10px;
+    margin: 0px 10px;
+    border-radius: 50%;
+    background-color: #979797;
+    display: inline-block;
+    vertical-align: middle;
+}
+.campaignCircle.current {
+    background-color: black;
+}
+
+/* ====================  
+Home Page: Product Dispaly
+====================  */
+main>.allProducts {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    margin: 20px auto;
+    justify-content: center;
+    line-height: 2rem;
+    letter-spacing: 0.25rem;
+}
+main>.allProducts .productContainer {
+    width: 28%;
+    margin: 2%;
+}
+
+main>.allProducts .productContainer .productImage {
+    width: 100%;
+}
+
+main>.allProducts .productContainer .allColors .colorChip {
+    width: 1rem;
+    height: 1rem;
+    display: inline-block;
+    margin-right: .5rem;
+    box-shadow: 0 0 1px #bbbbbb;
+}
+
+/* ==================== 
+Media Query 
+====================  */
+@media (max-width: 1000px) {
+/* Changes:
+1. Product Category
+2. Search Bar
+3. Shopping Cart & Member
+*/
+    .navProductCategory,
+    .iconCart,
+    .iconMember{
+        display: none;
+    }
+    nav {
+        display: flex;
+        justify-content: center;
+        height: 90px;
+    }
+    nav .logo {
+        flex: auto;
+        margin: auto;
+        height: 2.5rem;
+    }
+    .searchInput {
+        border: none;
+        width: 50px;
+        color: transparent;
+    }
+    .searchInput.open {
+        display: block;
+        width: 500px;
+        background-color: white;
+        border: solid 1px #979797;
+        padding: 0 10px;
+        color: #8b572a;
+    }
+    .navFeature.open {
+        right: auto;
+        display: flex;
+    }
+    .navProductCategory-mobile {
+        align-items: center;
+        height: 50px;
+    }
+    .navProductCategory-mobile a{
+        font-family: PingFangTC;
+        display: inline;
+        color: #828282;
+        border-right: 1px solid #828282;
+        flex: auto;
+        text-align: center;
+    }
+    .navProductCategory-mobile a:last-child {
+        border-right: none;
+    }
+    .navFeature-mobile {
+        background-color: rgb(49,53,56);
+        color: #ffffff;
+        display: flex;
+        position: fixed;
+        width: 100%;
+        bottom: 0;
+        padding: 10px 0px;
+        align-items: center;
+    }
+    .navFeature-mobile a {
+        text-decoration: none;
+        color: #ffffff;
+        display: block;
+        flex: auto;
+        text-align: center;
+    }
+    .navFeature-mobile a:first-child {
+        border-right: 1px solid #f5f5f5;
+    }
+    .navFeature-mobile img {
+        vertical-align: middle;
+    }
+    .campaign_text {
+        left: 15%;
+        bottom: 20%;
+    }
+    footer {
+        font-size: .8rem;
+        /* width: 100%; */
+        padding: 50px 0 100px 0;
+    }
+    .myFooter .footerResource {
+        width: 55%;
+    }
+}
+
+@media (max-width: 800px) {
+/* Changes:
+1. Product Display Row
+(from 3 -> 2 items)
+*/
+    .campaign {
+        height: 20rem;
+    }
+    .campaign_text {
+        width: 200px;
+        height: 150px;
+        font-size: 1.25rem;
+    }
+    .myFooter {
+        display: none;
+    }
+    main .allProducts .productContainer {
+        width: 45%;
+        margin: 1%;
+    }
+    footer {
+        height: 200px;
+        padding-top: 20px;
+        padding-bottom: 150px;
+    }
+    .myFooter-mobile {
+        max-width: 75%;
+        margin: auto;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+        line-height: 2em;
+    }
+    .myFooter-mobile .footerResource-mobile1 a,
+    .myFooter-mobile .footerResource-mobile2 a {
+        text-decoration: none;
+        font-family: PingFangTC;
+        color: #f5f5f5;
+    }
+    .myFooter-mobile .footerResource-mobile1,
+    .myFooter-mobile .footerResource-mobile2 {
+        /* display: flex; */
+        flex-direction: column;
+        margin: 0 auto;
+    }
+    .myFooter-mobile .footerResource-mobile1 {
+        order: 1;
+        width: 30%;;
+    }
+    .myFooter-mobile .footerResource-mobile2 {
+        order: 2;
+        width: 33%;
+    }
+    .myFooter-mobile .footerSocialLinks {
+        display: flex;
+        order: 3;
+        align-items: center;
+        width: 33%;
+    }
+    .myFooter-mobile .footerSocialLinks a {
+        padding: 8px;
+    }
+    .myFooter-mobile .footerSocialLinks img {
+        height: 1.25rem;
+    }
+    .myFooter-mobile .footerCopyright {
+        width: 100%;
+        font-family: PingFangTC;
+        color: #828282;
+        order: 4;
+        text-align: center;
+    }
+}
+
+@media (max-width: 600px) {
+/* Changes:
+1. onClick Search Bar Width
+2. CampaignStory Position
+*/
+    .searchInput.open {
+        width: 300px;
+    }
+    .campaignStory {
+        left: 10%;
+        bottom: 30%;
+    }
+    main>.itemContainer .itemMainImg {
+        width: 100%;
+        margin: 0;
+    }
+    main>.itemContainer .itemDetails,
+    main>.itemContainer .itemSeparator,
+    main>.itemContainer .itemInfo {
+        width: 90%;
+    }
+    main>.itemContainer .itemDetails .itemQty>.itemDetailTitle {
+        display: none;
+    }
+    main>.itemContainer .itemDetails .itemQty .qtySelect {
+        width: 100%;
+        margin: 0;
+    }
+    main>.itemContainer .itemDetails .addCart .addCartButton {
+        width: 100%;
+    }
+    main>.itemContainer .itemInfoImg img {
+        margin: 30px 0;
+        width: 100%;
+        display: block;
+        justify-content: center;
+    }
+}
