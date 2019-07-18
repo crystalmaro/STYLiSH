@@ -128,8 +128,10 @@ function renderProduct(data) {
   }
 
   for (let i = 0; i < product.length; i++) {
-    let productContainer = document.createElement("div");
+    let productContainer = document.createElement("a");
       productContainer.setAttribute("class", "productContainer");
+      productContainer.setAttribute("href", `${API_HOST_Products}/details?id=${product[i].id}`);
+
   
     // div.productImage
     let productImage = document.createElement("img");
