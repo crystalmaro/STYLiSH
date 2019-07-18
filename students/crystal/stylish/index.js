@@ -66,7 +66,7 @@ function renderCampaign (data) {
     // campaign clickable background image
     let campaignLink = document.createElement("a");
     campaignLink.className = "campaignLink";
-    campaignLink.setAttribute("href", `${HOST}/product.html?id=${campaignData[i].product_id}`)
+    campaignLink.setAttribute("href", `product.html?id=${campaignData[i].product_id}`)
     campaign.appendChild(campaignLink);
     
     // campaign story text
@@ -130,7 +130,7 @@ function renderProduct(data) {
   for (let i = 0; i < product.length; i++) {
     let productContainer = document.createElement("a");
       productContainer.setAttribute("class", "productContainer");
-      productContainer.setAttribute("href", `${API_HOST_Products}/details?id=${product[i].id}`);
+      productContainer.setAttribute("href", `product.html?id=${product[i].id}`);
 
   
     // div.productImage
