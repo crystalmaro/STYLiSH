@@ -163,7 +163,7 @@ function handleScroll(e) {
     }
     ticking = true;
   }
-// 真測是不是快滑到最下面
+// 偵測是不是快滑到最下面
 let endlessScroll = () => {
   let windowHeight = window.innerHeight;
   let remainingFooter = document.querySelector("footer").getBoundingClientRect().top;
