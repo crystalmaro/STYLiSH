@@ -86,6 +86,9 @@ const getProducts = (inputType) => {
 };
 
 // === Product display rendering dynamically (createElement)
+// const renderProduct = () => { 
+// error: can't access in lin3 3 before initialization
+// isnt' it just changing from func declaration to arrow func (?)
 function renderProduct(data) {
   let allProducts = document.querySelector(".allProducts");
   let product = data.data;
