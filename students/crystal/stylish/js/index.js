@@ -48,7 +48,7 @@ function renderCampaign (data) {
   // load the first campaign data on loading
   campaignSlider(0);
   // display next campaign every 10 seconds
-  setInterval(campaignSlider, 10000) 
+  setInterval(campaignSlider, 2000) 
 };
 
 // onClick function for campaignCicle
@@ -59,7 +59,7 @@ const campaignSlider = (index) => {
   for (let i = 0; i < 3; i++) {
     campaign[i].classList.remove("current");
     campaignCircle[i].classList.remove("current");
-  }
+  };
   // check if there's an index 0,1,2 (param passed by onClick action)
   if (index !== undefined) {
     // display campaign image and story

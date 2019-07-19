@@ -79,11 +79,28 @@ function renderItem (data) {
   });
 };
 
-// const selectedColor = (index) => {
-//   let itemColorChip = document.querySelector(".itemColorChip");
-//   for (let i = 0; i < 3; i++) {
-//     itemColorChip[i].classList.remove("current");
-//   };
-//   if (itemColorChip.className === )
-  
-// };
+const selectedColor = (index) => {
+  let itemColorChip = document.getElementsByClassName("itemColorChip");
+  for (let i = 0; i < 3; i++) {
+    itemColorChip[i].classList.remove("current");
+    if (index !== undefined) {
+      itemColorChip[index].classList.add("current");
+    } 
+    else {
+      itemColorChip[index].classList.remove("current");
+    }
+  }
+};
+
+const selectedSize = (index) => {
+  let sizeCircle = document.getElementsByClassName("sizeCircle");
+  for (let i = 0; i < 3; i++) {
+    sizeCircle[i].classList.remove("current");
+    if (index !== undefined) {
+      sizeCircle[index].classList.add("current");
+    } 
+    else {
+      sizeCircle[index].classList.remove("current");
+    }
+  }
+};
