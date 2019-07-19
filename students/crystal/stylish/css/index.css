@@ -245,6 +245,10 @@ main>.itemContainer .itemDetails .itemSizes .sizeCircle.current {
     background-color: black;
     color: white;
 }
+/* below is reserved for OOS (out-of-stock) classList styling */
+main>.itemContainer .itemDetails .itemSizes .sizeCircle.noStock {
+    opacity: 0.25;
+}
 
 main>.itemContainer .itemDetails .itemQty .qtySelect {
     display: inline-flex;

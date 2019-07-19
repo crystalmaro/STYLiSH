@@ -1,3 +1,4 @@
+
 const id = getParamName('id');
 ajax(`${API_HOST_Item}${id}`, renderItem);
 
@@ -32,20 +33,36 @@ function renderItem (data) {
   document.querySelector(".itemPrice").textContent = `TWD. ${item.price}`;
   // item color loop
   let itemColors = document.querySelector(".itemColors");
-  item.colors.forEach(color => {
-    itemColorChip = document.createElement("div");
-    itemColorChip.className = "itemColorChip pointer"
-    itemColorChip.setAttribute("style", "background-color:#" + color.code);
+  // item.colors.forEach(color => {
+  //   itemColorChip = document.createElement("div");
+  //   itemColorChip.className = "itemColorChip pointer"
+  //   itemColorChip.setAttribute("style", "background-color:#" + color.code);
+  //   // wip: 7/19 add clicked UI function
+  //   itemColorChip.setAttribute("onClick", `selectedColor(${color})`)
+  //   itemColors.appendChild(itemColorChip);
+  // });
+  for (let i = 0; i < item.colors.length; i++) {
+    let itemColorChip = document.createElement("div");
+    itemColorChip.className = "itemColorChip";
+    itemColorChip.setAttribute("style", `background-color:#${item.colors[i].code}`);
+    itemColorChip.setAttribute("onClick", `selectedColor(${i})`);
     itemColors.appendChild(itemColorChip);
-  });
+  }
   // item size loop
   let itemSizes = document.querySelector(".itemSizes");
-  item.sizes.forEach(sizing => {
-      sizeCircle = document.createElement("div");
-      sizeCircle.className = "sizeCircle pointer";
-      sizeCircle.innerHTML = sizing;
-      itemSizes.appendChild(sizeCircle);
-  });
+  // item.sizes.forEach(sizing => {
+  //     sizeCircle = document.createElement("div");
+  //     sizeCircle.className = "sizeCircle pointer";
+  //     sizeCircle.innerHTML = sizing;
+  //     itemSizes.appendChild(sizeCircle);
+  // });
+  for (let i = 0; i < item.sizes.length; i++) {
+    let sizeCircle = document.createElement("div");
+    sizeCircle.className = "sizeCircle";
+    sizeCircle.innerHTML = item.sizes[i];
+    sizeCircle.setAttribute("onClick", `selectedSize(${i})`)
+    itemSizes.appendChild(sizeCircle);
+  }
   document.querySelector(".itemNote").innerHTML = `*${item.note}`;
   document.querySelector(".itemTexture").innerHTML = item.texture;
   document.querySelector(".itemDesc").innerHTML = item.description.replace(/\r\n/g, "<br/>");;
@@ -61,3 +78,12 @@ function renderItem (data) {
     itemInfoImg.appendChild(itemImg);
   });
 };
+
+// const selectedColor = (index) => {
+//   let itemColorChip = document.querySelector(".itemColorChip");
+//   for (let i = 0; i < 3; i++) {
+//     itemColorChip[i].classList.remove("current");
+//   };
+//   if (itemColorChip.className === )
+  
+// };
