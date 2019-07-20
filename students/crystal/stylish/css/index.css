@@ -261,6 +261,7 @@ main>.itemContainer .itemDetails .itemQty .qtySelect {
 main>.itemContainer .itemDetails .itemQty .qtySelect .qtyModify {
     flex: none; /* grow:0 shrink:0 basis:auto */
     width: 25px;
+    border: none;
 }
 
 main>.itemContainer .itemDetails .itemQty .qtySelect .qtyValue {
