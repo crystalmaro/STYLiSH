@@ -4,6 +4,7 @@ let currentColorID;
 let currentSizeID;
 let currentStock = 0;
 let variants;
+let sizeList;
 
 /* ==================
 take Parameter by page URL
@@ -24,6 +25,7 @@ Render Product Detail based on Query String
 function renderItem (data) {
   let itemContainer = document.querySelector(".itemContainer");
   let item = data.data;
+  // assign size/color variants to globally declared variants for later use
   variants = item.variants;
 
   // A) itemMainImg (upper left section)
@@ -69,6 +71,8 @@ function renderItem (data) {
         break;
     }
   };
+  // assign to global sizeList, to use for checkStock(), to disable size without stock
+  sizeList = itemSizes.querySelectorAll(".sizeCircle");
   currentSizeID = document.querySelectorAll(".current")[1].id;
   document.querySelector(".itemNote").innerHTML = `*${item.note}`;
   document.querySelector(".itemTexture").innerHTML = item.texture;
@@ -106,7 +110,7 @@ qtyReset();
   }
   // check and update stock on each click
   fetchStock();
-  console.log(currentColorID);
+  checkOutOfStock();
 };
 
 const selectedSize = (index) => {
@@ -122,30 +126,77 @@ const selectedSize = (index) => {
 
   // check and update stock on each click
   fetchStock();
-  // console.log(currentSizeID);
 };
 
 function fetchStock() {
   let stockArray = variants.filter(item => 
     (currentColorID === item.color_code && 
-    currentSizeID === item.size && 
-    item.stock > 0));
+    currentSizeID === item.size 
+    ));
 
-  if (stockArray.length > 0) {
+// stockArray.length > 0
+  if (stockArray[0].stock > 0) {
     currentStock = stockArray[0].stock
   } else {
     currentStock = 0;
   }
-  console.log("stockArray: " + stockArray)
+  console.log(stockArray)
+  console.log(stockArray[0].stock)
+  console.log(stockArray[0].size)
+  console.log(sizeList[1].id)
   console.log(currentStock)
+  console.log(currentColorID)
+  console.log(variants[0].color_code)
 }
 
-function checkStock() {
+function checkOutOfStock () {
+  //@todo get a stock/size List array from variants for currentColorID
+  let noStockSize = variants.filter(item => currentColorID === item.color_code && item.stock === 0)[0].size
+  console.log(noStockSize)
+
+  // for (let j = 0; j < sizeList.length; j++) {
+  //   for (let i = 0; i < colorStockList.length; i++) {
+  //     if (colorStockList[i].stock === 0) {
+  //       console.log(colorStockList[i].size)
+  //     }
+  //   }
+  // }
+
+}
+
+
+
+//   if (currentColorID = variants[0].color_code) {
+//     for (let i = 0; i < sizeList.length; i++) {
+//       console.log(sizeList[i].id)
+//       if (stockArray[0].size === sizeList[i].id && stockArray[0].stock === 0) {
+//       alert("hello")
+//       }
+//     }
+//   }
+
+
+// for (let i = 0; i < variants.length; i++) {
+//   for (let j = 0; j < sizeList.length; j++) {
+//     if (currentColorID = variants[i].color_code && )
+//   }
+// }
+
+
+
+
+
+
+
+
+  // for (let i = 0; i < AllsizeCircle.length; i++) {
+
+  // }
 
   // @todo check current color's size's stock
   // if variants.stock = 0, then classList.add("disabled")
 
-}
+
 
 
 /* ==================
@@ -155,7 +206,6 @@ let qtyCount = 1;
 let qtyAdd = document.getElementById("qtyAdd");
 let qtyMinus = document.getElementById("qtyMinus");
 let qtyValue = document.querySelector(".qtyValue");
-// let parsedQty = parseInt(qtyValue);
 
 qtyAdd.addEventListener("click", function(){
   if (qtyCount < currentStock) {
@@ -174,25 +224,4 @@ qtyMinus.onclick = function(){
 function qtyReset () {
   qtyCount = 1;
   qtyValue.innerHTML = qtyCount;
-}
-
-// function qtyBtn (action) {
-// let qtyValue = document.querySelector(".qtyValue")
-// .textContent;
-
-// let parsedQty = parseInt(qtyValue) //change string to number
-  // if (action = "add") {
-    // if (count < currentStock) {
-      // count++;
-      // qtyValue.innerHTML = count;
-      // qtyValue.textContent = parsedQty;
-    // } 
-  // }
-    
-  // if (action === "minus") {
-  //   if (parsedQty > 1) {
-  //     parsedQty-- 
-  //   }
-  //   qtyValue.textContent = parsedQty
-  // }
-// };
+};
