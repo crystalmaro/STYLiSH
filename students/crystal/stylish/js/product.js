@@ -5,6 +5,10 @@ let currentSizeID;
 let currentStock = 0;
 let variants;
 let sizeList;
+let qtyCount = 1;
+let qtyAdd = document.getElementById("qtyAdd");
+let qtyMinus = document.getElementById("qtyMinus");
+let qtyValue = document.querySelector(".qtyValue");
 
 /* ==================
 take Parameter by page URL
@@ -103,19 +107,16 @@ onClick() CSS for selected color and size
 const selectedColor = (index) => {
 let itemColorChip = document.getElementsByClassName("itemColorChip");
 let sizeCircle = document.getElementsByClassName("sizeCircle");
-// reset currentSizeID with the first sizeCircle
-currentSizeID = document.getElementsByClassName("sizeCircle")[0].id;
 // reset quantity inside 數量 button
 qtyReset();
   for (let i = 0; i < 3; i++) {
-    // 砍掉重練 reset every color chip and size circle
+    // 砍掉重練 reset every color chip and remove noStock size
     itemColorChip[i].classList.remove("current");
     sizeCircle[i].classList.remove("noStock");
-    sizeCircle[i].classList.remove("current");
-    if (true) {
-      itemColorChip[index].classList.add("current");
-      currentColorID = itemColorChip[index].id;
-    }
+    // sizeCircle[currentSizeID].classList.add("current");
+
+    itemColorChip[index].classList.add("current");
+    currentColorID = itemColorChip[index].id;
   }
   // check and update stock on each click
   fetchStock();
@@ -125,16 +126,21 @@ qtyReset();
 
 const selectedSize = (index) => {
   let sizeCircle = document.getElementsByClassName("sizeCircle");
-  qtyReset();
+  
   for (let i = 0; i < 3; i++) {
+    // 砍掉重練 reset every sizeCircle style
     sizeCircle[i].classList.remove("current");
-    if (index !== undefined) {
+    if (sizeCircle[index].classList[1] !== "noStock") {
       sizeCircle[index].classList.add("current");
       currentSizeID = sizeCircle[index].id;
-    } 
+      // if user clicks on out-of-stock size, re-apply current styling with currentSizeID
+    } else if (sizeCircle[index].classList[1] === "noStock") {
+      sizeCircle[currentSizeID].classList.add("current");
+    }
   }
   // check and update stock on each click
   fetchStock();
+  qtyReset();
 };
 
 function fetchStock() {
@@ -142,7 +148,6 @@ function fetchStock() {
     (currentColorID === item.color_code && 
     currentSizeID === item.size 
     ));
-
   if (stockArray[0].stock > 0) {
     currentStock = stockArray[0].stock
   } else {
@@ -151,63 +156,22 @@ function fetchStock() {
 };
 
 function checkOutOfStockSize () {
-  let colorStockList = variants.filter(x => currentColorID === x.color_code)
-    console.log(colorStockList)
+  let colorStockList = variants.filter(item => currentColorID === item.color_code)
   for (let i = 0; i < colorStockList.length; i++) {
     for (let j = 0; j < sizeList.length; j++) {
-      // sizeList[j].classList.remove("noStock");
+      sizeList[j].classList.remove("current");
       if (sizeList[j].id === colorStockList[i].size 
         && colorStockList[i].stock === 0) {
         sizeList[j].classList.add("noStock");
       } 
-      sizeList[0].classList.add("current")
-    }
+      sizeList[0].classList.add("current");
+    } 
   }
 };
-
-
-
-//   if (currentColorID = variants[0].color_code) {
-//     for (let i = 0; i < sizeList.length; i++) {
-//       console.log(sizeList[i].id)
-//       if (stockArray[0].size === sizeList[i].id && stockArray[0].stock === 0) {
-//       alert("hello")
-//       }
-//     }
-//   }
-
-
-// for (let i = 0; i < variants.length; i++) {
-//   for (let j = 0; j < sizeList.length; j++) {
-//     if (currentColorID = variants[i].color_code && )
-//   }
-// }
-
-
-
-
-
-
-
-
-  // for (let i = 0; i < AllsizeCircle.length; i++) {
-
-  // }
-
-  // @todo check current color's size's stock
-  // if variants.stock = 0, then classList.add("disabled")
-
-
-
 
 /* ==================
 Button: Add to Cart
 ================== */
-let qtyCount = 1;
-let qtyAdd = document.getElementById("qtyAdd");
-let qtyMinus = document.getElementById("qtyMinus");
-let qtyValue = document.querySelector(".qtyValue");
-
 qtyAdd.addEventListener("click", function(){
   if (qtyCount < currentStock) {
   qtyCount++;
