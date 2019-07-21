@@ -48,13 +48,13 @@ function renderItem (data) {
     // loop color_code to #id to assign to global variable currentColorID
     itemColorChip.setAttribute("id", item.colors[i].code);
     itemColors.appendChild(itemColorChip);
+    // 1) use switch to assign "current" classList to the first color/size on page loading
     switch(i) {
       case 0:
         itemColorChip.classList.add("current");
         break;
     }
   };
-  currentColorID = document.querySelectorAll(".current")[0].id;
   // item size loop
   let itemSizes = document.querySelector(".itemSizes");
   for (let i = 0; i < item.sizes.length; i++) {
@@ -65,24 +65,19 @@ function renderItem (data) {
     // loop size to #id to assign to global variable currentColorID
     sizeCircle.setAttribute("id", item.sizes[i])
     itemSizes.appendChild(sizeCircle);
+    // 1) use switch to assign "current" classList to the first color/size on page loading
     switch(i) {
       case 0:
         sizeCircle.classList.add("current");
         break;
     }
   };
-  // assign to global sizeList, to use for checkStock(), to disable size without stock
-  sizeList = itemSizes.querySelectorAll(".sizeCircle");
-  currentSizeID = document.querySelectorAll(".current")[1].id;
   document.querySelector(".itemNote").innerHTML = `*${item.note}`;
   document.querySelector(".itemTexture").innerHTML = item.texture;
   document.querySelector(".itemDesc").innerHTML = item.description.replace(/\r\n/g, "<br/>");;
   document.querySelector(".itemWash").innerHTML = `清洗：${item.wash}`;
   document.querySelector(".itemPlace").innerHTML = `產地：${item.place}`;
-  // 1) use switch to assign "current" classList to the first color/size on loading
-  // 2) initiate fetchStock() for current color/size, to assign currentStock
-  // 3) use currentStock to set condition for - quantity+ button
-  fetchStock();
+
   // C) itemInfo (story & additional item images)
   document.querySelector(".itemInfoStory").innerHTML = item.story;
   let itemInfoImg = document.querySelector(".itemInfoImg");
@@ -91,6 +86,15 @@ function renderItem (data) {
     itemImg.setAttribute("src", img)
     itemInfoImg.appendChild(itemImg);
   });
+  // (1) set default (page loading) color and size, assign to global variables (currentColor/SizeID)
+  // (2) currentColor/SizeID are used to load stock for default color/size via fetchStock()
+  currentColorID = document.querySelectorAll(".current")[0].id;
+  currentSizeID = document.querySelectorAll(".current")[1].id;
+  // (3) initiate fetchStock() for currentColor/SizeID, assign to global currentStock
+  // (4) use currentStock to set condition for "-quantity+" button
+  fetchStock();
+  // assign to global sizeList, for checkOutOfStockSize() to style out-of-stock size
+  sizeList = itemSizes.querySelectorAll(".sizeCircle");
 };
 
 /* ==================
@@ -99,8 +103,9 @@ onClick() CSS for selected color and size
 const selectedColor = (index) => {
 let itemColorChip = document.getElementsByClassName("itemColorChip");
 let sizeCircle = document.getElementsByClassName("sizeCircle");
-currentSizeID = document.querySelector(".sizeCircle").id;
-console.log(currentSizeID)
+// reset currentSizeID with the first sizeCircle
+currentSizeID = document.getElementsByClassName("sizeCircle")[0].id;
+// reset quantity inside 數量 button
 qtyReset();
   for (let i = 0; i < 3; i++) {
     // 砍掉重練 reset every color chip and size circle
@@ -115,7 +120,7 @@ qtyReset();
   // check and update stock on each click
   fetchStock();
   // check what size is out of stock for selected color, apply CSS accordingly
-  checkOutOfStock();
+  checkOutOfStockSize();
 };
 
 const selectedSize = (index) => {
@@ -128,7 +133,6 @@ const selectedSize = (index) => {
       currentSizeID = sizeCircle[index].id;
     } 
   }
-  console.log(currentSizeID)
   // check and update stock on each click
   fetchStock();
 };
@@ -146,15 +150,14 @@ function fetchStock() {
   }
 };
 
-function checkOutOfStock () {
-  let stockList = variants.filter(x => currentColorID === x.color_code)
-    console.log(stockList)
-  
-  for (let i = 0; i < stockList.length; i++) {
+function checkOutOfStockSize () {
+  let colorStockList = variants.filter(x => currentColorID === x.color_code)
+    console.log(colorStockList)
+  for (let i = 0; i < colorStockList.length; i++) {
     for (let j = 0; j < sizeList.length; j++) {
       // sizeList[j].classList.remove("noStock");
-      if (sizeList[j].id === stockList[i].size 
-        && stockList[i].stock === 0) {
+      if (sizeList[j].id === colorStockList[i].size 
+        && colorStockList[i].stock === 0) {
         sizeList[j].classList.add("noStock");
       } 
       sizeList[0].classList.add("current")
