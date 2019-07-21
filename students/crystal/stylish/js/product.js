@@ -59,13 +59,14 @@ function renderItem (data) {
     let sizeCircle = document.createElement("div");
     sizeCircle.className = "sizeCircle";
     sizeCircle.innerHTML = item.sizes[i];
-    sizeCircle.setAttribute("onClick", `selectedSize(${i})`)
+    sizeCircle.setAttribute("onClick", `selectedSize('${item.sizes[i]}')`)
     // loop size to #id to assign to global variable currentColorID
     sizeCircle.setAttribute("id", item.sizes[i])
     itemSizes.appendChild(sizeCircle);
     switch(i) {
       case 0:
         sizeCircle.classList.add("current");
+
         break;
     }
   };
@@ -91,7 +92,7 @@ onClick() CSS for selected color and size
 ================== */
 const selectedColor = (index) => {
 let itemColorChip = document.getElementsByClassName("itemColorChip");
-let sizeCircle = document.getElementsByClassName("sizeCircle");
+// let sizeCircle = document.getElementsByClassName("sizeCircle");
   for (let i = 0; i < 3; i++) {
     // 砍掉重練 reset every color chip
     itemColorChip[i].classList.remove("current");
@@ -114,9 +115,14 @@ const selectedSize = (index) => {
       currentSizeID = sizeCircle[index].id;
     } 
   }
+  
+  // wip ==============
+  // console.log("INDEX: " + index)
+  // wip ==============
+
   // check and update stock on each click
   fetchStock();
-  console.log(currentSizeID);
+  // console.log(currentSizeID);
 };
 
 function fetchStock() {
@@ -145,25 +151,41 @@ function checkStock() {
 /* ==================
 Button: Add to Cart
 ================== */
-let cartMinus = document.querySelectorAll(".qtyModify")[0];
-let cartPlus = document.querySelectorAll(".qtyModify")[1];
+let qtyCount = 1;
+let qtyAdd = document.getElementById("qtyAdd");
+let qtyMinus = document.getElementById("qtyMinus");
 let qtyValue = document.querySelector(".qtyValue");
-let initValue = 1;
 
-function qtyBtn (action) {
-let qtyValue = document.querySelector(".qtyValue").textContent;
-let parsedQty = parseInt(qtyValue) //change string to number
-  if (action === "add") {
-    if (parsedQty < currentStock) {
-      parsedQty++;
-      qtyValue.textContent = parsedQty;
-    } 
-  }
+qtyAdd.addEventListener("click", function(){
+  qtyCount++;
+  qtyValue.innerHTML = qtyCount;
+})
+
+qtyMinus.onclick = function(){
+  qtyCount--;
+  qtyValue.innerHTML = qtyCount;
+}
+
+
+
+
+// function qtyBtn (action) {
+// let qtyValue = document.querySelector(".qtyValue")
+// .textContent;
+
+// let parsedQty = parseInt(qtyValue) //change string to number
+  // if (action = "add") {
+    // if (count < currentStock) {
+      // count++;
+      // qtyValue.innerHTML = count;
+      // qtyValue.textContent = parsedQty;
+    // } 
+  // }
     
-  if (action === "minus") {
-    if (parsedQty > 1) {
-      parsedQty-- 
-    }
-    qtyValue.textContent = parsedQty
-  }
-};
+  // if (action === "minus") {
+  //   if (parsedQty > 1) {
+  //     parsedQty-- 
+  //   }
+  //   qtyValue.textContent = parsedQty
+  // }
+// };

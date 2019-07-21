@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" type="text/css" href="css/index.css">
-    <script type="text/javascript" src="js/lib.js"></script>
-    <script type="text/javascript" src="js/product.js"></script>
+    <!-- <script type="text/javascript" src="js/lib.js"></script>
+    <script type="text/javascript" src="js/product.js"></script> -->
 
     <title>STYLiSH Product</title>
 </head>
@@ -75,14 +75,18 @@
         <div class="itemQty">
           <div class="itemDetailTitle">數量</div>
           <div class="qtySelect">
-            <button class="qtyModify pointer" onClick="qtyBtn('add')">-</button>
+            <button id="qtyMinus" class="qtyModify pointer">-</button>
             <div class="qtyValue">1</div>
-            <button class="qtyModify pointer" onClick="qtyBtn('minus')">+</button>
+            <button id="qtyAdd" class="qtyModify pointer">+</button>
           </div>
         </div>
         <div class="addCart">
           <button class="addCartButton pointer">加入購物車</button>
         </div>
+
+
+
+
         <div class="itemSummary">
           <p class="itemNote">
           <p class="itemTexture">
@@ -145,5 +149,8 @@
       <div class="footerCopyright">@2018, All rights reserved.</div>
     </div>
   </footer>
+
+  <script type="text/javascript" src="js/lib.js"></script>
+  <script type="text/javascript" src="js/product.js"></script>
 </body>
 </html>
