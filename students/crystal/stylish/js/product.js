@@ -155,15 +155,23 @@ let qtyCount = 1;
 let qtyAdd = document.getElementById("qtyAdd");
 let qtyMinus = document.getElementById("qtyMinus");
 let qtyValue = document.querySelector(".qtyValue");
+let parsedQty = parseInt(qtyValue);
+console.log(qtyValue)
+console.log(typeof qtyValue)
 
 qtyAdd.addEventListener("click", function(){
+  
+  // if (parsedQty < currentStock) {
   qtyCount++;
   qtyValue.innerHTML = qtyCount;
+  // }
 })
 
 qtyMinus.onclick = function(){
+  if (qtyCount > 1) {
   qtyCount--;
   qtyValue.innerHTML = qtyCount;
+  }
 }
 
 
