@@ -111,6 +111,7 @@ qtyReset();
   // check and update stock on each click
   fetchStock();
   checkOutOfStock();
+  // resetSize();
 };
 
 const selectedSize = (index) => {
@@ -149,19 +150,37 @@ function fetchStock() {
   console.log(variants[0].color_code)
 }
 
-function checkOutOfStock () {
   //@todo get a stock/size List array from variants for currentColorID
-  let noStockSize = variants.filter(item => currentColorID === item.color_code && item.stock === 0)[0].size
-  console.log(noStockSize)
-
-  // for (let j = 0; j < sizeList.length; j++) {
-  //   for (let i = 0; i < colorStockList.length; i++) {
-  //     if (colorStockList[i].stock === 0) {
-  //       console.log(colorStockList[i].size)
-  //     }
+function checkOutOfStock () {
+  // let noStockSize = variants.filter(item => 
+  //   currentColorID === item.color_code && item.stock === 0)[0].size
+  // for (let i = 0; i < sizeList.length; i++) {
+  //   if (sizeList[i].id === noStockSize) {
+  //     sizeList[i].classList.add("noStock");
   //   }
   // }
+  // ============= above shows error in console for colors with all sizes available
 
+  let stockList = variants.filter(x => currentColorID === x.color_code)
+    console.log(stockList)
+  
+  for (let i = 0; i < stockList.length; i++) {
+    for (let j = 0; j < sizeList.length; j++) {
+      if (sizeList[j].id === stockList[i].size 
+        && stockList[i].stock === 0) {
+        sizeList[j].classList.add("noStock");
+      } 
+      // sizeList[j].classList.remove("noStock")
+    }
+  }
+};
+
+function resetSize () {
+  console.log(sizeList)
+  for (let i = 0; i < sizeList.length; i++) {
+    sizeList[i].classList.remove("noStock");
+    sizeList[0].classList.add("current");
+  }
 }
 
 
