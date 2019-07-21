@@ -66,7 +66,6 @@ function renderItem (data) {
     switch(i) {
       case 0:
         sizeCircle.classList.add("current");
-
         break;
     }
   };
@@ -76,7 +75,10 @@ function renderItem (data) {
   document.querySelector(".itemDesc").innerHTML = item.description.replace(/\r\n/g, "<br/>");;
   document.querySelector(".itemWash").innerHTML = `清洗：${item.wash}`;
   document.querySelector(".itemPlace").innerHTML = `產地：${item.place}`;
-   
+  // 1) use switch to assign "current" classList to the first color/size on loading
+  // 2) initiate fetchStock() for current color/size, to assign currentStock
+  // 3) use currentStock to set condition for - quantity+ button
+  fetchStock();
   // C) itemInfo (story & additional item images)
   document.querySelector(".itemInfoStory").innerHTML = item.story;
   let itemInfoImg = document.querySelector(".itemInfoImg");
@@ -93,6 +95,7 @@ onClick() CSS for selected color and size
 const selectedColor = (index) => {
 let itemColorChip = document.getElementsByClassName("itemColorChip");
 // let sizeCircle = document.getElementsByClassName("sizeCircle");
+qtyReset();
   for (let i = 0; i < 3; i++) {
     // 砍掉重練 reset every color chip
     itemColorChip[i].classList.remove("current");
@@ -108,6 +111,7 @@ let itemColorChip = document.getElementsByClassName("itemColorChip");
 
 const selectedSize = (index) => {
   let sizeCircle = document.getElementsByClassName("sizeCircle");
+  qtyReset();
   for (let i = 0; i < 3; i++) {
     sizeCircle[i].classList.remove("current");
     if (index !== undefined) {
@@ -115,10 +119,6 @@ const selectedSize = (index) => {
       currentSizeID = sizeCircle[index].id;
     } 
   }
-  
-  // wip ==============
-  // console.log("INDEX: " + index)
-  // wip ==============
 
   // check and update stock on each click
   fetchStock();
@@ -134,10 +134,10 @@ function fetchStock() {
   if (stockArray.length > 0) {
     currentStock = stockArray[0].stock
   } else {
-
     currentStock = 0;
   }
-  console.log(stockArray)
+  console.log("stockArray: " + stockArray)
+  console.log(currentStock)
 }
 
 function checkStock() {
@@ -155,27 +155,26 @@ let qtyCount = 1;
 let qtyAdd = document.getElementById("qtyAdd");
 let qtyMinus = document.getElementById("qtyMinus");
 let qtyValue = document.querySelector(".qtyValue");
-let parsedQty = parseInt(qtyValue);
-console.log(qtyValue)
-console.log(typeof qtyValue)
+// let parsedQty = parseInt(qtyValue);
 
 qtyAdd.addEventListener("click", function(){
-  
-  // if (parsedQty < currentStock) {
+  if (qtyCount < currentStock) {
   qtyCount++;
   qtyValue.innerHTML = qtyCount;
-  // }
-})
+  }
+});
 
 qtyMinus.onclick = function(){
   if (qtyCount > 1) {
   qtyCount--;
   qtyValue.innerHTML = qtyCount;
   }
+};
+
+function qtyReset () {
+  qtyCount = 1;
+  qtyValue.innerHTML = qtyCount;
 }
-
-
-
 
 // function qtyBtn (action) {
 // let qtyValue = document.querySelector(".qtyValue")
