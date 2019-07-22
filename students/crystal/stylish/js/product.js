@@ -82,7 +82,7 @@ addCartButton.addEventListener("click", function(){
     setLocalStorage("cart", cartValue);
   } else {
     checkExistingProduct();
-    if (existingItemIndex > -1) {
+    if (existingItemIndex >= 0) {
       localStorageCart.list[existingItemIndex].qty = productDetail.qty;
     } else {
       localStorageCart.list.push(updateProductDetail());
