@@ -4,8 +4,6 @@ let currentColorCode;
 let currentColorTitle;
 let currentSizeID;
 let currentStock = 0;
-// let variants;
-let sizeList;
 let qtyCount = 1;
 let qtyAdd = document.getElementById("qtyAdd");
 let qtyMinus = document.getElementById("qtyMinus");
@@ -18,7 +16,7 @@ let parsedData;
 Local Storage
 ================== */
 let productDetail = {
-  id: "",
+  id: "123",
   main_image: "",
   name: "",
   price: "",
@@ -32,8 +30,7 @@ let productDetail = {
 }
 
 
-
-let cartStructure = {
+let cartValue = {
   shipping: "delivery",
   frieght: 60,
   payment: "credit_card",
@@ -51,19 +48,55 @@ let cartStructure = {
 
 let item = {};
 
-// function SetLocalStorage(item, cart){
-                        //(key, value)
-  localStorage.setItem("cart", JSON.stringify(cartStructure));
-// }
+/* ==================
+Local Storage: Set & Get
+================== */
+function setLocalStorage(key, value){
+  localStorage.setItem(key, JSON.stringify(value));
+}
 
-// function GetLocalStorage(item){
-  // return 
-  JSON.parse(localStorage.getItem("cart"));
+function getLocalStorage(key){
+  return JSON.parse(localStorage.getItem(key));
+}
 
-// }
+localStorageCart = getLocalStorage("cart");
 
-// SetLocalStorage(item, cart)
+/* ==================
+Button: Add to Cart
+================== */
+let addCartButton = document.querySelector(".addCartButton");
 
+addCartButton.addEventListener("click", function(){
+  alert("clicked button")
+
+  if (localStorageCart === null) {
+    // Insert Cart
+    // GlobalPara.cart.order.list.push(InsertProductItem());
+    // cartValue.list.push(productDetail);
+    cartValue.list.push(pushProductDetail());
+    setLocalStorage("cart", cartValue);
+  } else {
+    // use localStorageCart instead of cartValue, because 
+    localStorageCart.list.push(pushProductDetail());
+    setLocalStorage("cart", localStorageCart);
+  }
+  // update shopping cart quantity on each 加入購物車 click
+  updataCartQty();
+
+})
+/* ==================
+Update Shopping Cart
+================== */
+function updataCartQty () {
+let cartQty = document.querySelectorAll(".cartQty");
+  if (localStorageCart === null) {
+    cartValue.list = [];
+  } else {
+    for (let i = 0; i < cartQty.length; i++) {
+      cartQty[i].innerHTML = localStorageCart.list.length;
+    };
+  };
+};
 
 /* ==================
 take Parameter by page URL
@@ -84,7 +117,6 @@ Render Product Detail based on Query String
 function renderItem (data) {
   // assign size/color variants to globally declared variants for later use
   parsedData = data.data;
-  // variants = parsedData.variants;
  
   // A) itemMainImg (upper left section)
   let itemMainImg = document.querySelector(".itemMainImg");
@@ -100,7 +132,7 @@ function renderItem (data) {
   let itemColors = document.querySelector(".itemColors");
   for (let i = 0; i < parsedData.colors.length; i++) {
     let itemColorChip = document.createElement("div");
-    itemColorChip.className = "itemColorChip";
+    itemColorChip.classList.add("itemColorChip", "pointer");
     itemColorChip.setAttribute("style", `background-color:#${parsedData.colors[i].code}`);
     itemColorChip.setAttribute("onClick", `selectedColor(${i})`);
     // loop color_code to #id to assign to global variable currentColorCode
@@ -118,7 +150,7 @@ function renderItem (data) {
   let itemSizes = document.querySelector(".itemSizes");
   for (let i = 0; i < parsedData.sizes.length; i++) {
     let sizeLoop = document.createElement("div");
-    sizeLoop.className = "sizeCircle";
+    sizeLoop.classList.add("sizeCircle", "pointer");
     sizeLoop.innerHTML = parsedData.sizes[i];
     sizeLoop.setAttribute("onClick", `selectedSize('${parsedData.sizes[i]}')`)
     // loop size to #id to assign to global variable currentColorCode
@@ -156,13 +188,28 @@ function renderItem (data) {
   // assign to global sizeCircle, for checkOutOfStockSize() to style out-of-stock size
   sizeCircle = document.getElementsByClassName("sizeCircle");
   //===========
-  resetProductDetail();
+  updateProductDetail();
 };
 
+function pushProductDetail () {
+  return ({
+    id : productDetail.id,
+    main_image : productDetail.main_image,
+    name : productDetail.name,
+    price : productDetail.price,
+    qty : productDetail.qty,
+    size : productDetail.size,
+    stock : productDetail.stock,
+    color : {
+      code : productDetail.color.code,
+      name : productDetail.color.name
+    }
+  });
+}
+
 // assign product detail to global variable productDetail
-// call resetProductDetail() on every click action on page
-// click actions: color, size, qty
-function resetProductDetail() {
+// call updateProductDetail() on every click action on page (selection on color, size, qty)
+function updateProductDetail () {
   productDetail.id = parsedData.id;
   productDetail.main_image = parsedData.main_image;
   productDetail.name = parsedData.title;
@@ -175,12 +222,10 @@ function resetProductDetail() {
 }
 
 /* ==================
-onClick() CSS for selected color and size
+onClick() color and size
 ================== */
 const selectedColor = (index) => {
   let itemColorChip = document.getElementsByClassName("itemColorChip");
-  // reset quantity inside 數量 button
-  qtyReset();
     for (let i = 0; i < 3; i++) {
       // 砍掉重練 reset every color chip and remove noStock size
       itemColorChip[i].classList.remove("current");
@@ -193,9 +238,10 @@ const selectedColor = (index) => {
     }
     // check and update stock on each click
     fetchStock();
+    qtyReset();
+    updateProductDetail();
     // check what size is out of stock for selected color, apply CSS accordingly
     checkOutOfStockSize();
-    resetProductDetail();
 };
 
 const selectedSize = (index) => {
@@ -214,7 +260,7 @@ const selectedSize = (index) => {
   // check and update stock on each click
   fetchStock();
   qtyReset();
-  resetProductDetail();
+  updateProductDetail();
 };
 
 function fetchStock() {
@@ -231,7 +277,6 @@ function fetchStock() {
 
 function checkOutOfStockSize () {
   let colorStockList = parsedData.variants.filter(item => currentColorCode === item.color_code)
-  console.log(colorStockList)
   for (let i = 0; i < colorStockList.length; i++) {
     for (let j = 0; j < sizeCircle.length; j++) {
       sizeCircle[j].classList.remove("current");
@@ -254,7 +299,7 @@ qtyAdd.addEventListener("click", function(){
   qtyCount++;
   qtyValue.innerHTML = qtyCount;
   }
-  resetProductDetail();
+  updateProductDetail();
 });
 
 qtyMinus.onclick = function(){
@@ -262,21 +307,11 @@ qtyMinus.onclick = function(){
   qtyCount--;
   qtyValue.innerHTML = qtyCount;
   }
-  resetProductDetail();
+  updateProductDetail();
 };
 
 function qtyReset () {
   qtyCount = 1;
   qtyValue.innerHTML = qtyCount;
-  resetProductDetail();
+  updateProductDetail();
 };
-
-
-/* ==================
-Button: Add to Cart
-================== */
-let addCartButton = document.querySelector(".addCartButton");
-
-addCartButton.addEventListener("click", function(){
-  
-})
