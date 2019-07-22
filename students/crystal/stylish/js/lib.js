@@ -7,6 +7,7 @@ let pageNumber;
 let pagingURL;
 let ind = 0;
 
+
 /* ==================
 AJAX
 ================== */
