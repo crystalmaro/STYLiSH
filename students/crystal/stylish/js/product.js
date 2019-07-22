@@ -63,17 +63,17 @@ function renderItem (data) {
   // item size loop
   let itemSizes = document.querySelector(".itemSizes");
   for (let i = 0; i < item.sizes.length; i++) {
-    let sizeCircle = document.createElement("div");
-    sizeCircle.className = "sizeCircle";
-    sizeCircle.innerHTML = item.sizes[i];
-    sizeCircle.setAttribute("onClick", `selectedSize('${item.sizes[i]}')`)
+    let sizeLoop = document.createElement("div");
+    sizeLoop.className = "sizeCircle";
+    sizeLoop.innerHTML = item.sizes[i];
+    sizeLoop.setAttribute("onClick", `selectedSize('${item.sizes[i]}')`)
     // loop size to #id to assign to global variable currentColorID
-    sizeCircle.setAttribute("id", item.sizes[i])
-    itemSizes.appendChild(sizeCircle);
+    sizeLoop.setAttribute("id", item.sizes[i])
+    itemSizes.appendChild(sizeLoop);
     // 1) use switch to assign "current" classList to the first color/size on page loading
     switch(i) {
       case 0:
-        sizeCircle.classList.add("current");
+        sizeLoop.classList.add("current");
         break;
     }
   };
@@ -98,11 +98,9 @@ function renderItem (data) {
   // (3) initiate fetchStock() for currentColor/SizeID, assign to global currentStock
   // (4) use currentStock to set condition for "-quantity+" button
   fetchStock();
-  // assign to global sizeList, for checkOutOfStockSize() to style out-of-stock size
-  // sizeList = itemSizes.querySelectorAll(".sizeCircle");
+  // after sizeCircles loop are created
+  // assign to global sizeCircle, for checkOutOfStockSize() to style out-of-stock size
   sizeCircle = document.getElementsByClassName("sizeCircle");
-  // console.log(sizeList)
-  console.log(sizeCircle)
 };
 
 /* ==================
@@ -110,16 +108,15 @@ onClick() CSS for selected color and size
 ================== */
 const selectedColor = (index) => {
 let itemColorChip = document.getElementsByClassName("itemColorChip");
-// let sizeCircle = document.getElementsByClassName("sizeCircle");
 // reset quantity inside 數量 button
 qtyReset();
   for (let i = 0; i < 3; i++) {
     // 砍掉重練 reset every color chip and remove noStock size
     itemColorChip[i].classList.remove("current");
     sizeCircle[i].classList.remove("noStock");
-    // sizeCircle[currentSizeID].classList.add("current");
-
+    // apply "current" CSS styling to selected color
     itemColorChip[index].classList.add("current");
+    // re-assign global colorID with each click
     currentColorID = itemColorChip[index].id;
   }
   // check and update stock on each click
@@ -129,9 +126,6 @@ qtyReset();
 };
 
 const selectedSize = (index) => {
-  // let sizeCircle = document.getElementsByClassName("sizeCircle");
-  // console.log(sizeList[currentSizeID])
-  console.log(sizeCircle[currentSizeID])
   for (let i = 0; i < 3; i++) {
     // 砍掉重練 reset every sizeCircle style
     sizeCircle[i].classList.remove("current");
@@ -140,7 +134,8 @@ const selectedSize = (index) => {
       currentSizeID = sizeCircle[index].id;
       // if user clicks on out-of-stock size, re-apply current styling with currentSizeID
     } else if (sizeCircle[index].classList[1] === "noStock") {
-      sizeCircle[currentSizeID].classList.add("current");
+      sizeCircle[0].classList.add("current");
+      currentSizeID = sizeCircle[0].id;
     }
   }
   // check and update stock on each click
@@ -168,9 +163,8 @@ function checkOutOfStockSize () {
       if (sizeCircle[j].id === colorStockList[i].size 
         && colorStockList[i].stock === 0) {
         sizeCircle[j].classList.add("noStock");
-        sizeCircle[0].classList.add("current");
       } 
-      sizeCircle[currentSizeID].classList.add("current");
+      sizeCircle[0].classList.add("current");
     } 
   }
 };
