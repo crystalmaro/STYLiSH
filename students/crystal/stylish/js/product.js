@@ -57,7 +57,7 @@ let localStorageCart = getLocalStorage("cart");
 /* ==================
 Button: Add to Cart
 ================== */
-let sameProductIndex = -1;
+let sameProductIndex;
 let addCartButton = document.querySelector(".addCartButton");
 /*========== add to cart logic notes
 if (nothing in local storage) {
@@ -75,7 +75,6 @@ if (nothing in local storage) {
 addCartButton.addEventListener("click", function(){
   alert("added to cart")
   let localStorageCart = getLocalStorage("cart");
-
   if (localStorageCart === null) {
     // Insert first item into cart
     cartValue.list.push(updateProductDetail());
