@@ -10,13 +10,9 @@ let qtyMinus = document.getElementById("qtyMinus");
 let qtyValue = document.querySelector(".qtyValue");
 let sizeCircle;
 let parsedData;
-
-
-/* ==================
-Local Storage
-================== */
+let existingItemIndex;
 let productDetail = {
-  id: "123",
+  id: "",
   main_image: "",
   name: "",
   price: "",
@@ -27,9 +23,11 @@ let productDetail = {
     code: "",
     name: ""
   }
-}
+};
 
-
+/* ==================
+Local Storage 
+================== */
 let cartValue = {
   shipping: "delivery",
   frieght: 60,
@@ -46,11 +44,6 @@ let cartValue = {
   list: []
 };
 
-let item = {};
-
-/* ==================
-Local Storage: Set & Get
-================== */
 function setLocalStorage(key, value){
   localStorage.setItem(key, JSON.stringify(value));
 }
@@ -59,44 +52,79 @@ function getLocalStorage(key){
   return JSON.parse(localStorage.getItem(key));
 }
 
-localStorageCart = getLocalStorage("cart");
+let localStorageCart = getLocalStorage("cart");
 
 /* ==================
 Button: Add to Cart
 ================== */
+let sameProductIndex = -1;
 let addCartButton = document.querySelector(".addCartButton");
+
+//===== add to cart logic notes
+// if (null) {
+//   insert first item into cart
+// } else {
+//   checkExistingProduct();
+//   if (existingItem = true) {
+//     update product size
+//   } else {
+//     push to currentList
+//   }
+//   re-set localStorage with the newly pushed currentList
+// }
 
 addCartButton.addEventListener("click", function(){
   alert("clicked button")
+  let existingItem = false;
+  localStorageCart = getLocalStorage("cart");
 
   if (localStorageCart === null) {
-    // Insert Cart
-    // GlobalPara.cart.order.list.push(InsertProductItem());
-    // cartValue.list.push(productDetail);
-    cartValue.list.push(pushProductDetail());
+    // Insert first item into cart
+    cartValue.list.push(updateProductDetail());
     setLocalStorage("cart", cartValue);
   } else {
-    // use localStorageCart instead of cartValue, because 
-    localStorageCart.list.push(pushProductDetail());
+    checkExistingProduct();
+    // console.log(checkExistingProduct())
+    // console.log(localStorageCart.list)
+    if (existingItemIndex >= 0) {
+      localStorageCart.list[existingItemIndex].qty = productDetail.qty;
+    } else {
+      localStorageCart.list.push(updateProductDetail());
+    }
     setLocalStorage("cart", localStorageCart);
   }
-  // update shopping cart quantity on each 加入購物車 click
   updataCartQty();
+});
 
-})
+function checkExistingProduct () {
+  existingItemIndex = localStorageCart.list.findIndex(x => 
+    (x.id === productDetail.id &&
+      x.size === productDetail.size &&
+      x.color.code === productDetail.color.code
+    ))
+  console.log(existingItemIndex);
+}
+
+
 /* ==================
 Update Shopping Cart
 ================== */
 function updataCartQty () {
 let cartQty = document.querySelectorAll(".cartQty");
-  if (localStorageCart === null) {
-    cartValue.list = [];
-  } else {
+// let localStorageCart = getLocalStorage("cart");
+  // if (localStorageCart === null) {
+  //   cartValue.list = [];
+  // } else {
     for (let i = 0; i < cartQty.length; i++) {
       cartQty[i].innerHTML = localStorageCart.list.length;
     };
-  };
+  // };
 };
+
+// load cart quantity from localStorage on page loading
+window.addEventListener("load", function(){
+  updataCartQty();
+});
 
 /* ==================
 take Parameter by page URL
@@ -191,22 +219,6 @@ function renderItem (data) {
   updateProductDetail();
 };
 
-function pushProductDetail () {
-  return ({
-    id : productDetail.id,
-    main_image : productDetail.main_image,
-    name : productDetail.name,
-    price : productDetail.price,
-    qty : productDetail.qty,
-    size : productDetail.size,
-    stock : productDetail.stock,
-    color : {
-      code : productDetail.color.code,
-      name : productDetail.color.name
-    }
-  });
-}
-
 // assign product detail to global variable productDetail
 // call updateProductDetail() on every click action on page (selection on color, size, qty)
 function updateProductDetail () {
@@ -219,6 +231,8 @@ function updateProductDetail () {
   productDetail.stock = currentStock;
   productDetail.color.code = currentColorCode;
   productDetail.color.name = currentColorTitle;
+  // use return to get something out of calling this function: for localStorage
+  return productDetail;
 }
 
 /* ==================
