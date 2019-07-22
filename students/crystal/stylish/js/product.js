@@ -165,8 +165,10 @@ function checkOutOfStockSize () {
         sizeCircle[j].classList.add("noStock");
       } 
       sizeCircle[0].classList.add("current");
+      currentSizeID = sizeCircle[0].id;
     } 
   }
+  fetchStock();
 };
 
 /* ==================
