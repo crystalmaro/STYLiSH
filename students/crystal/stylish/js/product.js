@@ -9,6 +9,7 @@ let qtyCount = 1;
 let qtyAdd = document.getElementById("qtyAdd");
 let qtyMinus = document.getElementById("qtyMinus");
 let qtyValue = document.querySelector(".qtyValue");
+let sizeCircle;
 
 /* ==================
 take Parameter by page URL
@@ -98,7 +99,10 @@ function renderItem (data) {
   // (4) use currentStock to set condition for "-quantity+" button
   fetchStock();
   // assign to global sizeList, for checkOutOfStockSize() to style out-of-stock size
-  sizeList = itemSizes.querySelectorAll(".sizeCircle");
+  // sizeList = itemSizes.querySelectorAll(".sizeCircle");
+  sizeCircle = document.getElementsByClassName("sizeCircle");
+  // console.log(sizeList)
+  console.log(sizeCircle)
 };
 
 /* ==================
@@ -106,7 +110,7 @@ onClick() CSS for selected color and size
 ================== */
 const selectedColor = (index) => {
 let itemColorChip = document.getElementsByClassName("itemColorChip");
-let sizeCircle = document.getElementsByClassName("sizeCircle");
+// let sizeCircle = document.getElementsByClassName("sizeCircle");
 // reset quantity inside 數量 button
 qtyReset();
   for (let i = 0; i < 3; i++) {
@@ -125,8 +129,9 @@ qtyReset();
 };
 
 const selectedSize = (index) => {
-  let sizeCircle = document.getElementsByClassName("sizeCircle");
-  
+  // let sizeCircle = document.getElementsByClassName("sizeCircle");
+  // console.log(sizeList[currentSizeID])
+  console.log(sizeCircle[currentSizeID])
   for (let i = 0; i < 3; i++) {
     // 砍掉重練 reset every sizeCircle style
     sizeCircle[i].classList.remove("current");
@@ -158,13 +163,14 @@ function fetchStock() {
 function checkOutOfStockSize () {
   let colorStockList = variants.filter(item => currentColorID === item.color_code)
   for (let i = 0; i < colorStockList.length; i++) {
-    for (let j = 0; j < sizeList.length; j++) {
-      sizeList[j].classList.remove("current");
-      if (sizeList[j].id === colorStockList[i].size 
+    for (let j = 0; j < sizeCircle.length; j++) {
+      sizeCircle[j].classList.remove("current");
+      if (sizeCircle[j].id === colorStockList[i].size 
         && colorStockList[i].stock === 0) {
-        sizeList[j].classList.add("noStock");
+        sizeCircle[j].classList.add("noStock");
+        sizeCircle[0].classList.add("current");
       } 
-      sizeList[0].classList.add("current");
+      sizeCircle[currentSizeID].classList.add("current");
     } 
   }
 };
