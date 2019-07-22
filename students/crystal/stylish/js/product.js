@@ -1,6 +1,7 @@
 const idQuery = getParamName('id');
 ajax(`${API_HOST_Item}${idQuery}`, renderItem);
-let currentColorID;
+let currentColorCode;
+let currentColorTitle;
 let currentSizeID;
 let currentStock = 0;
 // let variants;
@@ -10,22 +11,28 @@ let qtyAdd = document.getElementById("qtyAdd");
 let qtyMinus = document.getElementById("qtyMinus");
 let qtyValue = document.querySelector(".qtyValue");
 let sizeCircle;
-
-
 let parsedData;
-
-
-
-let productDetail = {
-  id: "",
-  name: ""
-}
-
 
 
 /* ==================
 Local Storage
 ================== */
+let productDetail = {
+  id: "",
+  main_image: "",
+  name: "",
+  price: "",
+  qty: "",
+  size: "",
+  stock: "",
+  color: {
+    code: "",
+    name: ""
+  }
+}
+
+
+
 let cartStructure = {
   shipping: "delivery",
   frieght: 60,
@@ -75,21 +82,10 @@ function getParamName(name, url) {
 Render Product Detail based on Query String
 ================== */
 function renderItem (data) {
-  // let itemContainer = document.querySelector(".itemContainer");
-  let parsedData = data.data;
   // assign size/color variants to globally declared variants for later use
-  // variants = item.variants;
-  
-
-  //=========== assign product detail to global variable productDetail
-  productDetail.id = parsedData.id;
-  productDetail.main_image = parsedData.main_image;
-  productDetail.name = parsedData.title;
-  productDetail.price = parsedData.price;
-
-
-  //===========
-
+  parsedData = data.data;
+  // variants = parsedData.variants;
+ 
   // A) itemMainImg (upper left section)
   let itemMainImg = document.querySelector(".itemMainImg");
   let mainImg = document.createElement("img");
@@ -107,8 +103,9 @@ function renderItem (data) {
     itemColorChip.className = "itemColorChip";
     itemColorChip.setAttribute("style", `background-color:#${parsedData.colors[i].code}`);
     itemColorChip.setAttribute("onClick", `selectedColor(${i})`);
-    // loop color_code to #id to assign to global variable currentColorID
+    // loop color_code to #id to assign to global variable currentColorCode
     itemColorChip.setAttribute("id", parsedData.colors[i].code);
+    itemColorChip.setAttribute("title", parsedData.colors[i].name);
     itemColors.appendChild(itemColorChip);
     // 1) use switch to assign "current" classList to the first color/size on page loading
     switch(i) {
@@ -124,7 +121,7 @@ function renderItem (data) {
     sizeLoop.className = "sizeCircle";
     sizeLoop.innerHTML = parsedData.sizes[i];
     sizeLoop.setAttribute("onClick", `selectedSize('${parsedData.sizes[i]}')`)
-    // loop size to #id to assign to global variable currentColorID
+    // loop size to #id to assign to global variable currentColorCode
     sizeLoop.setAttribute("id", parsedData.sizes[i])
     itemSizes.appendChild(sizeLoop);
     // 1) use switch to assign "current" classList to the first color/size on page loading
@@ -148,38 +145,57 @@ function renderItem (data) {
     itemImg.setAttribute("src", img)
     itemInfoImg.appendChild(itemImg);
   });
-  // (1) set default (page loading) color and size, assign to global variables (currentColor/SizeID)
-  // (2) currentColor/SizeID are used to load stock for default color/size via fetchStock()
-  currentColorID = document.querySelectorAll(".current")[0].id;
+  //=========== assign current color/size/stock on page loading
+  currentColorCode = document.querySelectorAll(".current")[0].id;
+  currentColorTitle = document.querySelectorAll(".current")[0].title;
   currentSizeID = document.querySelectorAll(".current")[1].id;
-  // (3) initiate fetchStock() for currentColor/SizeID, assign to global currentStock
-  // (4) use currentStock to set condition for "-quantity+" button
+  // initiate fetchStock() for currentColor/SizeID, assign to global currentStock
+  // use currentStock to set condition for "-quantity+" button
   fetchStock();
-  // after sizeCircles loop are created
+  // after sizeCircles are created through loop
   // assign to global sizeCircle, for checkOutOfStockSize() to style out-of-stock size
   sizeCircle = document.getElementsByClassName("sizeCircle");
+  //===========
+  resetProductDetail();
 };
+
+// assign product detail to global variable productDetail
+// call resetProductDetail() on every click action on page
+// click actions: color, size, qty
+function resetProductDetail() {
+  productDetail.id = parsedData.id;
+  productDetail.main_image = parsedData.main_image;
+  productDetail.name = parsedData.title;
+  productDetail.price = parsedData.price;
+  productDetail.qty = qtyCount;
+  productDetail.size = currentSizeID;
+  productDetail.stock = currentStock;
+  productDetail.color.code = currentColorCode;
+  productDetail.color.name = currentColorTitle;
+}
 
 /* ==================
 onClick() CSS for selected color and size
 ================== */
 const selectedColor = (index) => {
-let itemColorChip = document.getElementsByClassName("itemColorChip");
-// reset quantity inside 數量 button
-qtyReset();
-  for (let i = 0; i < 3; i++) {
-    // 砍掉重練 reset every color chip and remove noStock size
-    itemColorChip[i].classList.remove("current");
-    sizeCircle[i].classList.remove("noStock");
-    // apply "current" CSS styling to selected color
-    itemColorChip[index].classList.add("current");
-    // re-assign global colorID with each click
-    currentColorID = itemColorChip[index].id;
-  }
-  // check and update stock on each click
-  fetchStock();
-  // check what size is out of stock for selected color, apply CSS accordingly
-  checkOutOfStockSize();
+  let itemColorChip = document.getElementsByClassName("itemColorChip");
+  // reset quantity inside 數量 button
+  qtyReset();
+    for (let i = 0; i < 3; i++) {
+      // 砍掉重練 reset every color chip and remove noStock size
+      itemColorChip[i].classList.remove("current");
+      sizeCircle[i].classList.remove("noStock");
+      // apply "current" CSS styling to selected color
+      itemColorChip[index].classList.add("current");
+      // re-assign global colorID with each click
+      currentColorCode = itemColorChip[index].id;
+      currentColorTitle = itemColorChip[index].title;
+    }
+    // check and update stock on each click
+    fetchStock();
+    // check what size is out of stock for selected color, apply CSS accordingly
+    checkOutOfStockSize();
+    resetProductDetail();
 };
 
 const selectedSize = (index) => {
@@ -198,11 +214,12 @@ const selectedSize = (index) => {
   // check and update stock on each click
   fetchStock();
   qtyReset();
+  resetProductDetail();
 };
 
 function fetchStock() {
   let stockArray = parsedData.variants.filter(item => 
-    (currentColorID === item.color_code && 
+    (currentColorCode === item.color_code && 
     currentSizeID === item.size 
     ));
   if (stockArray[0].stock > 0) {
@@ -213,7 +230,8 @@ function fetchStock() {
 };
 
 function checkOutOfStockSize () {
-  let colorStockList = parsedData.variants.filter(item => currentColorID === item.color_code)
+  let colorStockList = parsedData.variants.filter(item => currentColorCode === item.color_code)
+  console.log(colorStockList)
   for (let i = 0; i < colorStockList.length; i++) {
     for (let j = 0; j < sizeCircle.length; j++) {
       sizeCircle[j].classList.remove("current");
@@ -236,6 +254,7 @@ qtyAdd.addEventListener("click", function(){
   qtyCount++;
   qtyValue.innerHTML = qtyCount;
   }
+  resetProductDetail();
 });
 
 qtyMinus.onclick = function(){
@@ -243,11 +262,13 @@ qtyMinus.onclick = function(){
   qtyCount--;
   qtyValue.innerHTML = qtyCount;
   }
+  resetProductDetail();
 };
 
 function qtyReset () {
   qtyCount = 1;
   qtyValue.innerHTML = qtyCount;
+  resetProductDetail();
 };
 
 
