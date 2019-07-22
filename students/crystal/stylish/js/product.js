@@ -13,16 +13,16 @@ let parsedData;
 let existingItemIndex;
 let productDetail = {
   id: "",
-  main_image: "",
-  name: "",
-  price: "",
   qty: "",
   size: "",
-  stock: "",
   color: {
     code: "",
     name: ""
-  }
+  },
+  main_image: "",
+  name: "",
+  price: "",
+  stock: ""
 };
 
 /* ==================
@@ -59,24 +59,22 @@ Button: Add to Cart
 ================== */
 let sameProductIndex = -1;
 let addCartButton = document.querySelector(".addCartButton");
-
-//===== add to cart logic notes
-// if (null) {
-//   insert first item into cart
-// } else {
-//   checkExistingProduct();
-//   if (existingItem = true) {
-//     update product size
-//   } else {
-//     push to currentList
-//   }
-//   re-set localStorage with the newly pushed currentList
-// }
-
+/*========== add to cart logic notes
+if (nothing in local storage) {
+  insert first item into cart
+} else {
+  checkExistingProduct();
+  if (existingItem = true) {
+    update product size
+  } else {
+    push to currentList
+  }
+  re-set localStorage with the newly updated currentList
+}
+==========*/
 addCartButton.addEventListener("click", function(){
-  alert("clicked button")
-  let existingItem = false;
-  localStorageCart = getLocalStorage("cart");
+  alert("added to cart")
+  let localStorageCart = getLocalStorage("cart");
 
   if (localStorageCart === null) {
     // Insert first item into cart
@@ -84,9 +82,7 @@ addCartButton.addEventListener("click", function(){
     setLocalStorage("cart", cartValue);
   } else {
     checkExistingProduct();
-    // console.log(checkExistingProduct())
-    // console.log(localStorageCart.list)
-    if (existingItemIndex >= 0) {
+    if (existingItemIndex > -1) {
       localStorageCart.list[existingItemIndex].qty = productDetail.qty;
     } else {
       localStorageCart.list.push(updateProductDetail());
@@ -97,6 +93,7 @@ addCartButton.addEventListener("click", function(){
 });
 
 function checkExistingProduct () {
+let localStorageCart = getLocalStorage("cart");
   existingItemIndex = localStorageCart.list.findIndex(x => 
     (x.id === productDetail.id &&
       x.size === productDetail.size &&
@@ -111,14 +108,14 @@ Update Shopping Cart
 ================== */
 function updataCartQty () {
 let cartQty = document.querySelectorAll(".cartQty");
-// let localStorageCart = getLocalStorage("cart");
-  // if (localStorageCart === null) {
-  //   cartValue.list = [];
-  // } else {
+let localStorageCart = getLocalStorage("cart");
+  if (localStorageCart === null) {
+    cartValue.list = [];
+  } else {
     for (let i = 0; i < cartQty.length; i++) {
       cartQty[i].innerHTML = localStorageCart.list.length;
     };
-  // };
+  };
 };
 
 // load cart quantity from localStorage on page loading
