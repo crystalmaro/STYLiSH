@@ -52,6 +52,126 @@
     </a>
   </div>
 
+  <main class="cartMain">
+
+    <!-- ========= top title for product ========= -->
+    <div class="cartTitle flex">
+
+      <div class="cartTitleLeft">
+        購物車(<span class="cartQty">0</span>)  
+      </div>
+
+      <div class="cartTitleRight">
+        <div class="cartProductTitle">數量</div>
+        <div class="cartProductTitle">單價</div>
+        <div class="cartProductTitle">小計</div>
+        <div class="cartProductTitle"></div>
+      </div>
+
+    </div>
+    <!-- ========================================= -->
+
+    <div class="cartProductContainer flex">
+
+      <div class="cartProductList1 flex">
+          <div class="cartProductPic"> <!-- flex order: desktop(1) mobile (1) -->
+            <img src="https://api.appworks-school.tw/assets/201807201824/main.jpg" alt="">
+          </div>
+
+          <div class="cartProductInfo"> <!-- flex order: desktop(2) mobile (2) -->
+              <div class="cartProductName">洋裝洋裝洋裝洋裝</div>
+              <div class="cartProductID">12345678</div>
+              <div class="cartProductVariant">
+                <span class="itemDetailTitle">顏色</span>白
+              </div>
+              <div class="cartProductVariant">
+                <span class="itemDetailTitle">尺寸</span>S
+              </div>
+          </div>
+
+          <div class="cartProductVal flex"> <!-- flex order: desktop(3) mobile (4) -->
+
+            <!-- <div class="cartProductValRow1-mobile">
+              <div class="cartProductTitle-mobile">數量</div>
+              <div class="cartProductTitle-mobile">單價</div>
+              <div class="cartProductTitle-mobile">小計</div>
+            </div> -->
+
+            <div class="cartProductValRow2">
+
+              <div class="cartProductQty">
+                <select class="qtyStock">
+                <!-- use loop to create option counts, based on stock quantity -->
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                </select>
+              </div>
+              <div class="cartProductPrice">NT. 500</div>
+              <div class="cartProductSubtotal">NT. 1000</div>
+
+            </div>
+          </div>
+
+          <div class="cartProductTrash"> <!-- flex order: desktop(4) mobile (3) -->
+              <img src="../images/cart-remove.png">
+          </div>
+      </div>
+
+      <!-- second product -->
+
+      <div class="cartProductList2 flex">
+            <div class="cartProductPic"> <!-- flex order: desktop(1) mobile (1) -->
+              <img src="https://api.appworks-school.tw/assets/201807201824/main.jpg" alt="">
+            </div>
+  
+            <div class="cartProductInfo"> <!-- flex order: desktop(2) mobile (2) -->
+                <div class="cartProductName">洋裝洋裝洋裝洋裝</div>
+                <div class="cartProductID">12345678</div>
+                <div class="cartProductVariant">
+                  <span class="itemDetailTitle">顏色</span>白
+                </div>
+                <div class="cartProductVariant">
+                  <span class="itemDetailTitle">尺寸</span>S
+                </div>
+            </div>
+  
+            <div class="cartProductVal flex"> <!-- flex order: desktop(3) mobile (4) -->
+  
+              <!-- <div class="cartProductValRow1-mobile">
+                <div class="cartProductTitle-mobile">數量</div>
+                <div class="cartProductTitle-mobile">單價</div>
+                <div class="cartProductTitle-mobile">小計</div>
+              </div> -->
+  
+              <div class="cartProductValRow2">
+  
+                <div class="cartProductQty">
+                  <select class="qtyStock">
+                  <!-- use loop to create option counts, based on stock quantity -->
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                  </select>
+                </div>
+                <div class="cartProductPrice">NT. 500</div>
+                <div class="cartProductSubtotal">NT. 1000</div>
+  
+              </div>
+            </div>
+  
+            <div class="cartProductTrash"> <!-- flex order: desktop(4) mobile (3) -->
+                <img src="../images/cart-remove.png">
+            </div>
+        </div>
+     
+
+    </div>
+
+  </main>
+
+
+
 
   <footer>
     <div class="myFooter flex">

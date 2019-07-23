@@ -65,9 +65,9 @@ function updateCartQty () {
     };
   };
   
-  window.addEventListener("load", function(){
-    updateCartQty();
-  });  
+window.addEventListener("load", function(){
+  updateCartQty();
+});  
 
 /* ==================
 Remove Element

@@ -22,6 +22,106 @@ a {
     display: flex;
 }
 /* ====================
+Cart Page STARTS
+==================== */
+.cartMain {
+    max-width: 1200px;
+    margin: 100px auto;
+}
+.cartTitle {
+    /* justify-content: space-between;
+    align-content: flex-start;
+    align-items: center; */
+    margin: 20px 5px;
+}
+.cartTitleLeft,
+.cartTitleRight {
+    width: 50%;
+}
+.cartTitleRight {
+    padding-right: 30px;
+}
+.cartProductValRow1-mobile,
+.cartProductValRow2 {
+    width: 100%;
+}
+.cartTitleRight,
+.cartProductValRow2 {
+    display: inline-flex;
+    justify-content: space-between;
+}
+
+/* ==================== cartProductList */
+.cartProductContainer {
+    border: 1px solid grey;
+    flex-wrap: wrap;
+    padding-top: 30px;
+}
+.cartProductList1,
+.cartProductList2 {
+    flex-wrap: wrap;
+    width: 100%;
+    max-width: 100%;
+    padding: 0 30px 30px 30px;
+}
+/* ===== cartProductPic */
+.cartProductPic {
+    order: 1;
+    width: 12.5%;
+    max-width: 12.5%;
+}
+.cartProductPic img {
+    width: 100%;
+}
+/* ===== cartProductInfo */
+.cartProductInfo {
+    order: 2;
+    width: 37.5%;
+    /* max-width: 37.5%; */
+    padding-left: 20px;
+}
+.cartProductName,
+.cartProductID {
+    padding-bottom: 20px;
+}
+.cartProductVariant {
+    margin-bottom: 5px;
+    vertical-align: middle;
+}
+.itemDetailTitle {
+    padding-right: 10px;
+    border-right: 1px solid grey;
+    margin-right: 10px;
+    vertical-align: middle;
+}
+/* ===== cartProductVal */
+.cartProductVal {
+    order: 3;
+    width: 37.5%;
+    margin: auto 0;
+    flex-wrap: wrap;
+   
+}
+/* PUT product val row back later HERE */
+
+.qtyStock {
+    width: 60px;
+}
+/* ===== cartProductTrash */
+.cartProductTrash {
+    order: 4;
+    width: 12.5%;
+    max-width: 12.5%;
+    padding-left: 100px;
+    margin: auto 0;
+}
+
+
+/* ====================
+Cart Page ENDS
+==================== */
+
+/* ====================
 Nav Bar
 ==================== */
 nav {
