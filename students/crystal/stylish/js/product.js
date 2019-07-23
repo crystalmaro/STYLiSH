@@ -1,16 +1,32 @@
+
+
+/* ==================
+take Parameter by page URL
+================== */
+function getParamName(name, url){
+  if (!url) url = window.location.href;
+  name = name.replace(/[\[\]]/g, '\\$&');
+  let regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+      results = regex.exec(url);
+  if (!results) return null;
+  if (!results[2]) return '';
+  return decodeURIComponent(results[2].replace(/\+/g, ' '));
+};
+
 const idQuery = getParamName('id');
-ajax(`${API_HOST_Item}${idQuery}`, renderItem);
+/* ==================
+Variables
+================== */
+let parsedData;
+const qtyAdd = document.getElementById("qtyAdd");
+const qtyMinus = document.getElementById("qtyMinus");
+const qtyValue = document.querySelector(".qtyValue");
 let currentColorCode;
 let currentColorTitle;
 let currentSizeID;
 let currentStock = 0;
 let qtyCount = 1;
-let qtyAdd = document.getElementById("qtyAdd");
-let qtyMinus = document.getElementById("qtyMinus");
-let qtyValue = document.querySelector(".qtyValue");
 let sizeCircle;
-let parsedData;
-// let existingItemIndex;
 let productDetail = {
   id: "",
   qty: "",
@@ -25,38 +41,13 @@ let productDetail = {
   stock: ""
 };
 
-/* ==================
-Local Storage 
-================== */
-let cartValue = {
-  shipping: "delivery",
-  frieght: 60,
-  payment: "credit_card",
-  subtotal: "",
-  total: "",
-  recipient: {
-    name: "",
-    phone: "",
-    email: "",
-    address: "",
-    time: "anytime"
-  },
-  list: []
-};
 
-function setLocalStorage(key, value){
-  localStorage.setItem(key, JSON.stringify(value));
-}
-
-function getLocalStorage(key){
-  return JSON.parse(localStorage.getItem(key));
-}
 
 /* ==================
 Button: Add to Cart
 ================== */
 let sameProductIndex;
-let addCartButton = document.querySelector(".addCartButton");
+
 addCartButton.addEventListener("click", function(){
   alert("product added to cart")
   let localStorageCart = getLocalStorage("cart");
@@ -96,39 +87,24 @@ let localStorageCart = getLocalStorage("cart");
   console.log(sameProductIndex);
 } */
 
-/* ==================
-Update Shopping Cart
-================== */
-function updateCartQty () {
-let cartQty = document.querySelectorAll(".cartQty");
-let localStorageCart = getLocalStorage("cart");
-  // initialize empty structure into localStorage
-  if (localStorageCart === null) {
-    setLocalStorage("cart", cartValue);
-  } else {
-    for (let i = 0; i < cartQty.length; i++) {
-      cartQty[i].innerHTML = localStorageCart.list.length;
-    };
-  };
-};
+// /* ==================
+// Update Shopping Cart
+// ================== */
+// function updateCartQty () {
+// let localStorageCart = getLocalStorage("cart");
+//   // initialize empty structure into localStorage
+//   if (localStorageCart === null) {
+//     setLocalStorage("cart", cartValue);
+//   } else {
+//     for (let i = 0; i < cartQty.length; i++) {
+//       cartQty[i].innerHTML = localStorageCart.list.length;
+//     };
+//   };
+// };
 
-// load cart quantity from localStorage on page loading
-window.addEventListener("load", function(){
-  updateCartQty();
-});
-
-/* ==================
-take Parameter by page URL
-================== */
-function getParamName(name, url) {
-    if (!url) url = window.location.href;
-    name = name.replace(/[\[\]]/g, '\\$&');
-    let regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
-        results = regex.exec(url);
-    if (!results) return null;
-    if (!results[2]) return '';
-    return decodeURIComponent(results[2].replace(/\+/g, ' '));
-}
+// window.addEventListener("load", function(){
+//   updateCartQty();
+// });
 
 /* ==================
 Render Product Detail based on Query String
@@ -136,13 +112,11 @@ Render Product Detail based on Query String
 function renderItem (data) {
   // assign size/color variants to globally declared variants for later use
   parsedData = data.data;
- 
   // A) itemMainImg (upper left section)
   let itemMainImg = document.querySelector(".itemMainImg");
   let mainImg = document.createElement("img");
   mainImg.setAttribute("src", parsedData.main_image);
   itemMainImg.appendChild(mainImg);
-
   // B) itemDetails (upper right section)
   document.querySelector(".itemName").textContent = parsedData.title;
   document.querySelector(".itemID").textContent = parsedData.id;
@@ -187,7 +161,6 @@ function renderItem (data) {
   document.querySelector(".itemDesc").innerHTML = parsedData.description.replace(/\r\n/g, "<br/>");;
   document.querySelector(".itemWash").innerHTML = `清洗：${parsedData.wash}`;
   document.querySelector(".itemPlace").innerHTML = `產地：${parsedData.place}`;
-
   // C) itemInfo (story & additional item images)
   document.querySelector(".itemInfoStory").innerHTML = parsedData.story;
   let itemInfoImg = document.querySelector(".itemInfoImg");
@@ -268,7 +241,7 @@ const selectedSize = (index) => {
   updateProductDetail();
 };
 
-function fetchStock() {
+function fetchStock(){
   let stockArray = parsedData.variants.filter(item => 
     (currentColorCode === item.color_code && 
     currentSizeID === item.size 
@@ -297,7 +270,7 @@ function checkOutOfStockSize () {
 };
 
 /* ==================
-Button: Quantity
+Button: - Quantity +
 ================== */
 qtyAdd.addEventListener("click", function(){
   if (qtyCount < currentStock) {
@@ -320,3 +293,8 @@ function qtyReset () {
   qtyValue.innerHTML = qtyCount;
   updateProductDetail();
 };
+
+/* ==================
+Initial Page Loading
+================== */
+ajax(`${API_HOST_Item}${idQuery}`, renderItem);

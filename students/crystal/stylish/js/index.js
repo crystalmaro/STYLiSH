@@ -1,8 +1,10 @@
-// === Render & display on initial loading
-// another method: window.addEventListener()
-ajax(`${API_HOST_Products}/${type}`, renderProduct);
-ajax(`${API_HOST}/marketing/campaigns`, renderCampaign)
-
+/* ==================
+Variables
+================== */
+let type = "all";
+let pageNumber;
+let pagingURL;
+let ind = 0;
 /* ==================
 Marketing Campaign
 ================== */
@@ -21,7 +23,7 @@ function renderCampaign (data) {
     // campaign clickable background image
     let campaignLink = document.createElement("a");
     campaignLink.className = "campaignLink";
-    campaignLink.setAttribute("href", `product.html?id=${campaignData[i].product_id}`)
+    campaignLink.setAttribute("href", `product.html?id=${campaignData[i].product_id}`);
     campaign.appendChild(campaignLink);
     
     // campaign story text
@@ -31,9 +33,9 @@ function renderCampaign (data) {
     campaign.appendChild(campaignStory);
 
     keyVisualSection.appendChild(campaign);
-  }
+  };
 
-    // campaign circle toggle
+  // campaign circle toggle
   let campaignStep = document.createElement("div");
   campaignStep.className = "campaignStep";
   for (let i = 0; i < campaignData.length; i++) {
@@ -44,11 +46,11 @@ function renderCampaign (data) {
     campaignCircle.className = "campaignCircle";
     campaignStep.appendChild(campaignCircle);
     keyVisualSection.appendChild(campaignStep);
-  }
+  };
   // load the first campaign data on loading
   campaignSlider(0);
   // display next campaign every 10 seconds
-  setInterval(campaignSlider, 2000) 
+  setInterval(campaignSlider, 10000);
 };
 
 // onClick function for campaignCicle
@@ -79,7 +81,7 @@ const campaignSlider = (index) => {
 /* ==================
 Render Products
 ================== */
-const getProducts = (inputType) => {
+function getProducts(inputType){
   type = inputType;
   removeElement("allProducts");
     ajax(`${API_HOST_Products}/${inputType}`, renderProduct);
@@ -92,7 +94,6 @@ const getProducts = (inputType) => {
 function renderProduct(data) {
   let allProducts = document.querySelector(".allProducts");
   let product = data.data;
-
   // pagingURL for scroll event
   if (data.paging !== undefined) {
     pagingURL = `${API_HOST_Products}/${type}?paging=${data.paging}`;
@@ -100,19 +101,17 @@ function renderProduct(data) {
   } else {
     pagingURL = "";
     window.removeEventListener("scroll", handleScroll);
-  }
-
+  };
+  // start creating product from JSON data
   for (let i = 0; i < product.length; i++) {
     let productContainer = document.createElement("a");
     productContainer.setAttribute("class", "productContainer");
     productContainer.setAttribute("href", `product.html?id=${product[i].id}`);
-
     // div.productImage
     let productImage = document.createElement("img");
     productImage.setAttribute("class", "productImage");
     productImage.setAttribute("src", `${product[i].main_image}`);
     productContainer.appendChild(productImage);
-
     // div.allColors
     let allColors = document.createElement("div");
     allColors.setAttribute("class", "allColors");
@@ -134,47 +133,43 @@ function renderProduct(data) {
       allColors.appendChild(colorChip);
       });
       ------- */
-    
     // div.productName
     let productName = document.createElement("div");
     productName.setAttribute("class", "productName");
     productName.innerHTML = product[i].title;
     productContainer.appendChild(productName);
-
     // div.productPrice
     let productPrice = document.createElement("div");
     productPrice.setAttribute("class", "productPrice");
     productPrice.appendChild(document.createTextNode(`TWD.${product[i].price}`))
     productContainer.appendChild(productPrice);
-
     allProducts.appendChild(productContainer);
-  }
+  };
 };
 
 /* ==================
 Scrolling & Paging Feature
 ================== */
-window.addEventListener("scroll", handleScroll);
-
 function handleScroll(e) {
     let ticking = false;
     if (!ticking) {
-      window.requestAnimationFrame(function () {
+      window.requestAnimationFrame(function() {
         endlessScroll();
         ticking = false;
       });
     }
     ticking = true;
-  }
+};
+
 // 偵測是不是快滑到最下面
-let endlessScroll = () => {
+function endlessScroll() {
   let windowHeight = window.innerHeight;
   let remainingFooter = document.querySelector("footer").getBoundingClientRect().top;
     if (remainingFooter - windowHeight < 0) {
       ajax(pagingURL, setExtProduct);
       window.removeEventListener("scroll", handleScroll);
     }
-}
+};
 
 function setExtProduct(data) {
   if (data.paging !== undefined) {
@@ -185,3 +180,11 @@ function setExtProduct(data) {
   window.addEventListener("scroll", handleScroll);
   renderProduct(data);
 };
+
+window.addEventListener("scroll", handleScroll);
+/* ==================
+Initial Page Loading
+================== */
+// another method: window.addEventListener("load", function(){})
+ajax(`${API_HOST_Products}/${type}`, renderProduct);
+ajax(`${API_HOST}/marketing/campaigns`, renderCampaign)
