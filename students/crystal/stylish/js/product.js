@@ -210,7 +210,7 @@ onClick() color and size
 ================== */
 const selectedColor = (index) => {
   let itemColorChip = document.getElementsByClassName("itemColorChip");
-    for (let i = 0; i < 3; i++) {
+    for (let i = 0; i < itemColorChip.length; i++) {
       // 砍掉重練 reset every color chip and remove noStock size
       itemColorChip[i].classList.remove("current");
       sizeCircle[i].classList.remove("noStock");
