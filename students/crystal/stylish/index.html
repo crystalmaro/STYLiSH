@@ -5,10 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" type="text/css" href="css/index.css">
-    <script type="text/javascript" src="js/lib.js"></script>
-    <script type="text/javascript" src="js/index.js"></script>
-    
-
+    <!-- <script type="text/javascript" src="js/lib.js"></script>
+    <script type="text/javascript" src="js/index.js"></script> -->
     <title>STYLiSH</title>
 </head>
 <body>
@@ -31,7 +29,7 @@
         <input class="searchInput" type="text" onClick="showMobileSearch()"/>
         <input class="searchSubmit" type="submit">
       </form>
-      <a><img class="iconCart" src="images/btn-shopping-cart-01-add_2019-07-10/btn-shopping-cart-01-add@3x.png" alt=""></a method="GET" action="/search">
+      <a class="iconCart"><div class="cartValStyle cartQty">0</div></a>
       <a><img class="iconMember" src="images/btn-member-01-normal_2019-07-10/btn-member-01-normal@3x.png" alt=""></a>
     </div>
   </nav>
@@ -44,7 +42,10 @@
 
   <div class="navFeature-mobile flex">
     <a>
-      <img src="images/btn-shopping-cart-02-normal_2019-07-11/btn-shopping-cart-02-normal.png" alt="">
+      <div class="cart-mobile">
+        <div class="cartValStyle-mobile cartQty">0</div>
+        <!-- <img src="images/btn-shopping-cart-02-normal_2019-07-11/btn-shopping-cart-02-normal.png" alt=""> -->
+      </div>
       購物車
     </a>
     <a>
@@ -117,5 +118,8 @@
       <div class="footerCopyright">@2018, All rights reserved.</div>
     </div>
   </footer>
+
+  <script type="text/javascript" src="js/lib.js"></script>
+  <script type="text/javascript" src="js/index.js"></script>
 </body>
 </html>
