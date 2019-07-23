@@ -15,6 +15,11 @@ function getParamName(name, url){
 
 const idQuery = getParamName('id');
 /* ==================
+Initial Page Loading
+================== */
+ajax(`${API_HOST_Item}${idQuery}`, renderItem);
+
+/* ==================
 Variables
 ================== */
 let parsedData;
@@ -27,6 +32,7 @@ let currentSizeID;
 let currentStock = 0;
 let qtyCount = 1;
 let sizeCircle;
+let sameProductIndex;
 let productDetail = {
   id: "",
   qty: "",
@@ -42,17 +48,17 @@ let productDetail = {
 };
 
 
-
 /* ==================
 Button: Add to Cart
 ================== */
-let sameProductIndex;
-
 addCartButton.addEventListener("click", function(){
   alert("product added to cart")
+  updateProductDetail();
   let localStorageCart = getLocalStorage("cart");
+  // reset sameProductIndex, and run checkIfSameProduct() again
+  sameProductIndex = -1;
   checkIfSameProduct();
-  if (sameProductIndex >= 0) {
+  if (sameProductIndex > -1) {
     // update quantity only
     localStorageCart.list[sameProductIndex].qty = productDetail.qty;
   } else {
@@ -71,24 +77,24 @@ function checkIfSameProduct() {
     if (localStorageCart.list[i].id === productDetail.id &&
       localStorageCart.list[i].size === productDetail.size &&
       localStorageCart.list[i].color.code === productDetail.color.code) {
-        sameProductIndex = i
+        sameProductIndex = i;
         console.log(i)
-      }
+      } 
   }
 };
-/*  === can also use findIndex for checkSameProduct, and assign the index to global variable
-function checkSameProduct () {
-let localStorageCart = getLocalStorage("cart");
-  sameProductIndex = localStorageCart.list.findIndex(x => 
-    (x.id === productDetail.id &&
-      x.size === productDetail.size &&
-      x.color.code === productDetail.color.code
-    ))
-  console.log(sameProductIndex);
-} */
+//=== can also use findIndex for checkSameProduct, and assign the index to global variable
+// function checkIfSameProduct () {
+// let localStorageCart = getLocalStorage("cart");
+//   sameProductIndex = localStorageCart.list.findIndex(x => 
+//     (x.id === productDetail.id &&
+//       x.size === productDetail.size &&
+//       x.color.code === productDetail.color.code
+//     ))
+//   console.log(sameProductIndex);
+// };
 
 // /* ==================
-// Update Shopping Cart
+// Update Shopping Cart : moved to lib.js
 // ================== */
 // function updateCartQty () {
 // let localStorageCart = getLocalStorage("cart");
@@ -185,7 +191,7 @@ function renderItem (data) {
 
 // assign product detail to global variable productDetail
 // call updateProductDetail() on every click action on page (selection on color, size, qty)
-function updateProductDetail () {
+function updateProductDetail() {
   productDetail.id = parsedData.id;
   productDetail.main_image = parsedData.main_image;
   productDetail.name = parsedData.title;
@@ -294,7 +300,3 @@ function qtyReset () {
   updateProductDetail();
 };
 
-/* ==================
-Initial Page Loading
-================== */
-ajax(`${API_HOST_Item}${idQuery}`, renderItem);
