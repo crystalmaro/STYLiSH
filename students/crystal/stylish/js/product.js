@@ -71,7 +71,7 @@ addCartButton.addEventListener("click", function(){
   // re-set localStorage with updated cart
   setLocalStorage("cart", localStorageCart);
   // updated item count on shopping cart icon
-  updataCartQty();
+  updateCartQty();
 });
 
 function checkIfSameProduct() {
@@ -99,7 +99,7 @@ let localStorageCart = getLocalStorage("cart");
 /* ==================
 Update Shopping Cart
 ================== */
-function updataCartQty () {
+function updateCartQty () {
 let cartQty = document.querySelectorAll(".cartQty");
 let localStorageCart = getLocalStorage("cart");
   // initialize empty structure into localStorage
@@ -114,7 +114,7 @@ let localStorageCart = getLocalStorage("cart");
 
 // load cart quantity from localStorage on page loading
 window.addEventListener("load", function(){
-  updataCartQty();
+  updateCartQty();
 });
 
 /* ==================
