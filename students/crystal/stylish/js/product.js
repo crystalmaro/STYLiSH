@@ -10,7 +10,7 @@ let qtyMinus = document.getElementById("qtyMinus");
 let qtyValue = document.querySelector(".qtyValue");
 let sizeCircle;
 let parsedData;
-let existingItemIndex;
+// let existingItemIndex;
 let productDetail = {
   id: "",
   qty: "",
@@ -52,55 +52,49 @@ function getLocalStorage(key){
   return JSON.parse(localStorage.getItem(key));
 }
 
-let localStorageCart = getLocalStorage("cart");
-
 /* ==================
 Button: Add to Cart
 ================== */
 let sameProductIndex;
 let addCartButton = document.querySelector(".addCartButton");
-/*========== add to cart logic notes
-if (nothing in local storage) {
-  insert first item into cart
-} else {
-  checkExistingProduct();
-  if (existingItem = true) {
-    update product size
-  } else {
-    push to currentList
-  }
-  re-set localStorage with the newly updated currentList
-}
-==========*/
 addCartButton.addEventListener("click", function(){
-  alert("added to cart")
+  alert("product added to cart")
   let localStorageCart = getLocalStorage("cart");
-  if (localStorageCart === null) {
-    // Insert first item into cart
-    cartValue.list.push(updateProductDetail());
-    setLocalStorage("cart", cartValue);
+  checkIfSameProduct();
+  if (sameProductIndex >= 0) {
+    // update quantity only
+    localStorageCart.list[sameProductIndex].qty = productDetail.qty;
   } else {
-    checkExistingProduct();
-    if (existingItemIndex >= 0) {
-      localStorageCart.list[existingItemIndex].qty = productDetail.qty;
-    } else {
-      localStorageCart.list.push(updateProductDetail());
-    }
-    setLocalStorage("cart", localStorageCart);
+    // otherwise add new item into cart
+    localStorageCart.list.push(updateProductDetail());
   }
+  // re-set localStorage with updated cart
+  setLocalStorage("cart", localStorageCart);
+  // updated item count on shopping cart icon
   updataCartQty();
 });
 
-function checkExistingProduct () {
+function checkIfSameProduct() {
+  let localStorageCart = getLocalStorage("cart");
+  for (let i = 0; i < localStorageCart.list.length; i++) {
+    if (localStorageCart.list[i].id === productDetail.id &&
+      localStorageCart.list[i].size === productDetail.size &&
+      localStorageCart.list[i].color.code === productDetail.color.code) {
+        sameProductIndex = i
+        console.log(i)
+      }
+  }
+};
+/*  === can also use findIndex for checkSameProduct, and assign the index to global variable
+function checkSameProduct () {
 let localStorageCart = getLocalStorage("cart");
-  existingItemIndex = localStorageCart.list.findIndex(x => 
+  sameProductIndex = localStorageCart.list.findIndex(x => 
     (x.id === productDetail.id &&
       x.size === productDetail.size &&
       x.color.code === productDetail.color.code
     ))
-  console.log(existingItemIndex);
-}
-
+  console.log(sameProductIndex);
+} */
 
 /* ==================
 Update Shopping Cart
@@ -108,8 +102,9 @@ Update Shopping Cart
 function updataCartQty () {
 let cartQty = document.querySelectorAll(".cartQty");
 let localStorageCart = getLocalStorage("cart");
+  // initialize empty structure into localStorage
   if (localStorageCart === null) {
-    cartValue.list = [];
+    setLocalStorage("cart", cartValue);
   } else {
     for (let i = 0; i < cartQty.length; i++) {
       cartQty[i].innerHTML = localStorageCart.list.length;
@@ -155,18 +150,18 @@ function renderItem (data) {
   // item color loop
   let itemColors = document.querySelector(".itemColors");
   for (let i = 0; i < parsedData.colors.length; i++) {
-    let itemColorChip = document.createElement("div");
-    itemColorChip.classList.add("itemColorChip", "pointer");
-    itemColorChip.setAttribute("style", `background-color:#${parsedData.colors[i].code}`);
-    itemColorChip.setAttribute("onClick", `selectedColor(${i})`);
+    let colorLoop = document.createElement("div");
+    colorLoop.classList.add("itemColorChip", "pointer");
+    colorLoop.setAttribute("style", `background-color:#${parsedData.colors[i].code}`);
+    colorLoop.setAttribute("onClick", `selectedColor(${i})`);
     // loop color_code to #id to assign to global variable currentColorCode
-    itemColorChip.setAttribute("id", parsedData.colors[i].code);
-    itemColorChip.setAttribute("title", parsedData.colors[i].name);
-    itemColors.appendChild(itemColorChip);
+    colorLoop.setAttribute("id", parsedData.colors[i].code);
+    colorLoop.setAttribute("title", parsedData.colors[i].name);
+    itemColors.appendChild(colorLoop);
     // 1) use switch to assign "current" classList to the first color/size on page loading
     switch(i) {
       case 0:
-        itemColorChip.classList.add("current");
+        colorLoop.classList.add("current");
         break;
     }
   };
