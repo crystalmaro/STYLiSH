@@ -27,6 +27,7 @@ Cart Page STARTS
 .cartMain {
     max-width: 1200px;
     margin: 100px auto;
+    padding: 20px;
 }
 .cartTitle {
     /* justify-content: space-between;
@@ -82,10 +83,10 @@ Cart Page STARTS
 }
 .cartProductName,
 .cartProductID {
-    padding-bottom: 20px;
+    padding-bottom: 15px;
 }
 .cartProductVariant {
-    margin-bottom: 5px;
+    padding-bottom: 5px;
     vertical-align: middle;
 }
 .itemDetailTitle {
@@ -99,8 +100,10 @@ Cart Page STARTS
     order: 3;
     width: 37.5%;
     margin: auto 0;
-    flex-wrap: wrap;
-   
+    flex-wrap: wrap;  
+}
+.cartProductValRow1-mobile {
+    display: none;
 }
 /* PUT product val row back later HERE */
 
@@ -524,6 +527,12 @@ Media Query
 2. Search Bar
 3. Shopping Cart & Member
 */
+
+/* shopping cart page*/
+.cartProductTrash {
+    padding-left: 50px;
+}
+/* ============= */
     .navProductCategory,
     .iconCart,
     .iconMember{
@@ -604,18 +613,6 @@ Media Query
         width: 40px;
         height: 40px;
     }
-    /* .navFeature-mobile .cartValStyle-mobile {
-        background-color: #8b572a;
-        color: white;
-        text-align: center;
-        border-radius: 50%;
-        opacity: 0.9;
-        width: 25px;
-        height: 25px;
-        line-height: 25px;
-        margin-top: 20px;
-        margin-left: 20px;
-    } */
     .campaign_text {
         left: 15%;
         bottom: 20%;
@@ -635,6 +632,12 @@ Media Query
 1. Product Display Row
 (from 3 -> 2 items)
 */
+
+/* shopping cart page*/
+.cartProductInfo div {
+    padding-bottom: 5px;
+}
+/* ============= */
     .campaign {
         height: 20rem;
     }
@@ -709,6 +712,53 @@ Media Query
 1. onClick Search Bar Width
 2. CampaignStory Position
 */
+
+/* shopping cart page*/
+.cartTitleRight {
+    display: none;
+}
+
+.cartTitle,
+.cartProductContainer {
+    border: 0;
+    padding: 0;
+}
+.cartProductList1,
+.cartProductList2 {
+    border-top: 1px solid black;
+    padding-top: 15px;
+}
+
+.cartProductPic{
+    order: 1;
+    width: 40%;
+    max-width: 40%;
+}
+.cartProductInfo {
+    order: 2;
+    width: 40%;
+    max-width: 50%;
+}
+.cartProductVal {
+    order: 4;
+    width: 100%;
+    max-width: 100%;
+}
+.cartProductTrash {
+    order: 3;
+    width: 10%;
+    max-width: 10%;
+}
+.cartProductValRow1-mobile {
+    display: inline-flex;
+    /* justify-content: space-evenly; */
+    /* width: 100%; */
+}
+/* 7/23 left off here */
+
+/* ============= */
+
+
     .searchInput.open {
         width: 300px;
     }
