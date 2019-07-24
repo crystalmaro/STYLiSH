@@ -53,7 +53,7 @@ function getLocalStorage(key){
 /* ==================
 Shopping Cart
 ================== */
-function updateCartQty () {
+function updateCartQty() {
   let localStorageCart = getLocalStorage("cart");
     // initialize empty structure into localStorage
     if (localStorageCart === null) {

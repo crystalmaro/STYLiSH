@@ -1,20 +1,18 @@
-// let localStorageCart.list = getLocalStorage("cart").list;
 let localStorageCart = getLocalStorage("cart");
 
 function renderCartProduct(){
   let cartProductContainer = document.querySelector(".cartProductContainer");
   let xIndex = 0;
     if (localStorageCart.list.length === 0) {
-        emptyCart = document.createElement("div");
-        emptyCart.classList.add("emptyCart");
-        emptyCart.innerHTML = "empty shopping cart";
-        cartProductContainer.appendChild(emptyCart);
+      emptyCart = document.createElement("div");
+      emptyCart.classList.add("emptyCart");
+      emptyCart.innerHTML = "empty shopping cart";
+      cartProductContainer.appendChild(emptyCart);
     } else {
-    localStorageCart.list.forEach( x => {
+      localStorageCart.list.forEach( x => {
       // individual item row
       let cartProductIndex = document.createElement("div");
       cartProductIndex.classList.add("cartProductIndex", "flex");
-    //   console.log(x)
       cartProductIndex.setAttribute("id", xIndex++);
       cartProductContainer.appendChild(cartProductIndex);
 
@@ -101,6 +99,8 @@ function renderCartProduct(){
             cartProductSubtotal.innerHTML = `NT. ${x.price * event.target.value}`;
             x.qty = Number(event.target.value);
             setLocalStorage("cart", localStorageCart);
+            calculateCartSubtotal();
+            calculateCartTotal();
           });
           
           // 單價 value
@@ -122,55 +122,56 @@ function renderCartProduct(){
       trashIcon.setAttribute("src", "../images/cart-remove.png");
       cartProductTrash.appendChild(trashIcon);
       cartProductIndex.appendChild(cartProductTrash);
-      // item trash - remove function
-
-      
-
     });
-
   }
-
-
 };
 renderCartProduct();
 
-
-
+// ============================
+// Remove Function
+// ============================
 function removeItem(el){
-
-    let itemArr = JSON.parse(localStorage.getItem("cart"));
-    let removeItemID = el.parentNode.id;
-    console.log(removeItemID);
-
-    itemArr.splice(removeItemID, 1);
-    console.log(itemArr);
-
-    localStorage.setItem("cart", JSON.stringify(itemArr));
-    setLocalStorage("cart", JSON.stringify(itemArr))
-    window.location.reload();
-}
+  let itemCount = document.querySelectorAll(".cartProductIndex");
+  let itemIndex = -1;
+  // remove item from localStorage
+  for(let i = 0; i < itemCount.length; i++) {
+    if (itemCount[i] == el.parentNode) {
+      itemIndex = i;
+    }
+  }
+  // splice(start splicing at updated itemIndex, remove 1 count from array)
+  localStorageCart.list.splice(itemIndex, 1);
+  setLocalStorage("cart", localStorageCart);
+  // remove item on page
+  let parent = el.parentNode;
+  parent.parentNode.removeChild(parent);
+  // update cart qty + order value
+  updateCartQty();
+  calculateCartSubtotal();
+  calculateCartTotal();
+};
 
 // ============================
 // Order Value Section Calculation
 // ============================
 let newSubtotal = 0;
 function calculateCartSubtotal(){
-    let cartProductSubtotal = document.querySelectorAll(".cartProductSubtotal");
-    console.log(cartProductSubtotal)
-    for (let i = 0; i < cartProductSubtotal.length; i++) {
-        // slice 4 character count including the space between NT. and $ 
-        newSubtotal += Number(cartProductSubtotal[i].innerHTML.slice(4));
-    }
-    let orderSubtotalVal = document.querySelector(".orderSubtotalVal");
-    orderSubtotalVal.innerHTML = newSubtotal;
+  let cartProductSubtotal = document.querySelectorAll(".cartProductSubtotal");
+  for (let i = 0; i < cartProductSubtotal.length; i++) {
+    // slice 4 character count including the space between NT. and $ 
+    newSubtotal += Number(cartProductSubtotal[i].innerHTML.slice(4));
+  }
+  let orderSubtotalVal = document.querySelector(".orderSubtotalVal");
+  orderSubtotalVal.innerHTML = newSubtotal;
 }
 calculateCartSubtotal();
 
-function amountPayable(){
-    let orderTotalVal = document.querySelector(".orderTotalVal");
-    let orderShippingVal = document.querySelector(".orderShippingVal");
-    orderTotalVal.innerHTML = newSubtotal + Number(orderShippingVal.innerHTML);
+function calculateCartTotal(){
+  let orderTotalVal = document.querySelector(".orderTotalVal");
+  let orderShippingVal = document.querySelector(".orderShippingVal");
+  let localStorageCart = getLocalStorage("cart");
+  orderTotalVal.innerHTML = newSubtotal + Number(orderShippingVal.innerHTML);
+  // console.log(parseInt(orderTotalVal))
+  // localStorageCart.total.push(Number(orderTotalVal));
 };
-amountPayable();
-
-
+calculateCartTotal();
