@@ -3,16 +3,19 @@ let localStorageCart = getLocalStorage("cart");
 
 function renderCartProduct(){
   let cartProductContainer = document.querySelector(".cartProductContainer");
+  let xIndex = 0;
     if (localStorageCart.list.length === 0) {
         emptyCart = document.createElement("div");
         emptyCart.classList.add("emptyCart");
         emptyCart.innerHTML = "empty shopping cart";
         cartProductContainer.appendChild(emptyCart);
     } else {
-    localStorageCart.list.forEach(x => {
+    localStorageCart.list.forEach( x => {
       // individual item row
       let cartProductIndex = document.createElement("div");
       cartProductIndex.classList.add("cartProductIndex", "flex");
+    //   console.log(x)
+      cartProductIndex.setAttribute("id", xIndex++);
       cartProductContainer.appendChild(cartProductIndex);
 
       // item image
@@ -93,8 +96,13 @@ function renderCartProduct(){
             }  
             qtyStockSelect.appendChild(qtyStockOption);   
           };
+          // 數量 onChange event
+          qtyStockSelect.addEventListener("change", function(){
+            cartProductSubtotal.innerHTML = `NT. ${x.price * event.target.value}`;
+            x.qty = Number(event.target.value);
+            setLocalStorage("cart", localStorageCart);
+          });
           
-
           // 單價 value
           let cartProductPrice = document.createElement("div");
           cartProductPrice.classList.add("cartProductPrice");
@@ -105,32 +113,64 @@ function renderCartProduct(){
           cartProductSubtotal.classList.add("cartProductSubtotal");
           cartProductSubtotal.innerHTML = `NT. ${x.price * x.qty}`;
           cartProductValRow2.appendChild(cartProductSubtotal);
-      
-
-          // 數量 onChange event
-          qtyStockSelect.addEventListener("change", function(){
-            cartProductSubtotal.innerHTML = `NT. ${x.price * event.target.value}`;
-            x.qty = Number(event.target.value);
-            setLocalStorage("cart", localStorageCart);
-          });
-
-          
           
       // item trash
       let cartProductTrash = document.createElement("div");
       cartProductTrash.classList.add("cartProductTrash");
+      cartProductTrash.setAttribute("onClick", "removeItem(this)");
       let trashIcon = document.createElement("img");
       trashIcon.setAttribute("src", "../images/cart-remove.png");
       cartProductTrash.appendChild(trashIcon);
       cartProductIndex.appendChild(cartProductTrash);
+      // item trash - remove function
+
+      
+
     });
 
   }
 
 
-
-
-
 };
-
 renderCartProduct();
+
+
+
+function removeItem(el){
+
+    let itemArr = JSON.parse(localStorage.getItem("cart"));
+    let removeItemID = el.parentNode.id;
+    console.log(removeItemID);
+
+    itemArr.splice(removeItemID, 1);
+    console.log(itemArr);
+
+    localStorage.setItem("cart", JSON.stringify(itemArr));
+    setLocalStorage("cart", JSON.stringify(itemArr))
+    window.location.reload();
+}
+
+// ============================
+// Order Value Section Calculation
+// ============================
+let newSubtotal = 0;
+function calculateCartSubtotal(){
+    let cartProductSubtotal = document.querySelectorAll(".cartProductSubtotal");
+    console.log(cartProductSubtotal)
+    for (let i = 0; i < cartProductSubtotal.length; i++) {
+        // slice 4 character count including the space between NT. and $ 
+        newSubtotal += Number(cartProductSubtotal[i].innerHTML.slice(4));
+    }
+    let orderSubtotalVal = document.querySelector(".orderSubtotalVal");
+    orderSubtotalVal.innerHTML = newSubtotal;
+}
+calculateCartSubtotal();
+
+function amountPayable(){
+    let orderTotalVal = document.querySelector(".orderTotalVal");
+    let orderShippingVal = document.querySelector(".orderShippingVal");
+    orderTotalVal.innerHTML = newSubtotal + Number(orderShippingVal.innerHTML);
+};
+amountPayable();
+
+
