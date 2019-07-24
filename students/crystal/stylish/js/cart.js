@@ -168,7 +168,8 @@ let newSubtotal = 0;
   }
   let orderSubtotalVal = document.querySelector(".orderSubtotalVal");
   orderSubtotalVal.innerHTML = newSubtotal;
-//   console.log(newSubtotal)
+  localStorageCart.subtotal = orderSubtotalVal.innerHTML;
+  setLocalStorage("cart", localStorageCart);
 }
 calculateCartSubtotal();
 
@@ -178,7 +179,15 @@ function calculateCartTotal(){
   let orderSubtotalVal = parseInt((document.querySelector(".orderSubtotalVal").innerHTML));
   let localStorageCart = getLocalStorage("cart");
   orderTotalVal.innerHTML = orderSubtotalVal + Number(orderShippingVal.innerHTML);
-  // console.log(parseInt(orderTotalVal))
-  // localStorageCart.total.push(Number(orderTotalVal));
+
+  console.log(localStorageCart)
+  console.log(localStorageCart.total)
+  localStorageCart.total = orderTotalVal.innerHTML;
+  setLocalStorage("cart", localStorageCart);
 };
 calculateCartTotal();
+
+// localStorageCart.list.push(updateProductDetail());
+// }
+// // re-set localStorage with updated cart
+// setLocalStorage("cart", localStorageCart);
