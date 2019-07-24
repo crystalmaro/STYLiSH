@@ -55,7 +55,7 @@
 
   <main class="cartMain">
 
-    <!-- ========= top title for product ========= -->
+    <!-- ========= header title for product ========= -->
     <div class="cartTitle flex">
 
       <div class="cartTitleLeft">
@@ -70,103 +70,46 @@
       </div>
 
     </div>
-    <!-- ========================================= -->
-
+    <!-- 產品家長 ========================================= -->
     <div class="cartProductContainer flex">
-
-      <div class="cartProductList flex">
-          <div class="cartProductPic"> <!-- flex order: desktop(1) mobile (1) -->
-            <img src="https://api.appworks-school.tw/assets/201807201824/main.jpg" alt="">
-          </div>
-
-          <div class="cartProductInfo"> <!-- flex order: desktop(2) mobile (2) -->
-              <div class="cartProductName">洋裝洋裝洋裝洋裝</div>
-              <div class="cartProductID">12345678</div>
-              <div class="cartProductVariant">
-                <span class="itemDetailTitle">顏色</span>白
-              </div>
-              <div class="cartProductVariant">
-                <span class="itemDetailTitle">尺寸</span>S
-              </div>
-          </div>
-
-          <div class="cartProductVal flex"> <!-- flex order: desktop(3) mobile (4) -->
-
-            <div class="cartProductValRow1-mobile">
-              <div class="cartProductTitle-mobile">數量</div>
-              <div class="cartProductTitle-mobile">單價</div>
-              <div class="cartProductTitle-mobile">小計</div>
-            </div>
-
-            <div class="cartProductValRow2">
-
-              <div class="cartProductQty">
-                <select class="qtyStock">
-                <!-- use loop to create option counts, based on stock quantity -->
-                  <option value="1">1</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                </select>
-              </div>
-              <div class="cartProductPrice">NT. 500</div>
-              <div class="cartProductSubtotal">NT. 1000</div>
-
-            </div>
-          </div>
-
-          <div class="cartProductTrash"> <!-- flex order: desktop(4) mobile (3) -->
-              <img src="../images/cart-remove.png">
-          </div>
-      </div>
-
-      <!-- second product -->
-
-      <div class="cartProductList flex">
-            <div class="cartProductPic"> <!-- flex order: desktop(1) mobile (1) -->
-              <img src="https://api.appworks-school.tw/assets/201807201824/main.jpg" alt="">
-            </div>
-  
-            <div class="cartProductInfo"> <!-- flex order: desktop(2) mobile (2) -->
-                <div class="cartProductName">洋裝洋裝洋裝洋裝</div>
-                <div class="cartProductID">12345678</div>
-                <div class="cartProductVariant">
-                  <span class="itemDetailTitle">顏色</span>白
-                </div>
-                <div class="cartProductVariant">
-                  <span class="itemDetailTitle">尺寸</span>S
-                </div>
-            </div>
-  
-            <div class="cartProductVal flex"> <!-- flex order: desktop(3) mobile (4) -->
-  
-              <div class="cartProductValRow1-mobile">
-                <div class="cartProductTitle-mobile">數量</div>
-                <div class="cartProductTitle-mobile">單價</div>
-                <div class="cartProductTitle-mobile">小計</div>
-              </div>
-  
-              <div class="cartProductValRow2">
-  
-                <div class="cartProductQty">
-                  <select class="qtyStock">
-                  <!-- use loop to create option counts, based on stock quantity -->
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                  </select>
-                </div>
-                <div class="cartProductPrice">NT. 500</div>
-                <div class="cartProductSubtotal">NT. 1000</div>
-  
-              </div>
-            </div>
-  
-            <div class="cartProductTrash"> <!-- flex order: desktop(4) mobile (3) -->
-                <img src="../images/cart-remove.png">
-            </div>
+    <!-- 產品生小孩 ========================================= -->
+      <!-- <div class="cartProductIndex flex">
+        <div class="cartProductPic">
+          <img src="https://api.appworks-school.tw/assets/201807201824/main.jpg" alt="">
         </div>
-     
 
+        <div class="cartProductInfo">
+          <div class="cartProductName">洋裝洋裝洋裝洋裝</div>
+          <div class="cartProductID">12345678</div>
+          <div class="cartProductColor">顏色 | 白</div>
+          <div class="cartProductSize">尺寸 | S</div>
+        </div>
+
+        <div class="cartProductVal flex">
+
+          <div class="cartProductValRow1-mobile">
+            <div class="cartProductTitle-mobile">數量</div>
+            <div class="cartProductTitle-mobile">單價</div>
+            <div class="cartProductTitle-mobile">小計</div>
+          </div>
+
+          <div class="cartProductValRow2">
+            <div class="cartProductQty">
+              <select class="qtyStock">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+              </select>
+            </div>
+            <div class="cartProductPrice">NT. 500</div>
+            <div class="cartProductSubtotal">NT. 1000</div>
+          </div>
+        </div>
+
+        <div class="cartProductTrash">
+            <img src="../images/cart-remove.png">
+        </div>
+      </div> -->
     </div>
 
     <!-- 配送國家 ========================================= -->
@@ -215,15 +158,15 @@
           <div class="infoTitle">配送時間</div>
           <div class="deliveryTime">
             <label>
-              <input type="radio">
+              <input type="radio" name="deliveryTime">
               <span class="time">08:00 - 12:00</span>
             </label>
             <label>
-              <input type="radio">
+              <input type="radio" name="deliveryTime">
               <span class="time">14:00 - 18:00</span>
             </label>
             <label>
-              <input type="radio">
+              <input type="radio" name="deliveryTime">
               <span class="time">不指定</span>
             </label>
           </div>
@@ -335,5 +278,6 @@
   </footer>
 
   <script type="text/javascript" src="js/lib.js"></script>
+  <script type="text/javascript" src="js/cart.js"></script>
 </body>
 </html>

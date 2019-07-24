@@ -93,25 +93,6 @@ function checkIfSameProduct() {
 //   console.log(sameProductIndex);
 // };
 
-// /* ==================
-// Update Shopping Cart : moved to lib.js
-// ================== */
-// function updateCartQty () {
-// let localStorageCart = getLocalStorage("cart");
-//   // initialize empty structure into localStorage
-//   if (localStorageCart === null) {
-//     setLocalStorage("cart", cartValue);
-//   } else {
-//     for (let i = 0; i < cartQty.length; i++) {
-//       cartQty[i].innerHTML = localStorageCart.list.length;
-//     };
-//   };
-// };
-
-// window.addEventListener("load", function(){
-//   updateCartQty();
-// });
-
 /* ==================
 Render Product Detail based on Query String
 ================== */
