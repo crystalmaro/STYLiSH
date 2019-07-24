@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" type="text/css" href="css/index.css">
+    <link rel="stylesheet" type="text/css" href="css/cart.css">
     <title>STYLiSH Cart</title>
 </head>
 <body>
@@ -166,6 +167,129 @@
         </div>
      
 
+    </div>
+
+    <!-- 配送國家 ========================================= -->
+
+    <div class="cartPreference flex">
+      <div class="cartPrefShipping">
+        <div>配送國家</div>
+        <select>
+          <option value="台灣或離島">台灣或離島</option>
+        </select>
+      </div>
+      <div class="cartPrefPayment">
+        <div>付款方式</div>
+        <select>
+          <option value="信用卡付款">信用卡付款</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="cartReminder">
+      <div>※ 提醒您：</div>
+      <div>● 請填寫正確收件人資訊，避免包裹配送不達</div>
+      <div>● 請填寫正確收件人姓名 ( 與證件相符 )，避免無法領取</div>
+    </div>
+
+    <!-- 收件資料 ========================================= -->
+    <div class="buyerInfo flex">
+        <div class="sectionHeader">收件資料</div>
+        <div class="sectionLine">
+          <div class="infoTitle">收件人姓名</div>
+          <input type="text" class="buyerName">
+        </div>
+        <div class="sectionLine">
+          <div class="infoTitle">Email</div>
+          <input type="text" class="buyerEmail">
+        </div>
+        <div class="sectionLine">
+          <div class="infoTitle">手機號碼</div>
+          <input type="text" class="buyerPhone">
+        </div>
+        <div class="sectionLine">
+          <div class="infoTitle">收件地址</div>
+          <input type="text" class="buyerAddress">
+        </div>
+        <div class="sectionLine">
+          <div class="infoTitle">配送時間</div>
+          <div class="deliveryTime">
+            <label>
+              <input type="radio">
+              <span class="time">08:00 - 12:00</span>
+            </label>
+            <label>
+              <input type="radio">
+              <span class="time">14:00 - 18:00</span>
+            </label>
+            <label>
+              <input type="radio">
+              <span class="time">不指定</span>
+            </label>
+          </div>
+        </div>
+    </div>
+
+    <!-- 付款資料 ========================================= -->
+    <div class="buyerPayment flex">
+      <div class="sectionHeader">付款資料</div>
+      <div class="sectionLine">
+        <div class="infoTitle">信用卡號碼</div>
+        <div class="paymentInput">
+          <div class="tpfield" id="card-number">
+            <input type="password" value="***">
+          </div>
+        </div>
+      </div>
+
+      <div class="sectionLine">
+        <div class="infoTitle">有效期限</div>
+        <div class="paymentInput">
+          <div class="tpfield" id="card-expiration-date">
+            <input type="text" value="MM / YY">
+          </div>
+        </div>
+      </div>
+
+      <div class="sectionLine">
+        <div class="infoTitle">安全碼</div>
+        <div class="paymentInput">
+          <div class="tpfield" id="card-ccv">
+            <input type="text" value="CCV">
+          </div>
+        </div>  
+      </div>  
+      
+    </div>
+
+<!-- 付款$$$ ========================================= -->
+    <div class="orderValSection flex">
+        <div class="orderRow">
+          <div class="orderTitle">總金額</div>
+            <div class="orderSubtotal">
+              <span class="ntd">NT. </span>
+              <span class="orderSubtotalVal">100</span>
+            </div>
+        </div>
+
+        <div class="orderRow">
+          <div class="orderTitle">運費</div>
+            <div class="orderShipping">
+              <span class="ntd">NT. </span>
+              <span class="orderShippingVal">60</span>
+            </div>
+        </div>
+
+        <div class="orderRow">
+          <div class="orderTitle">應付金額</div>
+            <div class="orderTotal">
+              <span class="ntd">NT. </span>
+              <span class="orderTotalVal">160</span>
+            </div>
+        </div>
+
+        <button class="checkoutButton">確認付款</button>
+        
     </div>
 
   </main>
