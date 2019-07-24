@@ -154,23 +154,27 @@ function removeItem(el){
 // ============================
 // Order Value Section Calculation
 // ============================
-let newSubtotal = 0;
+
 function calculateCartSubtotal(){
+let newSubtotal = 0;
   let cartProductSubtotal = document.querySelectorAll(".cartProductSubtotal");
   for (let i = 0; i < cartProductSubtotal.length; i++) {
     // slice 4 character count including the space between NT. and $ 
     newSubtotal += Number(cartProductSubtotal[i].innerHTML.slice(4));
+    // console.log(newSubtotal)
   }
   let orderSubtotalVal = document.querySelector(".orderSubtotalVal");
   orderSubtotalVal.innerHTML = newSubtotal;
+//   console.log(newSubtotal)
 }
 calculateCartSubtotal();
 
 function calculateCartTotal(){
   let orderTotalVal = document.querySelector(".orderTotalVal");
   let orderShippingVal = document.querySelector(".orderShippingVal");
+  let orderSubtotalVal = parseInt((document.querySelector(".orderSubtotalVal").innerHTML));
   let localStorageCart = getLocalStorage("cart");
-  orderTotalVal.innerHTML = newSubtotal + Number(orderShippingVal.innerHTML);
+  orderTotalVal.innerHTML = orderSubtotalVal + Number(orderShippingVal.innerHTML);
   // console.log(parseInt(orderTotalVal))
   // localStorageCart.total.push(Number(orderTotalVal));
 };
