@@ -4,9 +4,6 @@
     padding: 20px;
 }
 .cartTitle {
-    /* justify-content: space-between;
-    align-content: flex-start;
-    align-items: center; */
     margin: 20px 5px;
 }
 .cartTitleLeft,
@@ -32,14 +29,13 @@
     flex-wrap: wrap;
     padding-top: 30px;
 }
-.cartProductList1,
-.cartProductList2 {
+.cartProductList {
     flex-wrap: wrap;
     width: 100%;
     max-width: 100%;
     padding: 0 30px 30px 30px;
 }
-/* ===== cartProductPic */
+
 .cartProductPic {
     order: 1;
     width: 12.5%;
@@ -48,28 +44,30 @@
 .cartProductPic img {
     width: 100%;
 }
-/* ===== cartProductInfo */
+
 .cartProductInfo {
     order: 2;
     width: 37.5%;
-    /* max-width: 37.5%; */
     padding-left: 20px;
 }
+
 .cartProductName,
 .cartProductID {
     padding-bottom: 15px;
 }
+
 .cartProductVariant {
     padding-bottom: 5px;
     vertical-align: middle;
 }
+
 .itemDetailTitle {
     padding-right: 10px;
     border-right: 1px solid grey;
     margin-right: 10px;
     vertical-align: middle;
 }
-/* ===== cartProductVal */
+
 .cartProductVal {
     order: 3;
     width: 37.5%;
@@ -83,7 +81,7 @@
 .qtyStock {
     width: 60px;
 }
-/* ===== cartProductTrash */
+
 .cartProductTrash {
     order: 4;
     width: 12.5%;
@@ -159,7 +157,7 @@
     margin-top: 20px;
     padding: 20px 5px;
     flex-direction: column;
-    font-size: 1.5rem;
+    font-size: 1.25rem;
 }
 
 .orderRow,
@@ -222,22 +220,20 @@ Media Query
         border: 0;
         padding: 5px;
     }
-    .cartProductList1,
-    .cartProductList2 {
+    .cartProductList {
         border-top: 1px solid black;
-        /* padding-top: 15px; */
         padding: 15px 0;
     }
-
+    .cartProductList:last-of-type {
+        border-bottom: 1px solid black;
+    }
     .cartProductPic{
         order: 1;
         width: 30%;
-        max-width: 30%;
     }
     .cartProductInfo {
         order: 2;
         width: 50%;
-        max-width: 50%;
         padding-left: 10px;
     }
     .cartProductName,
@@ -247,21 +243,35 @@ Media Query
     .cartProductVal {
         order: 4;
         width: 100%;
-        max-width: 100%;
     }
     .cartProductTrash {
         order: 3;
         width: 10%;
-        max-width: 10%;
         margin: 0;
     }
     .cartProductValRow1-mobile,
     .cartProductValRow2 {
         display: inline-flex;
-        /* justify-content: space-evenly; */
         justify-content: space-around;
-        /* justify-content: space-evenly; */
         max-width: 90%;
         margin: 5px auto;
     }
+    .sectionHeader {
+        width: 100%;
+        margin: 0;
+        font-weight: bold;
+    }
+    .sectionLine {
+        display: block;
+        width: 95%;
+    }
+    .infoTitle {
+        padding: 10px 0;
+    }
+    .infoTitle+input,
+    .paymentInput div input,
+    .checkoutButton {
+        width: 100%;
+    }
+
 }
