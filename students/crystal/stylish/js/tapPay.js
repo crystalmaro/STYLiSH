@@ -114,13 +114,14 @@ TPDirect.card.getTappayFieldsStatus();
 
 // ======================= get Prime
 // call TPDirect.card.getPrime when user submit form to get tappay prime
+
 function checkoutInput(){
-let isValid = true;
+    let isValid = true;
     let inputFields = document.querySelectorAll(".checkoutInput");
     for(let i = 0; i < inputFields.length; i++){
       if(inputFields[i].value == ""){
-        isValid = false
-      }
+        isValid = false;
+      } 
     } 
     if (isValid == false){
         alert("Please enter all user info.")
@@ -130,7 +131,7 @@ let isValid = true;
 function getPrime(){
     let localStorageCart = getLocalStorage("cart");
     checkoutInput();
-    return new Promise((resolve, reject) => {
+    // return new Promise((resolve, reject) => {
         event.preventDefault();
 
         // Get TapPay Fields  status
@@ -149,7 +150,7 @@ function getPrime(){
                 return
             }
             
-            resolve(console.log(localStorageCart.prime));
+            // resolve(console.log(localStorageCart.prime));
             alert('get prime success, prime: ' + result.card.prime)
             localStorageCart.prime = result.card.prime;
             setLocalStorage("cart", localStorageCart);
@@ -157,7 +158,7 @@ function getPrime(){
             // send prime to your server, to pay with Pay by Prime API .
             // Pay By Prime Docs: https://docs.tappaysdk.com/tutorial/zh/back.html#pay-by-prime-api
         })
-    })
+    // })
 };
 
 function updateUserInput(){
