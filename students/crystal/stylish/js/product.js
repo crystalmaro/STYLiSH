@@ -47,13 +47,14 @@ let productDetail = {
   stock: ""
 };
 
+localStorageCart = getLocalStorage("cart");
 
 /* ==================
 Button: Add to Cart
 ================== */
 addCartButton.addEventListener("click", function(){
   updateProductDetail();
-  let localStorageCart = getLocalStorage("cart");
+  // let localStorageCart = getLocalStorage("cart");
   // reset sameProductIndex, and run checkIfSameProduct() again
   sameProductIndex = -1;
   checkIfSameProduct();
@@ -71,7 +72,7 @@ addCartButton.addEventListener("click", function(){
 });
 
 function checkIfSameProduct() {
-  let localStorageCart = getLocalStorage("cart");
+  // let localStorageCart = getLocalStorage("cart");
   for (let i = 0; i < localStorageCart.order.list.length; i++) {
     if (localStorageCart.order.list[i].id === productDetail.id &&
       localStorageCart.order.list[i].size === productDetail.size &&

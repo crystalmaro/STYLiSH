@@ -6,6 +6,10 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" type="text/css" href="css/common.css">
     <link rel="stylesheet" type="text/css" href="css/cart.css">
+
+    <script src="https://js.tappaysdk.com/tpdirect/v5.1.0"></script>
+    
+
     <title>STYLiSH Cart</title>
 </head>
 <body>
@@ -118,13 +122,13 @@
       <div class="cartPrefShipping">
         <div>配送國家</div>
         <select>
-          <option value="台灣或離島">台灣或離島</option>
+          <option value="台灣或離島" selected>台灣或離島</option>
         </select>
       </div>
       <div class="cartPrefPayment">
         <div>付款方式</div>
         <select>
-          <option value="信用卡付款">信用卡付款</option>
+          <option value="信用卡付款" selected>信用卡付款</option>
         </select>
       </div>
     </div>
@@ -158,11 +162,11 @@
           <div class="infoTitle">配送時間</div>
           <div class="deliveryTime">
             <label>
-              <input type="radio" name="deliveryTime" value="am">
+              <input type="radio" name="deliveryTime" value="morning">
               <span class="time">08:00 - 12:00</span>
             </label>
             <label>
-              <input type="radio" name="deliveryTime" value="pm">
+              <input type="radio" name="deliveryTime" value="afternoon">
               <span class="time">14:00 - 18:00</span>
             </label>
             <label>
@@ -178,7 +182,7 @@
       <div class="sectionHeader">付款資料</div>
       <div class="sectionLine">
         <div class="infoTitle">信用卡號碼</div>
-        <div class="paymentInput checkoutInput tpfield" id="card-number">
+        <div class="tpfield" id="card-number">
           <!-- <div class="tpfield" id="card-number"> -->
             <!-- <input type="password" value="***"> -->
           </div>
@@ -187,7 +191,7 @@
 
       <div class="sectionLine">
         <div class="infoTitle">有效期限</div>
-        <div class="paymentInput checkoutInput tpfield" id="card-expiration-date">
+        <div class="tpfield" id="card-expiration-date">
           <!-- <div class="tpfield" id="card-expiration-date"> -->
             <!-- <input type="text" value="MM / YY"> -->
           </div>
@@ -196,7 +200,7 @@
 
       <div class="sectionLine">
         <div class="infoTitle">安全碼</div>
-        <div class="paymentInput checkoutInput tpfield" id="card-ccv">
+        <div class="tpfield" id="card-ccv">
           <!-- <div class="tpfield" id="card-ccv"> -->
             <!-- <input type="text" value="CCV"> -->
           </div>
@@ -231,7 +235,7 @@
             </div>
         </div>
 
-        <button id="submitButton" onSubmit="getPrime" class="checkoutButton">確認付款</button>
+        <button id="submitButton" onClick="getPrime()" class="checkoutButton">確認付款</button>
         
     </div>
 
@@ -275,8 +279,8 @@
   </footer>
 
   <script type="text/javascript" src="js/lib.js"></script>
-  <script src="https://js.tappaysdk.com/tpdirect/v5.1.0"></script>
-  <script type="text/javascript" src="js/cart.js"></script>
   <script type="text/javascript" src="js/tapPay.js"></script>
+  <script type="text/javascript" src="js/cart.js"></script>
+  
 </body>
 </html>

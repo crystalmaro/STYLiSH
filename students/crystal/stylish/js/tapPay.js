@@ -68,47 +68,47 @@ TPDirect.card.setup({
 
 // ======================= onUpdate
 
-// TPDirect.card.onUpdate(function (update) {
-//     // update.canGetPrime === true
-//     // --> you can call TPDirect.card.getPrime()
-//     if (update.canGetPrime) {
-//         // Enable submit Button to get prime.
-//         // submitButton.removeAttribute('disabled')
-//     } else {
-//         // Disable submit Button to get prime.
-//         // submitButton.setAttribute('disabled', true)
-//     }
+TPDirect.card.onUpdate(function (update) {
+    // update.canGetPrime === true
+    // --> you can call TPDirect.card.getPrime()
+    if (update.canGetPrime) {
+        // Enable submit Button to get prime.
+        // submitButton.removeAttribute('disabled')
+    } else {
+        // Disable submit Button to get prime.
+        // submitButton.setAttribute('disabled', true)
+    }
 
-//     // cardTypes = ['mastercard', 'visa', 'jcb', 'amex', 'unknown']
-//     if (update.cardType === 'visa') {
-//         // Handle card type visa.
-//     }
+    // cardTypes = ['mastercard', 'visa', 'jcb', 'amex', 'unknown']
+    if (update.cardType === 'visa') {
+        // Handle card type visa.
+    }
 
-//     // number fields is error
-//     if (update.status.number === 2) {
-//         // setNumberFormGroupToError()
-//     } else if (update.status.number === 0) {
-//         // setNumberFormGroupToSuccess()
-//     } else {
-//         // setNumberFormGroupToNormal()
-//     }
+    // number fields is error
+    if (update.status.number === 2) {
+        // setNumberFormGroupToError()
+    } else if (update.status.number === 0) {
+        // setNumberFormGroupToSuccess()
+    } else {
+        // setNumberFormGroupToNormal()
+    }
 
-//     if (update.status.expiry === 2) {
-//         // setNumberFormGroupToError()
-//     } else if (update.status.expiry === 0) {
-//         // setNumberFormGroupToSuccess()
-//     } else {
-//         // setNumberFormGroupToNormal()
-//     }
+    if (update.status.expiry === 2) {
+        // setNumberFormGroupToError()
+    } else if (update.status.expiry === 0) {
+        // setNumberFormGroupToSuccess()
+    } else {
+        // setNumberFormGroupToNormal()
+    }
 
-//     if (update.status.cvc === 2) {
-//         // setNumberFormGroupToError()
-//     } else if (update.status.cvc === 0) {
-//         // setNumberFormGroupToSuccess()
-//     } else {
-//         // setNumberFormGroupToNormal()
-//     }
-// });
+    if (update.status.cvc === 2) {
+        // setNumberFormGroupToError()
+    } else if (update.status.cvc === 0) {
+        // setNumberFormGroupToSuccess()
+    } else {
+        // setNumberFormGroupToNormal()
+    }
+});
 
 // ======================= getTappay Fields Status
 TPDirect.card.getTappayFieldsStatus();
@@ -119,29 +119,38 @@ TPDirect.card.getTappayFieldsStatus();
 // let submitButton = document.querySelector("#submitButton");
 
 function getPrime(){
-    event.preventDefault();
+    let localStorageCart = getLocalStorage("cart");
+    checkoutInput()
+    // return new Promoise((resolve, reject) => {
+        event.preventDefault();
 
-    // Get TapPay Fields  status
-    const tappayStatus = TPDirect.card.getTappayFieldsStatus()
+        // Get TapPay Fields  status
+        const tappayStatus = TPDirect.card.getTappayFieldsStatus()
 
-    // Check can getPrime
-    if (tappayStatus.canGetPrime === false) {
-        alert('can not get prime')
-        return
-    }
-
-    // Get prime
-    TPDirect.card.getPrime((result) => {
-        if (result.status !== 0) {
-            alert('get prime error ' + result.msg)
+        // Check can getPrime
+        if (tappayStatus.canGetPrime === false) {
+            alert('can not get prime')
             return
         }
-        localStorageCart.prime = result.cart.prime;
-        alert('get prime success, prime: ' + result.card.prime)
 
-        // send prime to your server, to pay with Pay by Prime API .
-        // Pay By Prime Docs: https://docs.tappaysdk.com/tutorial/zh/back.html#pay-by-prime-api
-    })
+        // Get prime
+        TPDirect.card.getPrime((result) => {
+            if (result.status !== 0) {
+                alert('get prime error ' + result.msg)
+                return
+            }
+            
+            // resolve(console.log(localStorageCart.prime));
+            alert('get prime success, prime: ' + result.card.prime)
+            localStorageCart.prime = result.card.prime;
+
+            console.log(localStorageCart)
+            console.log(localStorageCart.prime)
+
+            // send prime to your server, to pay with Pay by Prime API .
+            // Pay By Prime Docs: https://docs.tappaysdk.com/tutorial/zh/back.html#pay-by-prime-api
+        })
+    // })
 };
 
 // ======================================================================
