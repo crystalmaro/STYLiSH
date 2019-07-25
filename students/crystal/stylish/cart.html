@@ -140,33 +140,33 @@
         <div class="sectionHeader">收件資料</div>
         <div class="sectionLine">
           <div class="infoTitle">收件人姓名</div>
-          <input type="text" class="buyerName">
+          <input type="text" class="buyerName checkoutInput">
         </div>
         <div class="sectionLine">
           <div class="infoTitle">Email</div>
-          <input type="text" class="buyerEmail">
+          <input type="text" class="buyerEmail checkoutInput">
         </div>
         <div class="sectionLine">
           <div class="infoTitle">手機號碼</div>
-          <input type="text" class="buyerPhone">
+          <input type="text" class="buyerPhone checkoutInput">
         </div>
         <div class="sectionLine">
           <div class="infoTitle">收件地址</div>
-          <input type="text" class="buyerAddress">
+          <input type="text" class="buyerAddress checkoutInput">
         </div>
         <div class="sectionLine">
           <div class="infoTitle">配送時間</div>
           <div class="deliveryTime">
             <label>
-              <input type="radio" name="deliveryTime">
+              <input type="radio" name="deliveryTime" value="am">
               <span class="time">08:00 - 12:00</span>
             </label>
             <label>
-              <input type="radio" name="deliveryTime">
+              <input type="radio" name="deliveryTime" value="pm">
               <span class="time">14:00 - 18:00</span>
             </label>
             <label>
-              <input type="radio" name="deliveryTime">
+              <input type="radio" name="deliveryTime" value="anytime" checked>
               <span class="time">不指定</span>
             </label>
           </div>
@@ -178,27 +178,27 @@
       <div class="sectionHeader">付款資料</div>
       <div class="sectionLine">
         <div class="infoTitle">信用卡號碼</div>
-        <div class="paymentInput">
-          <div class="tpfield" id="card-number">
-            <input type="password" value="***">
+        <div class="paymentInput checkoutInput tpfield" id="card-number">
+          <!-- <div class="tpfield" id="card-number"> -->
+            <!-- <input type="password" value="***"> -->
           </div>
         </div>
       </div>
 
-      <div class="sectionLine">
+      <div class="secftionLine">
         <div class="infoTitle">有效期限</div>
-        <div class="paymentInput">
-          <div class="tpfield" id="card-expiration-date">
-            <input type="text" value="MM / YY">
+        <div class="paymentInput checkoutInput tpfield" id="card-expiration-date">
+          <!-- <div class="tpfield" id="card-expiration-date"> -->
+            <!-- <input type="text" value="MM / YY"> -->
           </div>
         </div>
       </div>
 
       <div class="sectionLine">
         <div class="infoTitle">安全碼</div>
-        <div class="paymentInput">
-          <div class="tpfield" id="card-ccv">
-            <input type="text" value="CCV">
+        <div class="paymentInput checkoutInput tpfield" id="card-ccv">
+          <!-- <div class="tpfield" id="card-ccv"> -->
+            <!-- <input type="text" value="CCV"> -->
           </div>
         </div>  
       </div>  
@@ -231,14 +231,11 @@
             </div>
         </div>
 
-        <button class="checkoutButton">確認付款</button>
+        <button id="submitButton" onSubmit="getPrime" class="checkoutButton">確認付款</button>
         
     </div>
 
   </main>
-
-
-
 
   <footer>
     <div class="myFooter flex">
@@ -278,6 +275,8 @@
   </footer>
 
   <script type="text/javascript" src="js/lib.js"></script>
+  <script src="https://js.tappaysdk.com/tpdirect/v5.1.0"></script>
   <script type="text/javascript" src="js/cart.js"></script>
+  <script type="text/javascript" src="js/tapPay.js"></script>
 </body>
 </html>

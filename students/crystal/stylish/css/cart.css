@@ -1,3 +1,12 @@
+/* TapPay */
+/* .tpfield {
+    height: 40px;
+    width: 300px;
+    border: 1px solid gray;
+    margin: 5px 0;
+    padding: 5px;
+} */
+
 .emptyCart {
     padding-bottom: 30px;
     margin: auto;
@@ -138,7 +147,7 @@
     width: 120px;
 }
 
-.infoTitle+input {
+.checkoutInput {
     border-radius: 5px;
     width: 350px;
 }
@@ -147,10 +156,10 @@
     padding-right: 10px;
 }
 
-.paymentInput div input {
+/* .paymentInput div input {
     width: 150px;
     border-radius: 5px;
-}
+} */
 
 .orderValSection {
     border-top: 1px solid black;
@@ -271,8 +280,8 @@ Media Query
     .infoTitle {
         padding: 10px 0;
     }
-    .infoTitle+input,
-    .paymentInput div input,
+    .checkoutInput,
+    /* .paymentInput div input, */
     .checkoutButton {
         width: 100%;
     }
