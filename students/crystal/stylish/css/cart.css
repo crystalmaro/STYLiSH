@@ -1,0 +1,280 @@
+.emptyCart {
+    padding-bottom: 30px;
+    margin: auto;
+}
+
+.cartMain {
+    max-width: 1200px;
+    margin: 30px auto;
+    padding: 20px;
+}
+
+.cartTitle {
+    margin: 20px 5px;
+}
+
+.cartTitleLeft,
+.cartTitleRight {
+    width: 50%;
+}
+
+.cartTitleRight {
+    padding-right: 30px;
+}
+
+.cartProductValRow1-mobile,
+.cartProductValRow2 {
+    width: 100%;
+}
+
+.cartTitleRight,
+.cartProductValRow2 {
+    display: inline-flex;
+    justify-content: space-between;
+}
+
+/* ==================== cartProductIndex */
+.cartProductContainer {
+    border: 1px solid grey;
+    flex-wrap: wrap;
+    padding-top: 30px;
+}
+
+.cartProductIndex {
+    flex-wrap: wrap;
+    width: 100%;
+    max-width: 100%;
+    padding: 0 30px 30px 30px;
+}
+
+.cartProductPic {
+    order: 1;
+    width: 12.5%;
+    max-width: 12.5%;
+}
+.cartProductPic img {
+    width: 100%;
+}
+
+.cartProductInfo {
+    order: 2;
+    width: 37.5%;
+    padding-left: 20px;
+}
+
+.cartProductName,
+.cartProductID {
+    padding-bottom: 15px;
+}
+
+.cartProductVal {
+    order: 3;
+    width: 37.5%;
+    margin: auto 0;
+    flex-wrap: wrap;  
+}
+
+.cartProductValRow1-mobile {
+    display: none;
+}
+
+.qtyStock {
+    width: 60px;
+}
+
+.cartProductTrash {
+    order: 4;
+    width: 12.5%;
+    max-width: 12.5%;
+    padding-left: 100px;
+    margin: auto 0;
+}
+/* ==================== 
+ 配送國家 + 提醒
+====================  */
+.cartPreference {
+    background-color: #e8e8e8;
+    margin: 20px 0;
+    padding: 30px;
+    
+}
+.cartPreference select {
+    margin-left: 10px;
+}
+
+.cartPrefShipping,
+.cartPrefPayment {
+    width: 45%;
+    display: inline-flex;
+    align-items: center;
+}
+
+.cartReminder {
+    margin: 20px 0;
+}
+/* ==================== 
+收件資料 + 付款資料
+====================  */
+.buyerInfo,
+.buyerPayment {
+    flex-wrap: wrap;
+}
+
+.sectionHeader {
+    font-weight: bold;
+    border-bottom: 1px solid black;
+    width: 90%;
+    padding: 20px 0;
+    margin-bottom: 20px;
+}
+
+.sectionLine {
+    width: 60%;
+    display: inline-flex;
+    padding: 10px 0;
+}
+
+.infoTitle {
+    width: 120px;
+}
+
+.infoTitle+input {
+    border-radius: 5px;
+    width: 350px;
+}
+
+.deliveryTime .time {
+    padding-right: 10px;
+}
+
+.paymentInput div input {
+    width: 150px;
+    border-radius: 5px;
+}
+
+.orderValSection {
+    border-top: 1px solid black;
+    margin-top: 20px;
+    padding: 20px 5px;
+    flex-direction: column;
+    font-size: 1.25rem;
+}
+
+.orderRow,
+.checkoutButton {
+    width: 300px;
+    margin-left: auto;
+    padding: 10px 0;
+}
+
+.checkoutButton {
+    background-color: black;
+    color: white;
+    font-size: inherit;
+}
+
+.orderRow:last-of-type {
+    border-top: 1px solid black;
+    margin-bottom: 20px;
+
+}
+.orderTitle {
+    display: inline-block;
+    width: 35%;
+    text-align: left;
+}
+
+.orderSubtotal,
+.orderShipping,
+.orderTotal {
+    width: 60%;
+    display: inline-block;
+    text-align: right;
+}
+
+/* ================================= 
+Media Query 
+================================  */
+@media (max-width: 1000px) {
+    .cartProductTrash {
+        padding-left: 50px;
+    }
+}
+
+@media (max-width: 800px) {
+    .cartProductInfo div {
+        padding-bottom: 5px;
+    }
+}
+
+@media (max-width: 600px) {
+    .cartTitleRight {
+        display: none;
+    }
+    .cartMain {
+        margin: 0;
+    }
+    .cartTitle,
+    .cartProductContainer {
+        margin: 0;
+        border: 0;
+        padding: 5px;
+    }
+    .cartProductIndex {
+        border-top: 1px solid black;
+        padding: 15px 0;
+    }
+    .cartProductIndex:last-of-type {
+        border-bottom: 1px solid black;
+    }
+    .cartProductPic{
+        order: 1;
+        width: 30%;
+        max-width: 30%;
+    }
+    .cartProductInfo {
+        order: 2;
+        width: 50%;
+        padding-left: 10px;
+    }
+    .cartProductName,
+    .cartProductID,
+    .cartProductColor,
+    .cartProductSize {
+        margin-bottom: 5px;
+    }
+    .cartProductVal {
+        order: 4;
+        width: 100%;
+    }
+    .cartProductTrash {
+        order: 3;
+        width: 10%;
+        margin: 0;
+    }
+    .cartProductValRow1-mobile,
+    .cartProductValRow2 {
+        display: inline-flex;
+        justify-content: space-around;
+        max-width: 90%;
+        margin: 5px auto;
+    }
+    .sectionHeader {
+        width: 100%;
+        margin: 0;
+        font-weight: bold;
+    }
+    .sectionLine {
+        display: block;
+        width: 95%;
+    }
+    .infoTitle {
+        padding: 10px 0;
+    }
+    .infoTitle+input,
+    .paymentInput div input,
+    .checkoutButton {
+        width: 100%;
+    }
+
+}

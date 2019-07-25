@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="css/common.css">
+    <link rel="stylesheet" type="text/css" href="css/cart.css">
+    <title>STYLiSH Cart</title>
+</head>
+<body>
+
+  <nav class="flex">
+    <a href="index.html" onClick="getProducts('all')"><img class="logo" src="images/logo.png" alt="logo"></a>
+    <!-- href="./" -->
+    <div class="navProductCategory flex">
+      <a href="index.html" onClick="getProducts('women')">女裝</a>
+      <!-- "./?tag=women" -->
+      <a href="index.html" onClick="getProducts('men')">男裝</a>
+      <a href="index.html" onClick="getProducts('accessories')">配件</a>
+    </div>
+                
+    <div class="navFeature flex">
+      <form class="searchContainer flex" onSubmit="search();return false;" >
+      <!-- add ;return false; to onSubmit 
+        to render the search result dynamically,
+        without reloading the whole page altogether. -->
+        <input class="searchInput" type="text" onClick="showMobileSearch()"/>
+        <input class="searchSubmit" type="submit">
+      </form>
+        <a class="iconCart"><div class="cartValStyle cartQty">0</div></a>
+        <a><img class="iconMember" src="images/btn-member-01-normal_2019-07-10/btn-member-01-normal@3x.png" alt=""></a>
+    </div>
+  </nav>
+        
+  <div class="navProductCategory-mobile flex">
+    <a href="index.html" onClick="getProducts('women')">女裝</a>
+    <a href="index.html" onClick="getProducts('men')">男裝</a>
+    <a href="index.html" onClick="getProducts('accessories')">配件</a>
+  </div>
+
+  <div class="navFeature-mobile flex">
+    <a>
+      <div class="cart-mobile">
+        <div class="cartValStyle-mobile cartQty">0</div>
+        <!-- <img src="images/btn-shopping-cart-02-normal_2019-07-11/btn-shopping-cart-02-normal.png" alt=""> -->
+      </div>
+      購物車
+    </a>
+    <a>
+      <img src="images/member-mobile.png" alt="">
+      會員
+    </a>
+  </div>
+
+  <main class="cartMain">
+
+    <!-- ========= header title for product ========= -->
+    <div class="cartTitle flex">
+
+      <div class="cartTitleLeft">
+        購物車(<span class="cartQty">0</span>)  
+      </div>
+
+      <div class="cartTitleRight">
+        <div class="cartProductTitle">數量</div>
+        <div class="cartProductTitle">單價</div>
+        <div class="cartProductTitle">小計</div>
+        <div class="cartProductTitle"></div>
+      </div>
+
+    </div>
+    <!-- 產品家長 ========================================= -->
+    <div class="cartProductContainer flex">
+    <!-- 產品生小孩 ========================================= -->
+      <!-- <div class="cartProductIndex flex">
+        <div class="cartProductPic">
+          <img src="https://api.appworks-school.tw/assets/201807201824/main.jpg" alt="">
+        </div>
+
+        <div class="cartProductInfo">
+          <div class="cartProductName">洋裝洋裝洋裝洋裝</div>
+          <div class="cartProductID">12345678</div>
+          <div class="cartProductColor">顏色 | 白</div>
+          <div class="cartProductSize">尺寸 | S</div>
+        </div>
+
+        <div class="cartProductVal flex">
+
+          <div class="cartProductValRow1-mobile">
+            <div class="cartProductTitle-mobile">數量</div>
+            <div class="cartProductTitle-mobile">單價</div>
+            <div class="cartProductTitle-mobile">小計</div>
+          </div>
+
+          <div class="cartProductValRow2">
+            <div class="cartProductQty">
+              <select class="qtyStock">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+              </select>
+            </div>
+            <div class="cartProductPrice">NT. 500</div>
+            <div class="cartProductSubtotal">NT. 1000</div>
+          </div>
+        </div>
+
+        <div class="cartProductTrash">
+            <img src="../images/cart-remove.png">
+        </div>
+      </div> -->
+    </div>
+
+    <!-- 配送國家 ========================================= -->
+
+    <div class="cartPreference flex">
+      <div class="cartPrefShipping">
+        <div>配送國家</div>
+        <select>
+          <option value="台灣或離島">台灣或離島</option>
+        </select>
+      </div>
+      <div class="cartPrefPayment">
+        <div>付款方式</div>
+        <select>
+          <option value="信用卡付款">信用卡付款</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="cartReminder">
+      <div>※ 提醒您：</div>
+      <div>● 請填寫正確收件人資訊，避免包裹配送不達</div>
+      <div>● 請填寫正確收件人姓名 ( 與證件相符 )，避免無法領取</div>
+    </div>
+
+    <!-- 收件資料 ========================================= -->
+    <div class="buyerInfo flex">
+        <div class="sectionHeader">收件資料</div>
+        <div class="sectionLine">
+          <div class="infoTitle">收件人姓名</div>
+          <input type="text" class="buyerName">
+        </div>
+        <div class="sectionLine">
+          <div class="infoTitle">Email</div>
+          <input type="text" class="buyerEmail">
+        </div>
+        <div class="sectionLine">
+          <div class="infoTitle">手機號碼</div>
+          <input type="text" class="buyerPhone">
+        </div>
+        <div class="sectionLine">
+          <div class="infoTitle">收件地址</div>
+          <input type="text" class="buyerAddress">
+        </div>
+        <div class="sectionLine">
+          <div class="infoTitle">配送時間</div>
+          <div class="deliveryTime">
+            <label>
+              <input type="radio" name="deliveryTime">
+              <span class="time">08:00 - 12:00</span>
+            </label>
+            <label>
+              <input type="radio" name="deliveryTime">
+              <span class="time">14:00 - 18:00</span>
+            </label>
+            <label>
+              <input type="radio" name="deliveryTime">
+              <span class="time">不指定</span>
+            </label>
+          </div>
+        </div>
+    </div>
+
+    <!-- 付款資料 ========================================= -->
+    <div class="buyerPayment flex">
+      <div class="sectionHeader">付款資料</div>
+      <div class="sectionLine">
+        <div class="infoTitle">信用卡號碼</div>
+        <div class="paymentInput">
+          <div class="tpfield" id="card-number">
+            <input type="password" value="***">
+          </div>
+        </div>
+      </div>
+
+      <div class="sectionLine">
+        <div class="infoTitle">有效期限</div>
+        <div class="paymentInput">
+          <div class="tpfield" id="card-expiration-date">
+            <input type="text" value="MM / YY">
+          </div>
+        </div>
+      </div>
+
+      <div class="sectionLine">
+        <div class="infoTitle">安全碼</div>
+        <div class="paymentInput">
+          <div class="tpfield" id="card-ccv">
+            <input type="text" value="CCV">
+          </div>
+        </div>  
+      </div>  
+      
+    </div>
+
+<!-- 付款$$$ ========================================= -->
+    <div class="orderValSection flex">
+        <div class="orderRow">
+          <div class="orderTitle">總金額</div>
+            <div class="orderSubtotal">
+              <span class="ntd">NT. </span>
+              <span class="orderSubtotalVal">100</span>
+            </div>
+        </div>
+
+        <div class="orderRow">
+          <div class="orderTitle">運費</div>
+            <div class="orderShipping">
+              <span class="ntd">NT. </span>
+              <span class="orderShippingVal">60</span>
+            </div>
+        </div>
+
+        <div class="orderRow">
+          <div class="orderTitle">應付金額</div>
+            <div class="orderTotal">
+              <span class="ntd">NT. </span>
+              <span class="orderTotalVal">160</span>
+            </div>
+        </div>
+
+        <button class="checkoutButton">確認付款</button>
+        
+    </div>
+
+  </main>
+
+
+
+
+  <footer>
+    <div class="myFooter flex">
+      <div class="footerResource flex">
+        <a>關於 Stylish</a>
+        <a>服務條款</a>
+        <a>隱私政策</a>
+        <a>聯絡我們</a>
+        <a>FAQ</a>
+      </div>
+        
+      <div class="footerSocialLinks flex">
+        <a><img src="images/line.png" alt="Line"></a>
+        <a><img src="images/twitter.png" alt="Twitter"></a>
+        <a><img src="images/facebook.png" alt="Facebook"></a>
+        <p>@2018, All rights reserved.</p>
+     </div>
+    </div>
+        
+    <div class="myFooter-mobile flex">
+      <div class="footerResource-mobile1 flex">
+        <a>關於 Stylish</a>
+        <a>服務條款</a>
+        <a>隱私政策</a>
+      </div>
+      <div class="footerResource-mobile2 flex">
+        <a>聯絡我們</a>
+        <a>FAQ</a>
+      </div>
+      <div class="footerSocialLinks flex">
+        <a><img src="images/line.png" alt="Line"></a>
+        <a><img src="images/twitter.png" alt="Twitter"></a>
+        <a><img src="images/facebook.png" alt="Facebook"></a>
+      </div>
+      <div class="footerCopyright">@2018, All rights reserved.</div>
+    </div>
+  </footer>
+
+  <script type="text/javascript" src="js/lib.js"></script>
+  <script type="text/javascript" src="js/cart.js"></script>
+</body>
+</html>

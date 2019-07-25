@@ -52,7 +52,6 @@ let productDetail = {
 Button: Add to Cart
 ================== */
 addCartButton.addEventListener("click", function(){
-  alert("product added to cart")
   updateProductDetail();
   let localStorageCart = getLocalStorage("cart");
   // reset sameProductIndex, and run checkIfSameProduct() again
@@ -92,25 +91,6 @@ function checkIfSameProduct() {
 //     ))
 //   console.log(sameProductIndex);
 // };
-
-// /* ==================
-// Update Shopping Cart : moved to lib.js
-// ================== */
-// function updateCartQty () {
-// let localStorageCart = getLocalStorage("cart");
-//   // initialize empty structure into localStorage
-//   if (localStorageCart === null) {
-//     setLocalStorage("cart", cartValue);
-//   } else {
-//     for (let i = 0; i < cartQty.length; i++) {
-//       cartQty[i].innerHTML = localStorageCart.list.length;
-//     };
-//   };
-// };
-
-// window.addEventListener("load", function(){
-//   updateCartQty();
-// });
 
 /* ==================
 Render Product Detail based on Query String
@@ -210,7 +190,7 @@ onClick() color and size
 ================== */
 const selectedColor = (index) => {
   let itemColorChip = document.getElementsByClassName("itemColorChip");
-    for (let i = 0; i < 3; i++) {
+    for (let i = 0; i < itemColorChip.length; i++) {
       // 砍掉重練 reset every color chip and remove noStock size
       itemColorChip[i].classList.remove("current");
       sizeCircle[i].classList.remove("noStock");
