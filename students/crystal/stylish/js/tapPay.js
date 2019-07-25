@@ -1,8 +1,7 @@
 
-// ======================= 
+// ======================= 設置好等等 GetPrime 所需要的金鑰
 // Setup SDK (software development kit)
-// 設置好等等 GetPrime 所需要的金鑰
-let tap = {
+const tap = {
     APP_ID: 12348,
     APP_KEY: "app_pa1pQcKoY22IlnSXq5m5WP5jFKzoRG58VEXpT7wU62ud7mMbDOGzCYIlzzLF",
     serverType: "sandbox"
@@ -115,13 +114,23 @@ TPDirect.card.getTappayFieldsStatus();
 
 // ======================= get Prime
 // call TPDirect.card.getPrime when user submit form to get tappay prime
-
-// let submitButton = document.querySelector("#submitButton");
+function checkoutInput(){
+let isValid = true;
+    let inputFields = document.querySelectorAll(".checkoutInput");
+    for(let i = 0; i < inputFields.length; i++){
+      if(inputFields[i].value == ""){
+        isValid = false
+      }
+    } 
+    if (isValid == false){
+        alert("Please enter all user info.")
+    }
+};
 
 function getPrime(){
     let localStorageCart = getLocalStorage("cart");
-    checkoutInput()
-    // return new Promoise((resolve, reject) => {
+    checkoutInput();
+    return new Promise((resolve, reject) => {
         event.preventDefault();
 
         // Get TapPay Fields  status
@@ -140,29 +149,27 @@ function getPrime(){
                 return
             }
             
-            // resolve(console.log(localStorageCart.prime));
+            resolve(console.log(localStorageCart.prime));
             alert('get prime success, prime: ' + result.card.prime)
             localStorageCart.prime = result.card.prime;
-
-            console.log(localStorageCart)
-            console.log(localStorageCart.prime)
-
+            setLocalStorage("cart", localStorageCart);
+            updateUserInput();
             // send prime to your server, to pay with Pay by Prime API .
             // Pay By Prime Docs: https://docs.tappaysdk.com/tutorial/zh/back.html#pay-by-prime-api
         })
-    // })
+    })
 };
 
-// ======================================================================
-
-// function onClick() {
-//   // 讓 button click 之後觸發 getPrime 方法
-//   TPDirect.card.getPrime(function (result) {
-//     if (result.status !== 0) {
-//       console.err('getPrime 錯誤')
-//       return
-//     }
-//     let prime = result.card.prime
-//     alert('getPrime 成功: ' + prime)
-//   });
-// };
+function updateUserInput(){
+  let localStorageCart = getLocalStorage("cart");
+  let buyerName = document.querySelector(".buyerName");
+  let buyerEmail = document.querySelector(".buyerEmail");
+  let buyerPhone = document.querySelector(".buyerPhone");
+  let buyerAddress = document.querySelector(".buyerAddress");
+  
+  localStorageCart.order.recipient.name = buyerName.value;
+  localStorageCart.order.recipient.email = buyerEmail.value;
+  localStorageCart.order.recipient.phone = buyerPhone.value;
+  localStorageCart.order.recipient.address = buyerAddress.value;
+  setLocalStorage("cart", localStorageCart);
+};

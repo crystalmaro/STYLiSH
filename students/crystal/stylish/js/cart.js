@@ -4,16 +4,6 @@ let cartProductContainer = document.querySelector(".cartProductContainer");
 // ==============================
 // Order Submit Function
 // ==============================
-
-function checkoutInput(){
-  let inputFields = document.querySelectorAll(".checkoutInput");
-  for(let i = 0; i < inputFields.length; i++){
-    if(inputFields[i].value === ""){}
-  } alert("please enter all user info");
-};
-
-
-
 function checkCartItem(){
     if (localStorageCart.order.list.length == 0 || localStorageCart.order.list.length == null) {
       let emptyCart = document.createElement("div");
