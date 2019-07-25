@@ -47,22 +47,23 @@ let productDetail = {
   stock: ""
 };
 
+localStorageCart = getLocalStorage("cart");
 
 /* ==================
 Button: Add to Cart
 ================== */
 addCartButton.addEventListener("click", function(){
   updateProductDetail();
-  let localStorageCart = getLocalStorage("cart");
+  // let localStorageCart = getLocalStorage("cart");
   // reset sameProductIndex, and run checkIfSameProduct() again
   sameProductIndex = -1;
   checkIfSameProduct();
   if (sameProductIndex > -1) {
     // update quantity only
-    localStorageCart.list[sameProductIndex].qty = productDetail.qty;
+    localStorageCart.order.list[sameProductIndex].qty = productDetail.qty;
   } else {
     // otherwise add new item into cart
-    localStorageCart.list.push(updateProductDetail());
+    localStorageCart.order.list.push(updateProductDetail());
   }
   // re-set localStorage with updated cart
   setLocalStorage("cart", localStorageCart);
@@ -71,11 +72,11 @@ addCartButton.addEventListener("click", function(){
 });
 
 function checkIfSameProduct() {
-  let localStorageCart = getLocalStorage("cart");
-  for (let i = 0; i < localStorageCart.list.length; i++) {
-    if (localStorageCart.list[i].id === productDetail.id &&
-      localStorageCart.list[i].size === productDetail.size &&
-      localStorageCart.list[i].color.code === productDetail.color.code) {
+  // let localStorageCart = getLocalStorage("cart");
+  for (let i = 0; i < localStorageCart.order.list.length; i++) {
+    if (localStorageCart.order.list[i].id === productDetail.id &&
+      localStorageCart.order.list[i].size === productDetail.size &&
+      localStorageCart.order.list[i].color.code === productDetail.color.code) {
         sameProductIndex = i;
         console.log(i)
       } 
@@ -84,7 +85,7 @@ function checkIfSameProduct() {
 //=== can also use findIndex for checkSameProduct, and assign the index to global variable
 // function checkIfSameProduct () {
 // let localStorageCart = getLocalStorage("cart");
-//   sameProductIndex = localStorageCart.list.findIndex(x => 
+//   sameProductIndex = localStorageCart.order.list.findIndex(x => 
 //     (x.id === productDetail.id &&
 //       x.size === productDetail.size &&
 //       x.color.code === productDetail.color.code

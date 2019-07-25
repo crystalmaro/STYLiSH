@@ -27,19 +27,22 @@ function ajax(src, callback){
 Local Storage 
 ================== */
 let cartValue = {
-  shipping: "delivery",
-  frieght: 60,
-  payment: "credit_card",
-  subtotal: "",
-  total: "",
-  recipient: {
-    name: "",
-    phone: "",
-    email: "",
-    address: "",
-    time: "anytime"
-  },
-  list: []
+  prime: "",
+  order: {
+    shipping: "delivery",
+    frieght: 60,
+    payment: "credit_card",
+    subtotal: "",
+    total: "",
+    recipient: {
+      name: "",
+      phone: "",
+      email: "",
+      address: "",
+      time: "anytime"
+    },
+    list: []
+  }
 };
 
 function setLocalStorage(key, value){
@@ -60,7 +63,7 @@ function updateCartQty() {
       setLocalStorage("cart", cartValue);
     } else {
       for (let i = 0; i < cartQty.length; i++) {
-        cartQty[i].innerHTML = localStorageCart.list.length;
+        cartQty[i].innerHTML = localStorageCart.order.list.length;
       };
     };
   };
