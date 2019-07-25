@@ -1,8 +1,9 @@
 let localStorageCart = getLocalStorage("cart");
+let cartProductContainer = document.querySelector(".cartProductContainer");
 
 function checkCartItem(){
-    if (localStorageCart.order.list.length === 0) {
-      emptyCart = document.createElement("div");
+    if (localStorageCart.order.list.length == 0 || localStorageCart.order.list.length == null) {
+      let emptyCart = document.createElement("div");
       emptyCart.classList.add("emptyCart");
       emptyCart.innerHTML = "empty shopping cart";
       cartProductContainer.appendChild(emptyCart);
@@ -13,7 +14,6 @@ function checkCartItem(){
 checkCartItem();
 
 function renderCartItem(){
-  let cartProductContainer = document.querySelector(".cartProductContainer");
   // let xIndex = 0;
   localStorageCart.order.list.forEach( x => {
     // individual item row
