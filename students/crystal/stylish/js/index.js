@@ -81,10 +81,24 @@ const campaignSlider = (index) => {
 /* ==================
 Render Products
 ================== */
-function getProducts(inputType){
-  type = inputType;
+function getProducts(catg){
+  type = catg;
   removeElement("allProducts");
-    getAjax(`${API_HOST_Products}/${inputType}`, renderProduct);
+
+  let e = event.target;
+  let activeCatg = document.querySelectorAll(".catg");
+  activeCatg.forEach(x=>{
+    x.classList.remove("currentCategory");
+  });
+  e.classList.add("currentCategory");
+
+
+  getAjax(`${API_HOST_Products}/${catg}`, renderProduct);
+
+  
+
+
+
 };
 
 // === Product display rendering dynamically (createElement)

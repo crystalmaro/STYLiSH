@@ -94,20 +94,6 @@ function getParamName(name, url){
 };
 
 
-/* ==================
-Shopping Cart
-================== */
-function updateCartQty() {
-  let localStorageCart = getLocalStorage("cart");
-    // initialize empty structure into localStorage
-    if (localStorageCart === null) {
-      setLocalStorage("cart", cartValue);
-    } else {
-      for (let i = 0; i < cartQty.length; i++) {
-        cartQty[i].innerHTML = localStorageCart.order.list.length;
-      };
-    };
-  };
   
 window.addEventListener("load", function(){
   updateCartQty();
@@ -127,26 +113,26 @@ function removeElement(className){
 Search Function
 ================== */
 const search = () => { 
-    let input = document.querySelector(".searchInput").value;
-    let searchResult = API_HOST_Products + "/search?keyword=" + input;
-    // 先移除目前的東西，再render搜尋結果
-    removeElement("allProducts");
-    getAjax(searchResult, renderProduct);
-    // 模擬使用者點擊 stimulate user click to close search bar on mobile
-    let searchInput = document.querySelector(".searchInput");
-    searchInput.click();
+  let input = document.querySelector(".searchInput").value;
+  let searchResult = API_HOST_Products + "/search?keyword=" + input;
+  // 先移除目前的東西，再render搜尋結果
+  removeElement("allProducts");
+  getAjax(searchResult, renderProduct);
+  // 模擬使用者點擊 stimulate user click to close search bar on mobile
+  let searchInput = document.querySelector(".searchInput");
+  searchInput.click();
 };
   
 const showMobileSearch = () => {
-    let searchInput = document.querySelector(".searchInput");
-    let navFeature = document.querySelector(".navFeature");
-    // let nav = document.querySelector("nav");
-    if (searchInput.className === "searchInput" && navFeature.className === "navFeature") {
-      searchInput.classList.add("open");
-      navFeature.className += " open";
-    } else {
-      searchInput.classList.remove("open");
-      navFeature.className = "navFeature";
-    }
+  let searchInput = document.querySelector(".searchInput");
+  let navFeature = document.querySelector(".navFeature");
+  // let nav = document.querySelector("nav");
+  if (searchInput.className === "searchInput" && navFeature.className === "navFeature") {
+    searchInput.classList.add("open");
+    navFeature.className += " open";
+  } else {
+    searchInput.classList.remove("open");
+    navFeature.className = "navFeature";
+  }
 };
 
