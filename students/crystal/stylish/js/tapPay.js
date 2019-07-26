@@ -173,7 +173,7 @@ function updateLocalStorage(x){
 function removeImgStock(){
   let localStorageCart = getLocalStorage("cart");
   // call by reference & call by value
-  finalStorage = Object.assign({}, localStorageCart);
+  finalStorage = Object.assign8{}, localStorageCart);
   // remove main_image and stock from list, to match with order structure
   for (let i = 0; i < finalStorage.order.list.length; i++){
     delete finalStorage.order.list[i].stock;
