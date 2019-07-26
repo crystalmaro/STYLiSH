@@ -17,7 +17,7 @@ const idQuery = getParamName('id');
 /* ==================
 Initial Page Loading
 ================== */
-ajax(`${API_HOST_Item}${idQuery}`, renderItem);
+getAjax(`${API_HOST_Item}${idQuery}`, renderItem);
 
 /* ==================
 Variables

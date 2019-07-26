@@ -13,7 +13,7 @@ let cartQty = document.querySelectorAll(".cartQty");
 /* ==================
 AJAX
 ================== */
-function ajax(src, callback){ 
+function getAjax(src, callback){ 
   let xhr = new XMLHttpRequest();
   xhr.onreadystatechange = function () {
     if (this.readyState === 4 && this.status === 200) {
@@ -22,7 +22,24 @@ function ajax(src, callback){
   }
   xhr.open("GET", src);
   xhr.send();
+};
+
+
+
+
+function postAjax(src, obj, callback){
+  let xhr = new XMLHttpRequest();
+  xhr.open("POST", src, true);
+  xhr.setRequestHeader('Content-type','application/json; charset=utf-8');
+  xhr.onreadystatechange = function () {
+    if (this.readyState == 4 && this.status == "200") {
+      callback(JSON.parse(xhr.response));
+    } 
+  }
+  xhr.send(JSON.stringify(obj));
 }
+
+
 
 /* ==================
 Local Storage 
@@ -91,7 +108,7 @@ const search = () => {
     let searchResult = API_HOST_Products + "/search?keyword=" + input;
     // 先移除目前的東西，再render搜尋結果
     removeElement("allProducts");
-    ajax(searchResult, renderProduct);
+    getAjax(searchResult, renderProduct);
     // 模擬使用者點擊 stimulate user click to close search bar on mobile
     let searchInput = document.querySelector(".searchInput");
     searchInput.click();

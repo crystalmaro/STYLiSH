@@ -84,7 +84,7 @@ Render Products
 function getProducts(inputType){
   type = inputType;
   removeElement("allProducts");
-    ajax(`${API_HOST_Products}/${inputType}`, renderProduct);
+    getAjax(`${API_HOST_Products}/${inputType}`, renderProduct);
 };
 
 // === Product display rendering dynamically (createElement)
@@ -166,7 +166,7 @@ function endlessScroll() {
   let windowHeight = window.innerHeight;
   let remainingFooter = document.querySelector("footer").getBoundingClientRect().top;
     if (remainingFooter - windowHeight < 0) {
-      ajax(pagingURL, setExtProduct);
+      getAjax(pagingURL, setExtProduct);
       window.removeEventListener("scroll", handleScroll);
     }
 };
@@ -186,5 +186,5 @@ window.addEventListener("scroll", handleScroll);
 Initial Page Loading
 ================== */
 // another method: window.addEventListener("load", function(){})
-ajax(`${API_HOST_Products}/${type}`, renderProduct);
-ajax(`${API_HOST}/marketing/campaigns`, renderCampaign)
+getAjax(`${API_HOST_Products}/${type}`, renderProduct);
+getAjax(`${API_HOST}/marketing/campaigns`, renderCampaign)
