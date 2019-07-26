@@ -10,6 +10,7 @@ function checkCartItem(){
       emptyCart.classList.add("emptyCart");
       emptyCart.innerHTML = "empty shopping cart";
       cartProductContainer.appendChild(emptyCart);
+      checkoutButton.setAttribute("disabled", true);
     } else {
       renderCartItem();
     }
