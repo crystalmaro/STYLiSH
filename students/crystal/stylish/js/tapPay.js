@@ -129,58 +129,56 @@ function checkoutInput(){
 };
 
 function getPrime(){
-    checkoutInput();
-    // return new Promise((resolve, reject) => {
-        event.preventDefault();
+  checkoutInput();
+  event.preventDefault();
+  // Get TapPay Fields  status
+  const tappayStatus = TPDirect.card.getTappayFieldsStatus();
+  // Check can getPrime
+  if (tappayStatus.canGetPrime === false) {
+    alert('can not get prime');
+    return
+  };
 
-        // Get TapPay Fields  status
-        const tappayStatus = TPDirect.card.getTappayFieldsStatus()
-
-        // Check can getPrime
-        if (tappayStatus.canGetPrime === false) {
-            alert('can not get prime')
-            return
-        }
-
-        // Get prime
-        TPDirect.card.getPrime((result) => {
-            if (result.status !== 0) {
-                alert('get prime error ' + result.msg)
-                return
-            }
-            // resolve(console.log(localStorageCart.prime));
-            // function directToThx(parsedGetData){
-            //     window.location.href = `thankyou.html?order=${parsedGetData.data.number}`;
-            // };
-
-            // function directToThx(){
-            //     window.location.href = `thankyou.html`;
-            // };
-
-            alert('get prime success, prime: ' + result.card.prime)
-            let postAjaxObj = updateAndRemoveLocalStorage(result.card.prime);
-            postAjax(API_HOST_Order, postAjaxObj, directToThx);
-                
-            // send prime to your server, to pay with Pay by Prime API .
-            // Pay By Prime Docs: https://docs.tappaysdk.com/tutorial/zh/back.html#pay-by-prime-api
-        })
-    // })
+  // Get prime
+  TPDirect.card.getPrime((result) => {
+    if (result.status !== 0) {
+      alert('get prime error ' + result.msg)
+      return
+    };
+    // alert('get prime success, prime: ' + result.card.prime);
+    // insert prime key and user input into localStorage
+    updateLocalStorage(result.card.prime);
+    // remove img and stock to match with order/checkout data structure
+    removeImgStock();
+    // use ajax post to get order# (src, obj, callback)
+    postAjax(API_HOST_Order, finalStorage, directToThx);
+    // send prime to your server, to pay with Pay by Prime API .
+    // Pay By Prime Docs: https://docs.tappaysdk.com/tutorial/zh/back.html#pay-by-prime-api
+  });
 };
 
-function updateAndRemoveLocalStorage(x){
-    let localStorageCart = getLocalStorage("cart");
-    // insert prime key into localStorage
-    localStorageCart.prime = x;
-    setLocalStorage("cart", localStorageCart);
-    // insert buyer input into localStorage
-    setUserInput();
+function directToThx(parsedGetData){
+    window.location.href = `thankyou.html?order=${parsedGetData.data.number}`;
+};
+
+function updateLocalStorage(x){
+  let localStorageCart = getLocalStorage("cart");
+  // insert prime key into localStorage
+  localStorageCart.prime = x;
+  setLocalStorage("cart", localStorageCart);
+  // insert buyer input into localStorage
+  setUserInput();
 };
 
 function removeImgStock(){
-    let localStorageCart = getLocalStorage("cart");
-    // call by reference & call by value
-    let finalStorage = Object.assign({}, localStorageCart);
-    // remove main_image and stock from list, to match with order structure
+  let localStorageCart = getLocalStorage("cart");
+  // call by reference & call by value
+  finalStorage = Object.assign({}, localStorageCart);
+  // remove main_image and stock from list, to match with order structure
+  for (let i = 0; i < finalStorage.order.list.length; i++){
+    delete finalStorage.order.list[i].stock;
+    delete finalStorage.order.list[i].main_image;
+  };
 };
 
 function setUserInput(){

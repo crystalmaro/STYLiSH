@@ -3,8 +3,10 @@ alert("hi")
 Thank You Page
 ================== */
 // function showOrderNum(){
-//   let orderNum = docuement.querySelector(".orderNumber");
-//   orderNum.innerHTML = getParamName('orderNumber');
-//   console.log(getParamName('orderNumber'))
+//   let orderNum = document.querySelector(".orderNumber");
+// //   orderNum.innerHTML = getParamName('orderNumber');
+//   orderNum.innerHTML = Number(finalOrderNumber);
+//   console.log(finalOrderNumber)
+// //   console.log(getParamName('orderNumber'))
 // };
 // showOrderNum();

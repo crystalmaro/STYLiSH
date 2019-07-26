@@ -12,6 +12,7 @@ const addCartButton = document.querySelector(".addCartButton");
 const checkoutButton = document.querySelector(".checkoutButton");
 let cartQty = document.querySelectorAll(".cartQty");
 
+
 /* ==================
 AJAX: Get & Post
 ================== */

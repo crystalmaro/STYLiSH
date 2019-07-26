@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" type="text/css" href="css/common.css">
     <link rel="stylesheet" type="text/css" href="css/index.css">
+    <script type="text/javascript" src="js/lib.js"></script>
     <title>STYLiSH Home Page</title>
 </head>
 <body>
@@ -55,16 +56,17 @@
 
   <main class="thanyouMain">
     <div class="orderMsg">
-      親愛的 STYLiSH 貴賓<span class="thankyouBuyer">crystal</span>, 您好：<br>
-
-      感謝您惠顧，您的訂單編號：<span class="orderNumber">123</span>
-      
+      感謝您的惠顧</br>
+      您的訂單編號：<span class="orderNumber">123</span>  
     </div>
-
+    <script>
+      let orderNum = document.querySelector(".orderNumber");
+      orderNum.innerHTML = getParamName("order");
+      localStorage.clear();
+    </script>
   </main>
 
-
-
+  
 
   <footer>
     <div class="myFooter flex">
@@ -103,8 +105,8 @@
     </div>
   </footer>
 
-    <script type="text/javascript" src="js/lib.js"></script>
-    <script type="text/javascript" src="js/thankyou.js"></script>
-    <script type="text/javascript" src="js/tapPay.js"></script>
+    
+    <!-- <script type="text/javascript" src="js/thankyou.js"></script> -->
+   
 </body>
 </html>
