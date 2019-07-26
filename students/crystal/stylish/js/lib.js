@@ -5,13 +5,15 @@ const HOST = "https://api.appworks-school.tw";
 const API_HOST = "https://api.appworks-school.tw/api/1.0";
 const API_HOST_Products = "https://api.appworks-school.tw/api/1.0/products";
 const API_HOST_Item = "https://api.appworks-school.tw/api/1.0/products/details?id=";
+const API_HOST_Order = "https://api.appworks-school.tw/api/1.0/order/checkout";
+
 
 const addCartButton = document.querySelector(".addCartButton");
 const checkoutButton = document.querySelector(".checkoutButton");
 let cartQty = document.querySelectorAll(".cartQty");
 
 /* ==================
-AJAX
+AJAX: Get & Post
 ================== */
 function getAjax(src, callback){ 
   let xhr = new XMLHttpRequest();
@@ -24,22 +26,19 @@ function getAjax(src, callback){
   xhr.send();
 };
 
-
-
-
 function postAjax(src, obj, callback){
   let xhr = new XMLHttpRequest();
   xhr.open("POST", src, true);
   xhr.setRequestHeader('Content-type','application/json; charset=utf-8');
   xhr.onreadystatechange = function () {
+    let parsedGetData = JSON.parse(xhr.response);
     if (this.readyState == 4 && this.status == "200") {
-      callback(JSON.parse(xhr.response));
+      callback(parsedGetData);
     } 
   }
+  // send back Order Number
   xhr.send(JSON.stringify(obj));
-}
-
-
+};
 
 /* ==================
 Local Storage 
