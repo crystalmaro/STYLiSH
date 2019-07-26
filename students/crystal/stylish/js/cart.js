@@ -1,8 +1,12 @@
 let localStorageCart = getLocalStorage("cart");
+let cartProductContainer = document.querySelector(".cartProductContainer");
 
+// ==============================
+// Order Submit Function
+// ==============================
 function checkCartItem(){
-    if (localStorageCart.list.length === 0) {
-      emptyCart = document.createElement("div");
+    if (localStorageCart.order.list.length == 0 || localStorageCart.order.list.length == null) {
+      let emptyCart = document.createElement("div");
       emptyCart.classList.add("emptyCart");
       emptyCart.innerHTML = "empty shopping cart";
       cartProductContainer.appendChild(emptyCart);
@@ -13,9 +17,8 @@ function checkCartItem(){
 checkCartItem();
 
 function renderCartItem(){
-  let cartProductContainer = document.querySelector(".cartProductContainer");
   // let xIndex = 0;
-  localStorageCart.list.forEach( x => {
+  localStorageCart.order.list.forEach( x => {
     // individual item row
     let cartProductIndex = document.createElement("div");
     cartProductIndex.classList.add("cartProductIndex", "flex");
@@ -144,7 +147,7 @@ function removeItem(el){
     }
   }
   // splice(start splicing at updated itemIndex, remove 1 count from array)
-  localStorageCart.list.splice(itemIndex, 1);
+  localStorageCart.order.list.splice(itemIndex, 1);
   setLocalStorage("cart", localStorageCart);
   // remove item on page
   let parent = el.parentNode;
@@ -168,7 +171,7 @@ let newSubtotal = 0;
   }
   let orderSubtotalVal = document.querySelector(".orderSubtotalVal");
   orderSubtotalVal.innerHTML = newSubtotal;
-  localStorageCart.subtotal = orderSubtotalVal.innerHTML;
+  localStorageCart.order.subtotal = orderSubtotalVal.innerHTML;
   setLocalStorage("cart", localStorageCart);
 }
 calculateCartSubtotal();
@@ -180,14 +183,7 @@ function calculateCartTotal(){
   let localStorageCart = getLocalStorage("cart");
   orderTotalVal.innerHTML = orderSubtotalVal + Number(orderShippingVal.innerHTML);
 
-  console.log(localStorageCart)
-  console.log(localStorageCart.total)
-  localStorageCart.total = orderTotalVal.innerHTML;
+  localStorageCart.order.total = orderTotalVal.innerHTML;
   setLocalStorage("cart", localStorageCart);
 };
 calculateCartTotal();
-
-// localStorageCart.list.push(updateProductDetail());
-// }
-// // re-set localStorage with updated cart
-// setLocalStorage("cart", localStorageCart);
