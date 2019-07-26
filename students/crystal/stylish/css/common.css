@@ -34,15 +34,15 @@ nav {
 }
 
 nav .logo {
-    height: 3rem;
+    height: 3rem; 
 }
 
 .navProductCategory {
     padding-left: 50px;
     font-size: 1.25rem;
     letter-spacing: 1.5rem;
-    
-  }
+}
+
 .navProductCategory a:not(:last-child) {
     border-right: 1px solid #3f3a3a;
 }
@@ -81,6 +81,11 @@ nav .logo {
     padding: 0 5px;
     height: 40px;
 }
+
+.searchInput:hover {
+    background-image: url("../images/search-hover.png");
+}
+
 .searchInput {
     border: solid 1px #979797;
     border-radius: 20px;
@@ -96,7 +101,6 @@ nav .logo {
 .searchSubmit {
     display: none;
 }
-
 .iconCart,
 .iconMember {
     margin-left: 10px;
@@ -105,13 +109,20 @@ nav .logo {
     object-fit: contain;
 }
 
+.iconMember:hover {
+    background-image: url(../images/member-hover.png);
+}
+.iconMember {
+    background-image: url(../images/member.png);
+}
+
+.iconCart:hover{
+    background-image: url(../images/cart-hover.png);
+}
 .iconCart {
     background-image: url(../images/cart.png);
-    /* background-repeat: no-repeat;
-    background-position: center center; */
-    width: 44px;
-    height: 44px;
 }
+
 .cartValStyle,
 .navFeature-mobile .cartValStyle-mobile {
     background-color: #8b572a;
@@ -229,16 +240,17 @@ Media Query
         align-items: center;
         height: 50px;
     }
-    .navProductCategory-mobile>.catg{
+    .navProductCategory-mobile>.catg {
         font-family: PingFangTC;
         display: inline;
         color: #828282;
         border-right: 1px solid #828282;
         flex: auto;
         text-align: center;
+        font-size: 1.5rem;
     }
     .navProductCategory-mobile>.catg:hover,
-    .navProductCategory-mobile>.catg.currentCategory{
+    .navProductCategory-mobile>.catg.currentCategory {
         color: white;
     }
     .navProductCategory-mobile a:last-child {
