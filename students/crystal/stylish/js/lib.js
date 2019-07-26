@@ -7,6 +7,7 @@ const API_HOST_Products = "https://api.appworks-school.tw/api/1.0/products";
 const API_HOST_Item = "https://api.appworks-school.tw/api/1.0/products/details?id=";
 
 const addCartButton = document.querySelector(".addCartButton");
+const checkoutButton = document.querySelector(".checkoutButton");
 let cartQty = document.querySelectorAll(".cartQty");
 
 /* ==================
