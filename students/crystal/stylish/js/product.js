@@ -1,17 +1,5 @@
 
 
-/* ==================
-take Parameter by page URL
-================== */
-function getParamName(name, url){
-  if (!url) url = window.location.href;
-  name = name.replace(/[\[\]]/g, '\\$&');
-  let regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
-      results = regex.exec(url);
-  if (!results) return null;
-  if (!results[2]) return '';
-  return decodeURIComponent(results[2].replace(/\+/g, ' '));
-};
 
 const idQuery = getParamName('id');
 /* ==================
@@ -47,14 +35,14 @@ let productDetail = {
   stock: ""
 };
 
-localStorageCart = getLocalStorage("cart");
+// localStorageCart = getLocalStorage("cart");
 
 /* ==================
 Button: Add to Cart
 ================== */
 addCartButton.addEventListener("click", function(){
   updateProductDetail();
-  // let localStorageCart = getLocalStorage("cart");
+  let localStorageCart = getLocalStorage("cart");
   // reset sameProductIndex, and run checkIfSameProduct() again
   sameProductIndex = -1;
   checkIfSameProduct();
@@ -72,7 +60,7 @@ addCartButton.addEventListener("click", function(){
 });
 
 function checkIfSameProduct() {
-  // let localStorageCart = getLocalStorage("cart");
+  let localStorageCart = getLocalStorage("cart");
   for (let i = 0; i < localStorageCart.order.list.length; i++) {
     if (localStorageCart.order.list[i].id === productDetail.id &&
       localStorageCart.order.list[i].size === productDetail.size &&

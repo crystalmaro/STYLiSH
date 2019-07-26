@@ -129,7 +129,6 @@ function checkoutInput(){
 };
 
 function getPrime(){
-    let localStorageCart = getLocalStorage("cart");
     checkoutInput();
     // return new Promise((resolve, reject) => {
         event.preventDefault();
@@ -149,19 +148,42 @@ function getPrime(){
                 alert('get prime error ' + result.msg)
                 return
             }
-            
             // resolve(console.log(localStorageCart.prime));
+            // function directToThx(parsedGetData){
+            //     window.location.href = `thankyou.html?order=${parsedGetData.data.number}`;
+            // };
+
+            // function directToThx(){
+            //     window.location.href = `thankyou.html`;
+            // };
+
             alert('get prime success, prime: ' + result.card.prime)
-            localStorageCart.prime = result.card.prime;
-            setLocalStorage("cart", localStorageCart);
-            updateUserInput();
+            let postAjaxObj = updateAndRemoveLocalStorage(result.card.prime);
+            postAjax(API_HOST_Order, postAjaxObj, directToThx);
+                
             // send prime to your server, to pay with Pay by Prime API .
             // Pay By Prime Docs: https://docs.tappaysdk.com/tutorial/zh/back.html#pay-by-prime-api
         })
     // })
 };
 
-function updateUserInput(){
+function updateAndRemoveLocalStorage(x){
+    let localStorageCart = getLocalStorage("cart");
+    // insert prime key into localStorage
+    localStorageCart.prime = x;
+    setLocalStorage("cart", localStorageCart);
+    // insert buyer input into localStorage
+    setUserInput();
+};
+
+function removeImgStock(){
+    let localStorageCart = getLocalStorage("cart");
+    // call by reference & call by value
+    let finalStorage = Object.assign({}, localStorageCart);
+    // remove main_image and stock from list, to match with order structure
+};
+
+function setUserInput(){
   let localStorageCart = getLocalStorage("cart");
   let buyerName = document.querySelector(".buyerName");
   let buyerEmail = document.querySelector(".buyerEmail");
@@ -173,4 +195,6 @@ function updateUserInput(){
   localStorageCart.order.recipient.phone = buyerPhone.value;
   localStorageCart.order.recipient.address = buyerAddress.value;
   setLocalStorage("cart", localStorageCart);
+  return localStorageCart;
 };
+

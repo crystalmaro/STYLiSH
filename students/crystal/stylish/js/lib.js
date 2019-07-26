@@ -30,7 +30,7 @@ function postAjax(src, obj, callback){
   let xhr = new XMLHttpRequest();
   xhr.open("POST", src, true);
   xhr.setRequestHeader('Content-type','application/json; charset=utf-8');
-  xhr.onreadystatechange = function () {
+  xhr.onreadystatechange = function  () {
     let parsedGetData = JSON.parse(xhr.response);
     if (this.readyState == 4 && this.status == "200") {
       callback(parsedGetData);
@@ -39,6 +39,15 @@ function postAjax(src, obj, callback){
   // send back Order Number
   xhr.send(JSON.stringify(obj));
 };
+
+/* ==================
+Order Number & Thank You
+================== */
+// let orderNum = {
+//   data: {
+//     number: ""
+//   }
+// };
 
 /* ==================
 Local Storage 
@@ -69,6 +78,20 @@ function setLocalStorage(key, value){
 function getLocalStorage(key){
   return JSON.parse(localStorage.getItem(key));
 }
+
+/* ==================
+take Parameter by page URL
+================== */
+function getParamName(name, url){
+  if (!url) url = window.location.href;
+  name = name.replace(/[\[\]]/g, '\\$&');
+  let regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+      results = regex.exec(url);
+  if (!results) return null;
+  if (!results[2]) return '';
+  return decodeURIComponent(results[2].replace(/\+/g, ' '));
+};
+
 
 /* ==================
 Shopping Cart
