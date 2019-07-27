@@ -4,6 +4,7 @@
 const HOST = "https://api.appworks-school.tw";
 const API_HOST = "https://api.appworks-school.tw/api/1.0";
 const API_HOST_Products = "https://api.appworks-school.tw/api/1.0/products";
+const API_HOST_Tag = "https://api.appworks-school.tw/api/1.0/products/?tag=";
 const API_HOST_Item = "https://api.appworks-school.tw/api/1.0/products/details?id=";
 const API_HOST_Order = "https://api.appworks-school.tw/api/1.0/order/checkout";
 

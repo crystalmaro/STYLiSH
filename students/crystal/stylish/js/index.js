@@ -81,25 +81,28 @@ const campaignSlider = (index) => {
 /* ==================
 Render Products
 ================== */
-function getProducts(catg){
-  type = catg;
-  removeElement("allProducts");
-
-  let e = event.target;
-  let activeCatg = document.querySelectorAll(".catg");
-  activeCatg.forEach(x=>{
-    x.classList.remove("currentCategory");
-  });
-  e.classList.add("currentCategory");
+let tagQuery = getParamName("tag");
 
 
-  getAjax(`${API_HOST_Products}/${catg}`, renderProduct);
+// function getProducts(inputType){
 
-  
+//   type = inputType;
+//   removeElement("allProducts");
+
+//   // CSS styling (doesn't work after assigning href="./?tag=men")
+//   let e = event.target;
+//   let activeCatg = document.querySelectorAll(".catg");
+//   activeCatg.forEach(x=>{
+//     x.classList.remove("currentCategory");
+//   });
+//   e.classList.add("currentCategory");
+
+
+    
 
 
 
-};
+
 
 // === Product display rendering dynamically (createElement)
 // const renderProduct = () => { 
@@ -108,14 +111,18 @@ function getProducts(catg){
 function renderProduct(data) {
   let allProducts = document.querySelector(".allProducts");
   let product = data.data;
+  // removeElement("allProducts");
+
   // pagingURL for scroll event
   if (data.paging !== undefined) {
     pagingURL = `${API_HOST_Products}/${type}?paging=${data.paging}`;
+    console.log(pagingURL)
     window.addEventListener("scroll", handleScroll);
   } else {
     pagingURL = "";
     window.removeEventListener("scroll", handleScroll);
   };
+
   // start creating product from JSON data
   for (let i = 0; i < product.length; i++) {
     let productContainer = document.createElement("a");
@@ -181,6 +188,7 @@ function endlessScroll() {
   let remainingFooter = document.querySelector("footer").getBoundingClientRect().top;
     if (remainingFooter - windowHeight < 0) {
       getAjax(pagingURL, setExtProduct);
+      console.log(pagingURL)
       window.removeEventListener("scroll", handleScroll);
     }
 };
@@ -196,12 +204,7 @@ function setExtProduct(data) {
 };
 
 window.addEventListener("scroll", handleScroll);
-/* ==================
-Initial Page Loading
-================== */
-// another method: window.addEventListener("load", function(){})
-getAjax(`${API_HOST_Products}/${type}`, renderProduct);
-getAjax(`${API_HOST}/marketing/campaigns`, renderCampaign)
+
 
 /* ==================
 Shopping Cart
@@ -217,3 +220,34 @@ function updateCartQty() {
       };
     };
 };
+
+
+/* ==================
+Initial Page Loading
+================== */
+// another method: window.addEventListener("load", function(){})
+// getAjax(`${API_HOST_Products}/${type}`, renderProduct);
+// getAjax(`${API_HOST}/marketing/campaigns`, renderCampaign)
+window.addEventListener('load', (event) => {
+  getAjax(`${API_HOST}/marketing/campaigns`, renderCampaign);
+
+  let activeCatg = document.querySelectorAll(".catg");
+  activeCatg.forEach(x=>{
+    x.classList.remove("currentCategory");
+  });
+
+  removeElement("allProducts");
+
+  if (tagQuery == null || tagQuery == "all") {
+    getAjax(`${API_HOST_Products}/all`, renderProduct);
+    console.log(tagQuery)
+    return;
+  };
+
+  if (tagQuery == "women" || tagQuery == "men" || tagQuery == "accessories") {
+    type = tagQuery;
+    getAjax(`${API_HOST_Products}/${tagQuery}`, renderProduct);
+    console.log(tagQuery)
+  };
+
+});

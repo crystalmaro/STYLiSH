@@ -82,6 +82,10 @@ nav .logo {
     height: 40px;
 }
 
+.searchInput:focus{
+    background-color: rgb(237,236,242);
+}
+
 .searchInput:hover {
     background-image: url("../images/search-hover.png");
 }
