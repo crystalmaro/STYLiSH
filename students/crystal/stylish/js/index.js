@@ -1,10 +1,15 @@
 /* ==================
 Variables
 ================== */
+// type="all" on initial loading
 let type = "all";
+// after <a> refirection, tag = tagQuery: all, women, men, or accessories 
+let tagQuery = getParamName("tag");
 let pageNumber;
 let pagingURL;
 let ind = 0;
+
+
 /* ==================
 Marketing Campaign
 ================== */
@@ -81,38 +86,11 @@ const campaignSlider = (index) => {
 /* ==================
 Render Products
 ================== */
-let tagQuery = getParamName("tag");
-
-
-// function getProducts(inputType){
-
-//   type = inputType;
-//   removeElement("allProducts");
-
-//   // CSS styling (doesn't work after assigning href="./?tag=men")
-//   let e = event.target;
-//   let activeCatg = document.querySelectorAll(".catg");
-//   activeCatg.forEach(x=>{
-//     x.classList.remove("currentCategory");
-//   });
-//   e.classList.add("currentCategory");
-
-
-    
-
-
-
-
-
 // === Product display rendering dynamically (createElement)
-// const renderProduct = () => { 
-// error: can't access in lin3 3 before initialization
-// isnt' it just changing from func declaration to arrow func (?)
 function renderProduct(data) {
   let allProducts = document.querySelector(".allProducts");
   let product = data.data;
-  // removeElement("allProducts");
-
+  
   // pagingURL for scroll event
   if (data.paging !== undefined) {
     pagingURL = `${API_HOST_Products}/${type}?paging=${data.paging}`;
@@ -205,7 +183,6 @@ function setExtProduct(data) {
 
 window.addEventListener("scroll", handleScroll);
 
-
 /* ==================
 Shopping Cart
 ================== */
@@ -221,33 +198,30 @@ function updateCartQty() {
     };
 };
 
-
 /* ==================
 Initial Page Loading
 ================== */
-// another method: window.addEventListener("load", function(){})
-// getAjax(`${API_HOST_Products}/${type}`, renderProduct);
-// getAjax(`${API_HOST}/marketing/campaigns`, renderCampaign)
 window.addEventListener('load', (event) => {
+
+  // load & display marketing campaign
   getAjax(`${API_HOST}/marketing/campaigns`, renderCampaign);
 
+  // CSS styling for current category
   let activeCatg = document.querySelectorAll(".catg");
   activeCatg.forEach(x=>{
     x.classList.remove("currentCategory");
+    if (x.name == tagQuery) {
+      x.classList.add("currentCategory");
+    }
   });
-
+  // 砍掉重練 remove all products on initial loading
   removeElement("allProducts");
-
-  if (tagQuery == null || tagQuery == "all") {
-    getAjax(`${API_HOST_Products}/all`, renderProduct);
-    console.log(tagQuery)
-    return;
-  };
 
   if (tagQuery == "women" || tagQuery == "men" || tagQuery == "accessories") {
     type = tagQuery;
     getAjax(`${API_HOST_Products}/${tagQuery}`, renderProduct);
-    console.log(tagQuery)
-  };
+  } else {
+    getAjax(`${API_HOST_Products}/all`, renderProduct);
+  }
 
 });
