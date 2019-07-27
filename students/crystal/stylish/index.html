@@ -6,6 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" type="text/css" href="css/common.css">
     <link rel="stylesheet" type="text/css" href="css/index.css">
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.3&appId=2255951781382943"></script>
+    <script type="text/javascript" src="js/user.js"></script>
     <title>STYLiSH Home Page</title>
 </head>
 <body>
@@ -28,7 +30,12 @@
         <input class="searchSubmit" type="submit">
       </form>
       <a href="cart.html" class="iconCart"><div class="cartValStyle cartQty">0</div></a>
-      <a class="iconMember"></a>
+      <div class="iconMember">
+        <fb:login-button 
+        scope="public_profile,email"
+        onlogin="checkLoginState();">
+        </fb:login-button>
+      </div>
     </div>
   </nav>
 
@@ -69,15 +76,13 @@
   <main>
 
 
-<fb:login-button 
-scope="public_profile,email"
-onlogin="checkLoginState();">
-</fb:login-button>
 
-<div id="fb-root"></div>
-<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.3&appId=2255951781382943"></script>
 
-<div class="fb-login-button" data-width="" data-size="small" data-button-type="login_with" data-auto-logout-link="false" data-use-continue-as="false"></div>
+<!-- <div id="fb-root"></div> -->
+
+
+<!-- <div class="fb-login-button" data-display="transparent" data-width="" data-size="small" data-button-type="login_with" data-auto-logout-link="false" data-use-continue-as="false"></div> -->
+
 
     <div class="allProducts">
         <!-- <a class="productContainer">
@@ -131,6 +136,6 @@ onlogin="checkLoginState();">
 
   <script type="text/javascript" src="js/lib.js"></script>
   <script type="text/javascript" src="js/index.js"></script>
-  <script type="text/javascript" src="js/user.js"></script>
+  
 </body>
 </html>
