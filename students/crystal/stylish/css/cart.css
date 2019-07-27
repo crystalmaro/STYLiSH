@@ -286,10 +286,12 @@ Media Query
     }
     .cartPrefShipping,
     .cartPrefShipping div,
+    .cartPrefShipping select,
     .cartPrefPayment,
-    .cartPrefPayment div {
-        width: 90%;
+    .cartPrefPayment div,
+    .cartPrefPayment select {
+        width: 100%;
         display: block;
-}
-
+        margin: 0;
+    }
 }
