@@ -118,6 +118,7 @@ nav .logo {
 /* ============= */
 .fb_iframe_widget iframe {
     opacity: 0.01;
+    height: 35px;
 }
 .fb_iframe_widget {
   background-image: url(../images/member.png);
