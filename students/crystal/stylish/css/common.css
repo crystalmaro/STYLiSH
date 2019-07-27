@@ -121,6 +121,7 @@ nav .logo {
     height: 35px;
 }
 .fb_iframe_widget {
+  display: block;
   background-image: url(../images/member.png);
   background-repeat: no-repeat; 
   background-size: contain;

@@ -32,8 +32,9 @@ window.fbAsyncInit = function() {
 function statusChangeCallback(response){
   if(response.status == "connected"){
     console.log("logged in and authenticated");
+    window.location.href = `profile.html`;
   } else {
-    console.log("not authenticated");
+    console.log("not authenticated!!!!");
   }
 }
 
