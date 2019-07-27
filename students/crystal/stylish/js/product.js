@@ -36,7 +36,7 @@ let productDetail = {
 Button: Add to Cart
 ================== */
 addCartButton.addEventListener("click", function(){
-  alert("item added to cart.")
+  alert("item added to")
   updateProductDetail();
   let localStorageCart = getLocalStorage("cart");
   // reset sameProductIndex, and run checkIfSameProduct() again
@@ -249,6 +249,7 @@ qtyAdd.addEventListener("click", function(){
   qtyValue.innerHTML = qtyCount;
   }
   updateProductDetail();
+  
 });
 
 qtyMinus.onclick = function(){
