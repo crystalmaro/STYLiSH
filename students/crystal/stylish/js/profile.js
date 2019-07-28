@@ -1,6 +1,6 @@
-let userName;
-let userEmail;
-let userProfPic;
+let userName = "name holder";
+let userEmail = "email holder";
+let userProfPic = "pic holder";
 let userAccessToken;
 
 // https://crystalmaro.github.io/Web-Front-End-2019-Summer/students/crystal/stylish/
