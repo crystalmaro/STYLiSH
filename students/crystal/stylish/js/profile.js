@@ -1,9 +1,9 @@
 // test if gh-pages is updated
-alert("updated 8:50pm")
+alert("updated 8:55pm")
 
-let userName = "name holder";
-let userEmail = "email holder";
-let userProfPic = "pic holder";
+let userName;
+let userEmail;
+let userProfPic;
 let fb_backend = {
   "provider": "facebook",
   "access_token": ""
