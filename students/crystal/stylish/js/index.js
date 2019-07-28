@@ -1,5 +1,5 @@
 // test if gh-pages is updated
-alert("updated 7:52pm")
+alert("updated 8:01pm")
 
 /* ==================
 Variables

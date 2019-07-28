@@ -6,6 +6,10 @@ let fb_backend = {
   "access_token": ""
 };
 
+// test if gh-pages is updated
+alert("updated 8:01pm")
+
+
 // https://crystalmaro.github.io/Web-Front-End-2019-Summer/students/crystal/stylish/
 
 window.fbAsyncInit = function() {
@@ -33,21 +37,22 @@ window.fbAsyncInit = function() {
     js.src = "https://connect.facebook.net/en_US/sdk.js";
     fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));
-
+/// status change call back
 function statusChangeCallback(response){
   if(response.status === "connected"){
     console.log("logged in and authenticated");
     console.log(response)
-    fb_backend.access_token = response.authResponse.accessToken;
-    setLocalStorage("user", fb_backend)
+    // fb_backend.access_token = response.authResponse.accessToken;
+    // setLocalStorage("user", fb_backend)
 
     FB.api("/me?fields=name,email,picture,profile_pic", function(response){
-      if (response && !response.error){
+      // if (response && !response.error){
         alert("check response has something")
+
         console.log(response)
         buildProfile(response);
         // window.location.href = `profile.html`;
-      };
+      // };
     });
 
     testAPI();
@@ -102,6 +107,14 @@ function redirectToProfile(){
 function testAPI() {
   alert("testAPI activated");
   console.log(response)
+  FB.api("/me?fields=name,email,picture,profile_pic", function(response){
+    // if (response && !response.error){
+      alert("testAPI's FB.api")
+
+      console.log(response)
+      buildProfile(response);
+      // window.location.href = `profile.html`;
+    // };
 
 };
 
