@@ -1,7 +1,7 @@
 let userName = "name holder";
 let userEmail = "email holder";
 let userProfPic = "pic holder";
-let userAccessToken;
+let userAccessToken = "not yet";
 
 // https://crystalmaro.github.io/Web-Front-End-2019-Summer/students/crystal/stylish/
 
@@ -55,7 +55,7 @@ function checkLoginState() {
       "provider": "facebook",
       "access_token": userAccessToken
     };
-    postAjax(API_HOST_Order, fbObj, testAPI);
+    postAjax(API_HOST_Order, fbObj, redirectToProfile);
 
     // the response where i gather info
     // don't need to save accessToken into anywhere (localStorage)
@@ -86,9 +86,11 @@ function redirectToProfile(){
 function testAPI() {
   alert("testAPI activated");
   FB.api("/me?fields=name,email,picture,profile_pic", function(response){
+    alert("FB.api activated")
     if (response && !response.error){
+      alert("check response has something")
       buildProfile(response);
-      window.location.href = `profile.html`;
+      // window.location.href = `profile.html`;
     };
   });
 };
