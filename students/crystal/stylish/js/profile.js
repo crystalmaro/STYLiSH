@@ -1,5 +1,5 @@
 // test if gh-pages is updated
-alert("updated 8:45pm")
+alert("updated 8:46pm")
 
 let userName = "name holder";
 let userEmail = "email holder";
@@ -44,14 +44,14 @@ function statusChangeCallback(response){
     fb_backend.access_token = response.authResponse.accessToken;
     setLocalStorage("user", fb_backend)
 
-    // FB.api("/me?fields=name,email,picture.width(width:500)", function(response){
-    //   if (response && !response.error){
-    //     alert("check response has something")
-    //     console.log(response)
-    //     buildProfile(response);
-    //     // window.location.href = `profile.html`;
-    //   };
-    // });
+    FB.api("/me?fields=name,email,picture.width(width:500)", function(response){
+      if (response && !response.error){
+        alert("check response has something")
+        console.log(response)
+        buildProfile(response);
+        // window.location.href = `profile.html`;
+      };
+    });
 
     testAPI();
     
