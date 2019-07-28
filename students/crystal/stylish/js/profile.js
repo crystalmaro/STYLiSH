@@ -42,15 +42,14 @@ function statusChangeCallback(response){
     fb_backend.access_token = response.authResponse.accessToken;
     setLocalStorage("user", fb_backend)
 
-    FB.api("/me?fields=name,email,picture,profile_pic", function(response){
-      // if (response && !response.error){
-        alert("check response has something")
-
-        console.log(response)
-        buildProfile(response);
-        // window.location.href = `profile.html`;
-      // };
-    });
+    // FB.api("/me?fields=name,email,picture.width(width:500)", function(response){
+    //   if (response && !response.error){
+    //     alert("check response has something")
+    //     console.log(response)
+    //     buildProfile(response);
+    //     // window.location.href = `profile.html`;
+    //   };
+    // });
 
     testAPI();
     
@@ -105,13 +104,14 @@ function testAPI() {
   alert("testAPI activated");
   console.log(response)
   FB.api("/me?fields=name,email,picture,profile_pic", function(response){
-    // if (response && !response.error){
+    if (response && !response.error){
       alert("testAPI's FB.api")
 
       console.log(response)
       buildProfile(response);
-      // window.location.href = `profile.html`;
+      window.location.href = `profile.html`;
     })
+  )
 };
 
 // ============== build user profile
@@ -130,6 +130,7 @@ function buildProfile(response) {
   fbName.innerHTML = userName;
   fbEmail.innerHTML = userEmail;
   
+   window.location.href = `profile.html`;
 };
 
 // window.addEventListener("load", function(){
