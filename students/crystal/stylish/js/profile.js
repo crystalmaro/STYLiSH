@@ -1,3 +1,6 @@
+// test if gh-pages is updated
+alert("updated 8:07pm")
+
 let userName = "name holder";
 let userEmail = "email holder";
 let userProfPic = "pic holder";
@@ -5,10 +8,6 @@ let fb_backend = {
   "provider": "facebook",
   "access_token": ""
 };
-
-// test if gh-pages is updated
-alert("updated 8:05pm")
-
 
 // https://crystalmaro.github.io/Web-Front-End-2019-Summer/students/crystal/stylish/
 
