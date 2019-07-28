@@ -1,3 +1,5 @@
+// test if gh-pages is updated
+alert("updated 8:45pm")
 
 let userName = "name holder";
 let userEmail = "email holder";
@@ -110,8 +112,8 @@ function testAPI() {
       console.log(response)
       buildProfile(response);
       window.location.href = `profile.html`;
-    })
-  )
+    }
+  })
 };
 
 // ============== build user profile
