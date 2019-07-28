@@ -21,6 +21,22 @@ a {
 .flex {
     display: flex;
 }
+/* ============= */
+/* FB LOG IN
+/* ============= */
+.fb_iframe_widget iframe {
+    opacity: 0.01;
+    height: 35px;
+    top: 15px;
+}
+.iconMember:hover{
+    background-image: url(../images/member-hover.png);
+}
+.iconMember {
+    background-image: url(../images/member.png);
+    background-repeat: no-repeat;
+    background-size: 100%;
+}
 
 /* ====================
 Nav Bar
@@ -113,35 +129,6 @@ nav .logo {
     object-fit: contain;
 }
 
-/* ============= */
-/* FB LOG IN test */
-/* ============= */
-.fb_iframe_widget iframe {
-    opacity: 0.01;
-    height: 35px;
-    top: 15px;
-}
-/* .fb_iframe_widget,
-.fb_iframe_widget_fliud {
-    display: block;
-} */
-/* .fb_iframe_widget {
-  background-image: url(../images/member.png);
-  background-repeat: no-repeat; 
-  background-size: contain;
-  height: 44px;
-} */
-/* .fb_iframe_widget:hover { */
-.iconMember:hover{
-    background-image: url(../images/member-hover.png);
-}
-.iconMember {
-    background-image: url(../images/member.png);
-    background-repeat: no-repeat;
-    background-size: 100%;
-    width: 44px;
-    height: 44px;
-}
 .iconCart:hover{
     background-image: url(../images/cart-hover.png);
 }
@@ -297,14 +284,15 @@ Media Query
     .navFeature-mobile .cart-mobile  {
         vertical-align: middle;
     }
-    .navFeature-mobile a {
+    .navFeature-mobile a,
+    .navFeature-mobile div {
         text-decoration: none;
         color: #ffffff;
-        display: block;
+        display: inline-block;
         flex: auto;
         text-align: center;
     }
-    .navFeature-mobile a:first-child {
+    .navFeature-mobile a {
         border-right: 1px solid #f5f5f5;
     }
     .navFeature-mobile .cart-mobile {
@@ -315,13 +303,20 @@ Media Query
         width: 40px;
         height: 40px;
     }
-    /* .campaign_text {
-        left: 15%;
-        bottom: 20%;
-    } */
+    
+    .navFeature-mobile .member-mobile {
+        line-height: 44px;
+    }
+    .navFeature-mobile .member-mobile .fbIcon-mobile {
+        background-image: url(../images/member-mobile.png);
+        width: 44px;
+        height: 44px;
+    }
+    .fb_iframe_widget iframe {
+        top: 0;
+    }
     footer {
         font-size: .8rem;
-        /* width: 100%; */
         padding: 50px 0 100px 0;
     }
     .myFooter .footerResource {
