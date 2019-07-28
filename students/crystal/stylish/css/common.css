@@ -309,8 +309,8 @@ Media Query
     }
     .navFeature-mobile .member-mobile .fbIcon-mobile {
         background-image: url(../images/member-mobile.png);
-        width: 44px;
-        height: 44px;
+        width: 40px;
+        height: 40px;
     }
     .fb_iframe_widget iframe {
         top: 0;
