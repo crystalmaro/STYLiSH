@@ -19,7 +19,6 @@ window.fbAsyncInit = function() {
   // otherwise it'd say FB isn't found
   FB.getLoginStatus(function(response) {
     statusChangeCallback(response);
-    
   });
     
 };
@@ -37,9 +36,6 @@ function statusChangeCallback(response){
     console.log("logged in and authenticated");
     // window.location.href = `profile.html`;
     console.log(response)
-    console.log(response.authResponse)
-    console.log(response.authResponse.accessToken)
-    userAccessToken = response.authResponse.accessToken;
     testAPI();
   } else {
     console.log("not authenticated!!!!");
@@ -47,36 +43,42 @@ function statusChangeCallback(response){
   }
 };
 
+// onLogin() on the hidden fb button
 function checkLoginState() {
-  
   FB.getLoginStatus(function(response) {
     statusChangeCallback(response);
-    // the response where i gather info
+    console.log(response.authResponse.accessToken);
+    userAccessToken = response.authResponse.accessToken;
 
+    // send fb access_token to Check Out API
+    let fbObj = {
+      "provider": "facebook",
+      "access_token": userAccessToken
+    };
+    postAjax(API_HOST_Order, fbObj, testAPI);
+
+    // the response where i gather info
     // don't need to save accessToken into anywhere (localStorage)
-    // 1. need to set up what i need from FB (is. access token)
+    // 1. need to set up what i need from FB (ie. access token)
     // 2. use access token to retrieve user info (name, email, pic)
     // use AJAX post 
     // 
-   
   });
 
-  window.location.href = `profile.html`;
+  
 };
- 
 
-// for this scenario: API is the object list from FB graph API, that shows user name, email, profile pic 
-// need 
-
-
+// ============== test API response status
 function testAPI() {
   FB.api("/me?fields=name,email,picture,profile_pic", function(response){
     if (response && !response.error){
       buildProfile(response);
+      window.location.href = `profile.html`;
     };
   });
 };
 
+// ============== build user profile
 function buildProfile(user) {
   userProfPic = user.profile_pic;
   userName = user.name;
@@ -91,11 +93,5 @@ function buildProfile(user) {
   fbEmail.innerHTML = userEmail;
   
 };
-
-
-// let memberIcons = document.querySelectorAll(".iconMember .");
-// memberIcons.addeEventListener("click", function(e){
-  
-// } )
 
 window.addEventListener("load", textAPI);
