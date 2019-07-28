@@ -1,6 +1,11 @@
 // test if gh-pages is updated
-alert("updated 9:04pm")
+alert("updated 9:13pm")
 
+let fbUser = {
+  name: "",
+  email: "",
+  picUrl: ""
+}
 let userName;
 let userEmail;
 let userProfPic;
@@ -44,14 +49,14 @@ function statusChangeCallback(response){
     fb_backend.access_token = response.authResponse.accessToken;
     setLocalStorage("user", fb_backend)
 
-    FB.api("/me?fields=name,email,picture.width(500)", function(response){
-      if (response && !response.error){
-        alert("check response has something")
-        console.log(response)
-        buildProfile(response);
-        // window.location.href = `profile.html`;
-      };
-    });
+    // FB.api("/me?fields=name,email,picture.width(500)", function(response){
+    //   if (response && !response.error){
+    //     alert("check response has something")
+    //     console.log(response)
+    //     buildProfile(response);
+    //     // window.location.href = `profile.html`;
+    //   };
+    // });
 
     testAPI();
     
@@ -105,7 +110,7 @@ function redirectToProfile(){
 function testAPI() {
   alert("testAPI activated");
   console.log(response)
-  FB.api("/me?fields=name,email,picture,profile_pic", function(response){
+  FB.api("/me?fields=name,email,picture.width(500)", function(response){
     if (response && !response.error){
       alert("testAPI's FB.api")
 
@@ -118,24 +123,21 @@ function testAPI() {
 // ============== build user profile
 function buildProfile(response) {
   alert("buildProfile activated")
-  console.log(response)
-  userProfPic = response.picture.data.url;
-  userName = response.name;
-  userEmail = response.email;
-  console.log(userProfPic, userName, userEmail)
 
+  fbUser.picUrl = response.picture.data.url;
+  fbUser.name = response.name;
+  fbUser.email = response.email;
+
+  setLocalStorage("fbUser", fbUser)
+
+  let fbStorage = getLocalStorage("fbUser")
   let fbProfPic = document.querySelector(".fbleft img");
   let fbName = document.querySelector(".fbName");
   let fbEmail = document.querySelector(".fbEmail");
 
-  fbProfPic.setAttribute("src", userProfPic);
-  fbName.innerHTML = `${userName}`;
-  fbEmail.innerHTML = `${userEmail}`;
+  fbProfPic.setAttribute("src", fbStorage.picUrl);
+  fbName.innerHTML = fbStorage.name;
+  fbEmail.innerHTML = fbStorage.email;
   
-   window.location.href = "./profile.html";
+  // window.location.href = "./profile.html";
 };
-
-// window.addEventListener("load", function(){
-//   // textAPI();
-//   updateLocalStorageUser();
-// });
