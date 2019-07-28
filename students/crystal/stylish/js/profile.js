@@ -36,7 +36,7 @@ function statusChangeCallback(response){
     console.log("logged in and authenticated");
     // window.location.href = `profile.html`;
     console.log(response)
-    testAPI();
+    // testAPI();
   } else {
     console.log("not authenticated!!!!");
     console.log(response)
@@ -47,6 +47,7 @@ function statusChangeCallback(response){
 function checkLoginState() {
   alert("checking login status");
   FB.getLoginStatus(function(response) {
+    alert("getting login status");
     statusChangeCallback(response);
     console.log(response.authResponse.accessToken);
     userAccessToken = response.authResponse.accessToken;
@@ -64,9 +65,13 @@ function checkLoginState() {
     // 2. use access token to retrieve user info (name, email, pic)
     // use AJAX post 
     // 
+    if(response.status == "connected"){
+      updateUserInfo();
+      testAPI();
+      buildProfile(response);
+    }
+    
   });
-  updateUserInfo();
-  testAPI();
   
 };
 
@@ -77,6 +82,7 @@ function updateUserInfo() {
 
 // ============== test API response status
 function testAPI() {
+  alert("testAPI activated");
   FB.api("/me?fields=name,email,picture,profile_pic", function(response){
     if (response && !response.error){
       buildProfile(response);
@@ -87,6 +93,7 @@ function testAPI() {
 
 // ============== build user profile
 function buildProfile(user) {
+  alert("buildProfile activated")
   userProfPic = user.profile_pic;
   userName = user.name;
   userEmail = user.email;
@@ -102,6 +109,6 @@ function buildProfile(user) {
 };
 
 window.addEventListener("load", function(){
-  textAPI();
+  // textAPI();
   updateUserInfo();
 });
