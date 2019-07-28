@@ -1,5 +1,5 @@
 // test if gh-pages is updated
-alert("updated 9:32pm")
+alert("updated 9:36pm")
 
 // let fbUser = {
 //   name: "",
@@ -22,8 +22,7 @@ let fb_backend = {
 window.fbAsyncInit = function() {
   FB.init({
     appId      : '{2255951781382943',
-    cookie     : true,
-    xfbml      : true,
+    cookie     : true, 
     version    : 'v3.3'
   });
     
@@ -56,12 +55,21 @@ function statusChangeCallback(response){
       if (response && !response.error){
         alert("check response has something")
         console.log(response)
-        fb_backend.access_token = response.authResponse.accessToken;
-        fb_backend.picUrl = response.picture.data.url;
-        fb_backend.name = response.name;
-        fb_backend.email = response.email;
-        console.log(fb_backend);
-        setLocalStorage("user", fb_backend)
+
+
+        userName = response.name;
+        userEmail = response.email;
+        userProfPic = response.picture.data.url;
+
+        // fb_backend.access_token = response.authResponse.accessToken;
+        // fb_backend.picUrl = response.picture.data.url;
+        // fb_backend.name = response.name;
+        // fb_backend.email = response.email;
+        // console.log(fb_backend);
+        // setLocalStorage("user", fb_backend)
+
+
+
         // window.location.href = `profile.html`;
       };
     });
@@ -132,14 +140,15 @@ function testAPI() {
 function buildProfile(response) {
   alert("buildProfile activated")
 
-  let fbStorage = getLocalStorage("fbUser")
+  // let fbStorage = getLocalStorage("fbUser")
   let fbProfPic = document.querySelector(".fbleft img");
   let fbName = document.querySelector(".fbName");
   let fbEmail = document.querySelector(".fbEmail");
 
-  fbProfPic.setAttribute("src", fbStorage.picUrl);
-  fbName.innerHTML = fbStorage.name;
-  fbEmail.innerHTML = fbStorage.email;
-  
+  fbProfPic.setAttribute("src", userProfPic);
+  fbName.innerHTML = userName;
+  fbEmail.innerHTML = userEmail;
+
+
   // window.location.href = "./profile.html";
 };
