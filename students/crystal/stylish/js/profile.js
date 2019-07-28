@@ -1,17 +1,20 @@
 // test if gh-pages is updated
-alert("updated 9:13pm")
+alert("updated 9:21pm")
 
-let fbUser = {
-  name: "",
-  email: "",
-  picUrl: ""
-}
+// let fbUser = {
+//   name: "",
+//   email: "",
+//   picUrl: ""
+// }
 let userName;
 let userEmail;
 let userProfPic;
 let fb_backend = {
   "provider": "facebook",
-  "access_token": ""
+  "access_token": "",
+  "name": "",
+  "email": "",
+  "picUrl": ""
 };
 
 // https://crystalmaro.github.io/Web-Front-End-2019-Summer/students/crystal/stylish/
@@ -46,17 +49,21 @@ function statusChangeCallback(response){
   if(response.status === "connected"){
     console.log("logged in and authenticated");
     console.log(response)
-    fb_backend.access_token = response.authResponse.accessToken;
-    setLocalStorage("user", fb_backend)
 
-    // FB.api("/me?fields=name,email,picture.width(500)", function(response){
-    //   if (response && !response.error){
-    //     alert("check response has something")
-    //     console.log(response)
-    //     buildProfile(response);
-    //     // window.location.href = `profile.html`;
-    //   };
-    // });
+    
+
+    FB.api("/me?fields=name,email,picture.width(500)", function(response){
+      if (response && !response.error){
+        alert("check response has something")
+        console.log(response)
+        fb_backend.access_token = response.authResponse.accessToken;
+        fb_backend.picUrl = response.picture.data.url;
+        fb_backend.name = response.name;
+        fb_backend.email = response.email;
+        setLocalStorage("user", fb_backend)
+        // window.location.href = `profile.html`;
+      };
+    });
 
     testAPI();
     
@@ -75,11 +82,11 @@ function checkLoginState() {
     
 
     // send fb access_token to Check Out API
-    let fbObj = {
-      "provider": "facebook",
-      "access_token": userAccessToken
-    };
-    postAjax(API_HOST_Order, fbObj, redirectToProfile);
+    // let fbObj = {
+    //   "provider": "facebook",
+    //   "access_token": userAccessToken
+    // };
+    // postAjax(API_HOST_Order, fbObj, redirectToProfile);
 
     // the response where i gather info
     // don't need to save accessToken into anywhere (localStorage)
@@ -123,12 +130,6 @@ function testAPI() {
 // ============== build user profile
 function buildProfile(response) {
   alert("buildProfile activated")
-
-  fbUser.picUrl = response.picture.data.url;
-  fbUser.name = response.name;
-  fbUser.email = response.email;
-
-  setLocalStorage("fbUser", fbUser)
 
   let fbStorage = getLocalStorage("fbUser")
   let fbProfPic = document.querySelector(".fbleft img");
