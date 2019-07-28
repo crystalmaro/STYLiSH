@@ -97,3 +97,5 @@ function buildProfile(user) {
 // memberIcons.addeEventListener("click", function(e){
   
 // } )
+
+window.addEventListener("load", textAPI);
