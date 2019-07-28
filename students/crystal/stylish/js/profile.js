@@ -41,11 +41,11 @@ function statusChangeCallback(response){
     setLocalStorage("user", fb_backend)
 
     FB.api("/me?fields=name,email,picture,profile_pic", function(response){
-      if (response && !response.error){
+      // if (response && !response.error){
         alert("check response has something")
         buildProfile(response);
         // window.location.href = `profile.html`;
-      };
+      // };
     });
 
     testAPI();
