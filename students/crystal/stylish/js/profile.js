@@ -1,5 +1,5 @@
 // test if gh-pages is updated
-alert("updated 9:00pm")
+alert("updated 9:04pm")
 
 let userName;
 let userEmail;
@@ -111,7 +111,6 @@ function testAPI() {
 
       console.log(response)
       buildProfile(response);
-      window.location.href = `profile.html`;
     }
   })
 };
@@ -130,10 +129,10 @@ function buildProfile(response) {
   let fbEmail = document.querySelector(".fbEmail");
 
   fbProfPic.setAttribute("src", userProfPic);
-  fbName.innerHTML = userName;
-  fbEmail.innerHTML = userEmail;
+  fbName.innerHTML = `${userName}`;
+  fbEmail.innerHTML = `${userEmail}`;
   
-   window.location.href = `profile.html`;
+   window.location.href = "./profile.html";
 };
 
 // window.addEventListener("load", function(){
