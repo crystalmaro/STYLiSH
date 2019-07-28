@@ -7,7 +7,7 @@ let fb_backend = {
 };
 
 // test if gh-pages is updated
-alert("updated 8:01pm")
+alert("updated 8:05pm")
 
 
 // https://crystalmaro.github.io/Web-Front-End-2019-Summer/students/crystal/stylish/
@@ -114,7 +114,8 @@ function testAPI() {
       console.log(response)
       buildProfile(response);
       // window.location.href = `profile.html`;
-    // };
+    };
+  )
 
 };
 
