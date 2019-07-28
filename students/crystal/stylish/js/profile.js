@@ -1,5 +1,5 @@
 // test if gh-pages is updated
-alert("updated 9:22pm")
+alert("updated 9:32pm")
 
 // let fbUser = {
 //   name: "",
@@ -60,6 +60,7 @@ function statusChangeCallback(response){
         fb_backend.picUrl = response.picture.data.url;
         fb_backend.name = response.name;
         fb_backend.email = response.email;
+        console.log(fb_backend);
         setLocalStorage("user", fb_backend)
         // window.location.href = `profile.html`;
       };
@@ -102,10 +103,10 @@ function checkLoginState() {
   
 };
 
-function updateLocalStorageUser() {
-  // let localStorageUser = getLocalStorage("user");
-  setLocalStorage("user", userAccessToken)
-};
+// function updateLocalStorageUser() {
+//   // let localStorageUser = getLocalStorage("user");
+//   setLocalStorage("user", userAccessToken)
+// };
 
 // ============= redirect to profile page if logged in
 function redirectToProfile(){
