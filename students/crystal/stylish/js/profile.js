@@ -1,5 +1,5 @@
 // test if gh-pages is updated
-alert("updated 8:55pm")
+alert("updated 9:00pm")
 
 let userName;
 let userEmail;
@@ -120,9 +120,10 @@ function testAPI() {
 function buildProfile(response) {
   alert("buildProfile activated")
   console.log(response)
-  userProfPic = response.profile_pic;
+  userProfPic = response.picture.data.url;
   userName = response.name;
   userEmail = response.email;
+  console.log(userProfPic, userName, userEmail)
 
   let fbProfPic = document.querySelector(".fbleft img");
   let fbName = document.querySelector(".fbName");
