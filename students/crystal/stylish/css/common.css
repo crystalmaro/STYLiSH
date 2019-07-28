@@ -120,8 +120,11 @@ nav .logo {
     opacity: 0.01;
     height: 35px;
 }
+.fb_iframe_widget,
+.fb_iframe_widget_fliud {
+    display: block;
+}
 .fb_iframe_widget {
-  display: block;
   background-image: url(../images/member.png);
   background-repeat: no-repeat; 
   background-size: contain;
@@ -137,7 +140,6 @@ nav .logo {
     width: 44px;
     height: 44px;
 } */
-
 .iconCart:hover{
     background-image: url(../images/cart-hover.png);
 }
