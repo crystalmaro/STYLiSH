@@ -39,8 +39,8 @@ function statusChangeCallback(response){
   if(response.status === "connected"){
     console.log("logged in and authenticated");
     console.log(response)
-    // fb_backend.access_token = response.authResponse.accessToken;
-    // setLocalStorage("user", fb_backend)
+    fb_backend.access_token = response.authResponse.accessToken;
+    setLocalStorage("user", fb_backend)
 
     FB.api("/me?fields=name,email,picture,profile_pic", function(response){
       // if (response && !response.error){
@@ -111,9 +111,7 @@ function testAPI() {
       console.log(response)
       buildProfile(response);
       // window.location.href = `profile.html`;
-    };
-  )
-
+    })
 };
 
 // ============== build user profile
