@@ -1,5 +1,5 @@
 // test if gh-pages is updated
-alert("updated 9:21pm")
+alert("updated 9:22pm")
 
 // let fbUser = {
 //   name: "",
