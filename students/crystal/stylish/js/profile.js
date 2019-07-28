@@ -1,5 +1,3 @@
-// test if gh-pages is updated
-alert("updated 8:07pm")
 
 let userName = "name holder";
 let userEmail = "email holder";
