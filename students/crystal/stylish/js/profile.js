@@ -35,19 +35,19 @@ window.fbAsyncInit = function() {
 }(document, 'script', 'facebook-jssdk'));
 
 function statusChangeCallback(response){
-  if(response.status == "connected"){
+  if(response.status === "connected"){
     console.log("logged in and authenticated");
     console.log(response)
     fb_backend.access_token = response.authResponse.accessToken;
     setLocalStorage("user", fb_backend)
 
     FB.api("/me?fields=name,email,picture,profile_pic", function(response){
-      // if (response && !response.error){
+      if (response && !response.error){
         alert("check response has something")
         console.log(response)
         buildProfile(response);
         // window.location.href = `profile.html`;
-      // };
+      };
     });
 
     testAPI();
