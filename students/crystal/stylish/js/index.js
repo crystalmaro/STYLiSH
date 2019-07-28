@@ -1,3 +1,6 @@
+// test if gh-pages is updated
+alert("updated 1:35pm")
+
 /* ==================
 Variables
 ================== */
@@ -8,7 +11,6 @@ let tagQuery = getParamName("tag");
 let pageNumber;
 let pagingURL;
 let ind = 0;
-
 
 /* ==================
 Marketing Campaign
