@@ -305,10 +305,10 @@ Media Query
         height: 40px;
     }
     
-    .navFeature-mobile .member-mobile {
+    .navFeature-mobile .iconMember-mobile {
         line-height: 44px;
     }
-    .navFeature-mobile .member-mobile .fbIcon-mobile {
+    .navFeature-mobile .iconMember-mobile .fbIcon-mobile {
         background-image: url(../images/member-mobile.png);
         width: 40px;
         height: 40px;

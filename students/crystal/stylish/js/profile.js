@@ -35,7 +35,7 @@ window.fbAsyncInit = function() {
 function statusChangeCallback(response){
   if(response.status == "connected"){
     console.log("logged in and authenticated");
-    window.location.href = `profile.html`;
+    // window.location.href = `profile.html`;
     console.log(response)
     console.log(response.authResponse)
     console.log(response.authResponse.accessToken)
@@ -44,8 +44,6 @@ function statusChangeCallback(response){
   } else {
     console.log("not authenticated!!!!");
     console.log(response)
-    console.log(response.authResponse)
-    console.log(response.authResponse.accessToken)
   }
 };
 
@@ -60,7 +58,7 @@ function checkLoginState() {
     // 2. use access token to retrieve user info (name, email, pic)
     // use AJAX post 
     // 
-    // window.location.href = `profile.html`;
+    window.location.href = `profile.html`;
   });
 };
  
@@ -91,3 +89,9 @@ function buildProfile(user) {
   fbEmail.innerHTML = userEmail;
   
 };
+
+
+// let memberIcons = document.querySelectorAll(".iconMember .");
+// memberIcons.addeEventListener("click", function(e){
+  
+// } )
