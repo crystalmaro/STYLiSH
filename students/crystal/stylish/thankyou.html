@@ -6,17 +6,18 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" type="text/css" href="css/common.css">
     <link rel="stylesheet" type="text/css" href="css/index.css">
+    <script type="text/javascript" src="js/lib.js"></script>
     <title>STYLiSH Home Page</title>
 </head>
 <body>
 
   <nav class="flex">
-    <a href="./"><img class="logo" src="images/logo.png" alt="logo"></a>
+    <a hred="./"><img class="logo" src="images/logo.png" alt="logo"></a>
     <!-- href="./" -->
     <div class="navProductCategory flex">
-      <a href="./?tag=women" name="women" class="catg">女裝</a>
-      <a href="./?tag=men" name="men" class="catg">男裝</a>
-      <a href="./?tag=accessories" name="accessories" class="catg">配件</a>
+            <a href="./?tag=women" name="women" class="catg">女裝</a>
+            <a href="./?tag=men" name="men" class="catg">男裝</a>
+            <a href="./?tag=accessories" name="accessories" class="catg">配件</a>
     </div>
 
     <div class="navFeature flex">
@@ -27,7 +28,7 @@
         <input class="searchInput" type="text" onClick="showMobileSearch()"/>
         <input class="searchSubmit" type="submit">
       </form>
-      <a href="cart.html" class="iconCart"><div class="cartValStyle cartQty">0</div></a>
+      <a class="iconCart"><div class="cartValStyle cartQty">0</div></a>
       <a class="iconMember"></a>
     </div>
   </nav>
@@ -39,7 +40,7 @@
   </div>
 
   <div class="navFeature-mobile flex">
-    <a href="cart.html">
+    <a>
       <div class="cart-mobile">
         <div class="cartValStyle-mobile cartQty">0</div>
         <!-- <img src="images/btn-shopping-cart-02-normal_2019-07-11/btn-shopping-cart-02-normal.png" alt=""> -->
@@ -52,33 +53,19 @@
     </a>
   </div>
 
-  <div class="keyVisualSection">
-    <!-- <div class="campaign" style="background:url(https://api.appworks-school.tw/assets/keyvisuals/201807242228.jpg)">
-    <a class ="campaignLink" href="product_id"></a>
-    <div class="campaignStory">
-        message 1111111
+  <main class="thanyouMain">
+    <div class="orderMsg">
+      感謝您的惠顧</br>
+      您的訂單編號：<span class="orderNumber">123</span>  
     </div>
-    </div>-->
-    <!-- <div class="campaignStep">
-    <a onClick="campaignSlider()" style="background-color: green" class="campaignCircle"></a>
-    <a class="campaignCircle"></a>
-    <a class="campaignCircle"></a>
-    </div>  -->
-  </div>
-
-  <main>
-    <div class="allProducts">
-        <!-- <a class="productContainer">
-            <img src="https://api.appworks-school.tw/assets/201902191247/main.jpg">
-            <div class="allColors">
-                <div class="colorChip" style="background-color:pink;"></div>
-                <div class="colorChip" style="background-color:skyblue;"></div>
-            </div>
-            <div class="productName">後鬆緊牛仔落地寬褲</div>
-            <div class="productPrice">TWD.590</div>
-        </a> -->
-    </div>
+    <script>
+      let orderNum = document.querySelector(".orderNumber");
+      orderNum.innerHTML = getParamName("order");
+      localStorage.clear();
+    </script>
   </main>
+
+  
 
   <footer>
     <div class="myFooter flex">
@@ -117,7 +104,8 @@
     </div>
   </footer>
 
-  <script type="text/javascript" src="js/lib.js"></script>
-  <script type="text/javascript" src="js/index.js"></script>
+    
+    <!-- <script type="text/javascript" src="js/thankyou.js"></script> -->
+   
 </body>
 </html>

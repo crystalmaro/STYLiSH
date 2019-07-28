@@ -1,4 +1,18 @@
 /* ====================  
+Thank you Page
+====================  */
+.orderMsg {
+    border: 1px solid black;
+    margin: 50px auto;
+    padding: 200px 0;
+    max-width: 800px;
+    height: 500px;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 30px;
+}
+
+/* ====================  
 Home Page: Campaign
 ====================  */
 .keyVisualSection {

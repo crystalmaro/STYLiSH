@@ -281,5 +281,15 @@ Media Query
     .checkoutButton {
         width: 100%;
     }
+    .cartPreference {
+        flex-direction: column;
+    }
+    .cartPrefShipping,
+    .cartPrefShipping div,
+    .cartPrefPayment,
+    .cartPrefPayment div {
+        width: 90%;
+        display: block;
+}
 
 }

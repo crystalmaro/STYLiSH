@@ -1,10 +1,15 @@
 /* ==================
 Variables
 ================== */
+// type="all" on initial loading
 let type = "all";
+// after <a> refirection, tag = tagQuery: all, women, men, or accessories 
+let tagQuery = getParamName("tag");
 let pageNumber;
 let pagingURL;
 let ind = 0;
+
+
 /* ==================
 Marketing Campaign
 ================== */
@@ -81,27 +86,21 @@ const campaignSlider = (index) => {
 /* ==================
 Render Products
 ================== */
-function getProducts(inputType){
-  type = inputType;
-  removeElement("allProducts");
-    ajax(`${API_HOST_Products}/${inputType}`, renderProduct);
-};
-
 // === Product display rendering dynamically (createElement)
-// const renderProduct = () => { 
-// error: can't access in lin3 3 before initialization
-// isnt' it just changing from func declaration to arrow func (?)
 function renderProduct(data) {
   let allProducts = document.querySelector(".allProducts");
   let product = data.data;
+  
   // pagingURL for scroll event
   if (data.paging !== undefined) {
     pagingURL = `${API_HOST_Products}/${type}?paging=${data.paging}`;
+    console.log(pagingURL)
     window.addEventListener("scroll", handleScroll);
   } else {
     pagingURL = "";
     window.removeEventListener("scroll", handleScroll);
   };
+
   // start creating product from JSON data
   for (let i = 0; i < product.length; i++) {
     let productContainer = document.createElement("a");
@@ -166,7 +165,8 @@ function endlessScroll() {
   let windowHeight = window.innerHeight;
   let remainingFooter = document.querySelector("footer").getBoundingClientRect().top;
     if (remainingFooter - windowHeight < 0) {
-      ajax(pagingURL, setExtProduct);
+      getAjax(pagingURL, setExtProduct);
+      console.log(pagingURL)
       window.removeEventListener("scroll", handleScroll);
     }
 };
@@ -182,9 +182,46 @@ function setExtProduct(data) {
 };
 
 window.addEventListener("scroll", handleScroll);
+
+/* ==================
+Shopping Cart
+================== */
+function updateCartQty() {
+  let localStorageCart = getLocalStorage("cart");
+    // initialize empty structure into localStorage
+    if (localStorageCart === null) {
+      setLocalStorage("cart", cartValue);
+    } else {
+      for (let i = 0; i < cartQty.length; i++) {
+        cartQty[i].innerHTML = localStorageCart.order.list.length;
+      };
+    };
+};
+
 /* ==================
 Initial Page Loading
 ================== */
-// another method: window.addEventListener("load", function(){})
-ajax(`${API_HOST_Products}/${type}`, renderProduct);
-ajax(`${API_HOST}/marketing/campaigns`, renderCampaign)
+window.addEventListener('load', (event) => {
+
+  // load & display marketing campaign
+  getAjax(`${API_HOST}/marketing/campaigns`, renderCampaign);
+
+  // CSS styling for current category
+  let activeCatg = document.querySelectorAll(".catg");
+  activeCatg.forEach(x=>{
+    x.classList.remove("currentCategory");
+    if (x.name == tagQuery) {
+      x.classList.add("currentCategory");
+    }
+  });
+  // 砍掉重練 remove all products on initial loading
+  removeElement("allProducts");
+
+  if (tagQuery == "women" || tagQuery == "men" || tagQuery == "accessories") {
+    type = tagQuery;
+    getAjax(`${API_HOST_Products}/${tagQuery}`, renderProduct);
+  } else {
+    getAjax(`${API_HOST_Products}/all`, renderProduct);
+  }
+
+});

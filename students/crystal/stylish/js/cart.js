@@ -10,6 +10,7 @@ function checkCartItem(){
       emptyCart.classList.add("emptyCart");
       emptyCart.innerHTML = "empty shopping cart";
       cartProductContainer.appendChild(emptyCart);
+      checkoutButton.setAttribute("disabled", true);
     } else {
       renderCartItem();
     }
@@ -187,3 +188,18 @@ function calculateCartTotal(){
   setLocalStorage("cart", localStorageCart);
 };
 calculateCartTotal();
+
+/* ==================
+Shopping Cart
+================== */
+function updateCartQty() {
+  let localStorageCart = getLocalStorage("cart");
+    // initialize empty structure into localStorage
+    if (localStorageCart === null) {
+      setLocalStorage("cart", cartValue);
+    } else {
+      for (let i = 0; i < cartQty.length; i++) {
+        cartQty[i].innerHTML = localStorageCart.order.list.length;
+      };
+    };
+  };
