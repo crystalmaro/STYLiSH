@@ -34,9 +34,8 @@ window.fbAsyncInit = function() {
 function statusChangeCallback(response){
   if(response.status == "connected"){
     console.log("logged in and authenticated");
-    // window.location.href = `profile.html`;
-    console.log(response)
-    // testAPI();
+    userAccessToken = response.authResponse.accessToken;
+    testAPI();
   } else {
     console.log("not authenticated!!!!");
     console.log(response)
@@ -49,8 +48,7 @@ function checkLoginState() {
   FB.getLoginStatus(function(response) {
     alert("getting login status");
     statusChangeCallback(response);
-    console.log(response.authResponse.accessToken);
-    userAccessToken = response.authResponse.accessToken;
+    
 
     // send fb access_token to Check Out API
     let fbObj = {
@@ -66,19 +64,23 @@ function checkLoginState() {
     // use AJAX post 
     // 
     if(response.status == "connected"){
-      updateUserInfo();
-      testAPI();
-      buildProfile(response);
+      redirectToProfile
     }
-    
+
   });
   
 };
 
-function updateUserInfo() {
+function updateLocalStorageUser() {
   // let localStorageUser = getLocalStorage("user");
   setLocalStorage("user", userAccessToken)
 };
+
+// ============= redirect to profile page if logged in
+function redirectToProfile(){
+  window.location.href = `profile.html`;
+}
+
 
 // ============== test API response status
 function testAPI() {
@@ -110,5 +112,5 @@ function buildProfile(user) {
 
 window.addEventListener("load", function(){
   // textAPI();
-  updateUserInfo();
+  updateLocalStorageUser();
 });
