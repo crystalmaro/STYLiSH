@@ -58,8 +58,10 @@ function checkLoginState() {
     // 2. use access token to retrieve user info (name, email, pic)
     // use AJAX post 
     // 
-    window.location.href = `profile.html`;
+   
   });
+
+  window.location.href = `profile.html`;
 };
  
 
