@@ -45,6 +45,7 @@ function statusChangeCallback(response){
 
 // onLogin() on the hidden fb button
 function checkLoginState() {
+  alert("clicked checkLoginState function");
   FB.getLoginStatus(function(response) {
     statusChangeCallback(response);
     console.log(response.authResponse.accessToken);
@@ -66,6 +67,11 @@ function checkLoginState() {
   });
 
   
+};
+
+function updateUserInfo() {
+  // let localStorageUser = getLocalStorage("user");
+  setLocalStorage("user", userAccessToken)
 };
 
 // ============== test API response status
@@ -94,4 +100,7 @@ function buildProfile(user) {
   
 };
 
-window.addEventListener("load", textAPI);
+window.addEventListener("load", function(){
+  textAPI();
+  updateUserInfo();
+});

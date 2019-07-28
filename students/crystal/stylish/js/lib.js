@@ -32,6 +32,7 @@ function postAjax(src, obj, callback){
   let xhr = new XMLHttpRequest();
   xhr.open("POST", src, true);
   xhr.setRequestHeader('Content-type','application/json; charset=utf-8');
+  xhr.setRequestHeader('authorization',`Bearer ${getLocalStorage(user)}`);
   xhr.onreadystatechange = function  () {
     let parsedGetData = JSON.parse(xhr.response);
     if (this.readyState == 4 && this.status == "200") {
