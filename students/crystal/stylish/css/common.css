@@ -6,6 +6,7 @@
 body {
     margin: auto;
     /* expands background color width */
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 a {
