@@ -45,7 +45,7 @@ function statusChangeCallback(response){
 
 // onLogin() on the hidden fb button
 function checkLoginState() {
-  alert("clicked checkLoginState function");
+  alert("checking login status");
   FB.getLoginStatus(function(response) {
     statusChangeCallback(response);
     console.log(response.authResponse.accessToken);
@@ -65,7 +65,8 @@ function checkLoginState() {
     // use AJAX post 
     // 
   });
-
+  updateUserInfo();
+  testAPI();
   
 };
 
