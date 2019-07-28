@@ -85,8 +85,10 @@ function redirectToProfile(){
 // ============== test API response status
 function testAPI() {
   alert("testAPI activated");
+  console.log(response)
   FB.api("/me?fields=name,email,picture,profile_pic", function(response){
     alert("FB.api activated")
+    console.log(response)
     if (response && !response.error){
       alert("check response has something")
       buildProfile(response);
