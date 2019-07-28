@@ -119,27 +119,29 @@ nav .logo {
 .fb_iframe_widget iframe {
     opacity: 0.01;
     height: 35px;
+    top: 15px;
 }
-.fb_iframe_widget,
+/* .fb_iframe_widget,
 .fb_iframe_widget_fliud {
     display: block;
-}
-.fb_iframe_widget {
+} */
+/* .fb_iframe_widget {
   background-image: url(../images/member.png);
   background-repeat: no-repeat; 
   background-size: contain;
   height: 44px;
-}
-.fb_iframe_widget:hover {
+} */
+/* .fb_iframe_widget:hover { */
+.iconMember:hover{
     background-image: url(../images/member-hover.png);
 }
-/* .iconMember {
+.iconMember {
     background-image: url(../images/member.png);
     background-repeat: no-repeat;
     background-size: 100%;
     width: 44px;
     height: 44px;
-} */
+}
 .iconCart:hover{
     background-image: url(../images/cart-hover.png);
 }
