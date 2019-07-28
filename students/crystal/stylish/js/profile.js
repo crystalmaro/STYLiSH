@@ -1,5 +1,5 @@
 // test if gh-pages is updated
-alert("updated 8:46pm")
+alert("updated 8:49pm")
 
 let userName = "name holder";
 let userEmail = "email holder";
@@ -44,7 +44,7 @@ function statusChangeCallback(response){
     fb_backend.access_token = response.authResponse.accessToken;
     setLocalStorage("user", fb_backend)
 
-    FB.api("/me?fields=name,email,picture.width(width:500)", function(response){
+    FB.api("/me?fields=name,email,picture.width(500)", function(response){
       if (response && !response.error){
         alert("check response has something")
         console.log(response)
