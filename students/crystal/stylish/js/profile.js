@@ -1,7 +1,10 @@
 let userName = "name holder";
 let userEmail = "email holder";
 let userProfPic = "pic holder";
-let userAccessToken = "not yet";
+let fb_backend = {
+  "provider": "facebook",
+  "access_token": ""
+};
 
 // https://crystalmaro.github.io/Web-Front-End-2019-Summer/students/crystal/stylish/
 
@@ -34,8 +37,19 @@ window.fbAsyncInit = function() {
 function statusChangeCallback(response){
   if(response.status == "connected"){
     console.log("logged in and authenticated");
-    userAccessToken = response.authResponse.accessToken;
+    fb_backend.access_token = response.authResponse.accessToken;
+    setLocalStorage("user", fb_backend)
+
+    FB.api("/me?fields=name,email,picture,profile_pic", function(response){
+      if (response && !response.error){
+        alert("check response has something")
+        buildProfile(response);
+        // window.location.href = `profile.html`;
+      };
+    });
+
     testAPI();
+    
   } else {
     console.log("not authenticated!!!!");
     console.log(response)
@@ -64,7 +78,7 @@ function checkLoginState() {
     // use AJAX post 
     // 
     if(response.status == "connected"){
-      redirectToProfile
+      redirectToProfile();
     }
 
   });
@@ -86,15 +100,7 @@ function redirectToProfile(){
 function testAPI() {
   alert("testAPI activated");
   console.log(response)
-  FB.api("/me?fields=name,email,picture,profile_pic", function(response){
-    alert("FB.api activated")
-    console.log(response)
-    if (response && !response.error){
-      alert("check response has something")
-      buildProfile(response);
-      // window.location.href = `profile.html`;
-    };
-  });
+
 };
 
 // ============== build user profile
@@ -114,7 +120,7 @@ function buildProfile(user) {
   
 };
 
-window.addEventListener("load", function(){
-  // textAPI();
-  updateLocalStorageUser();
-});
+// window.addEventListener("load", function(){
+//   // textAPI();
+//   updateLocalStorageUser();
+// });
