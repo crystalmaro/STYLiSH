@@ -225,3 +225,140 @@ window.addEventListener('load', (event) => {
   }
 
 });
+
+// ======================================================
+// FACEBOOK 
+// ======================================================
+// test if gh-pages is updated
+alert("updated 9:50pm")
+
+// let fbUser = {
+//   name: "",
+//   email: "",
+//   picUrl: ""
+// }
+let userName;
+let userEmail;
+let userProfPic;
+let fb_backend = {
+  "provider": "facebook",
+  "access_token": "",
+  "name": "",
+  "email": "",
+  "picUrl": ""
+};
+
+// https://crystalmaro.github.io/Web-Front-End-2019-Summer/students/crystal/stylish/
+
+window.fbAsyncInit = function() {
+  FB.init({
+    appId      : '{2255951781382943',
+    cookie     : true, 
+    version    : 'v3.3'
+  });
+    
+//   FB.AppEvents.logPageView();   
+
+  // need to put below func within this window.func
+  // otherwise it'd say FB isn't found
+  FB.getLoginStatus(function(response) {
+    statusChangeCallback(response);
+  });
+    
+};
+
+(function(d, s, id){
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) {return;}
+    js = d.createElement(s); js.id = id;
+    js.src = "https://connect.facebook.net/en_US/sdk.js";
+    fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+/// status change call back
+function statusChangeCallback(response){
+  if(response.status === "connected"){
+    console.log("logged in and authenticated");
+    console.log(response)
+
+    
+
+    FB.api("/me?fields=name,email,picture.width(500)", function(response){
+      if (response && !response.error){
+        alert("check response has something")
+        console.log(response)
+
+
+        userName = response.name;
+        userEmail = response.email;
+        userProfPic = response.picture.data.url;
+
+        // fb_backend.access_token = response.authResponse.accessToken;
+        // fb_backend.picUrl = response.picture.data.url;
+        // fb_backend.name = response.name;
+        // fb_backend.email = response.email;
+        // console.log(fb_backend);
+        // setLocalStorage("user", fb_backend)
+
+
+
+        // window.location.href = `profile.html`;
+      };
+    });
+
+    testAPI();
+    
+  } else {
+    console.log("not authenticated!!!!");
+    console.log(response)
+  }
+};
+
+// onLogin() on the hidden fb button
+function checkLoginState() {
+  alert("checking login status");
+  FB.getLoginStatus(function(response) {
+    alert("getting login status");
+    statusChangeCallback(response);
+    
+
+    // send fb access_token to Check Out API
+    // let fbObj = {
+    //   "provider": "facebook",
+    //   "access_token": userAccessToken
+    // };
+    // postAjax(API_HOST_Order, fbObj, redirectToProfile);
+
+    // the response where i gather info
+    // don't need to save accessToken into anywhere (localStorage)
+    // 1. need to set up what i need from FB (ie. access token)
+    // 2. use access token to retrieve user info (name, email, pic)
+    // use AJAX post 
+    // 
+    if(response.status == "connected"){
+      redirectToProfile();
+    }
+
+  });
+  
+};
+
+
+// ============= redirect to profile page if logged in
+function redirectToProfile(){
+  window.location.href = "./profile.html";
+}
+
+
+// ============== test API response status
+function testAPI() {
+  alert("testAPI activated");
+  console.log(response)
+  FB.api("/me?fields=name,email,picture.width(500)", function(response){
+    if (response && !response.error){
+      alert("testAPI's FB.api")
+
+      console.log(response)
+      // buildProfile(response);
+    }
+  })
+};
