@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" type="text/css" href="css/common.css">
     <link rel="stylesheet" type="text/css" href="css/index.css">
+    <link rel="stylesheet" type="text/css" href="css/profile.css">
     <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.3&appId=2255951781382943"></script>
     <script type="text/javascript" src="js/user.js"></script>
     <title>STYLiSH Profile</title>
@@ -61,10 +62,18 @@
 
 
   <main>
-      user profile info from <strong>Facebook Graph API</strong>:<br>
-      user picture<br>
-      name<br>
-      email<br>
+    <div class="profileContainer flex">
+      <div>Profile</div>
+      <div class="fbLeft">
+        <img src="images/fb-profile-pic.jpeg" alt="">
+      </div>
+      <div class="fbRight">
+        <div class="fbName">fb name</div>
+        <div class="fbEmail">fb email</div>
+      </div>
+
+    </div>
+
   </main>
 
 
