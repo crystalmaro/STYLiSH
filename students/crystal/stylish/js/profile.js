@@ -37,12 +37,14 @@ window.fbAsyncInit = function() {
 function statusChangeCallback(response){
   if(response.status == "connected"){
     console.log("logged in and authenticated");
+    console.log(response)
     fb_backend.access_token = response.authResponse.accessToken;
     setLocalStorage("user", fb_backend)
 
     FB.api("/me?fields=name,email,picture,profile_pic", function(response){
       // if (response && !response.error){
         alert("check response has something")
+        console.log(response)
         buildProfile(response);
         // window.location.href = `profile.html`;
       // };
@@ -104,11 +106,12 @@ function testAPI() {
 };
 
 // ============== build user profile
-function buildProfile(user) {
+function buildProfile(response) {
   alert("buildProfile activated")
-  userProfPic = user.profile_pic;
-  userName = user.name;
-  userEmail = user.email;
+  console.log(response)
+  userProfPic = response.profile_pic;
+  userName = response.name;
+  userEmail = response.email;
 
   let fbProfPic = document.querySelector(".fbleft img");
   let fbName = document.querySelector(".fbName");
