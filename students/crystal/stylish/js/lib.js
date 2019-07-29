@@ -180,7 +180,7 @@ const showMobileSearch = () => {
 // FACEBOOK 
 // ======================================================
 // test if gh-pages is updated
-alert("updated 04:20pm")
+alert("updated 04:24pm")
 
 // let userName;
 // let userEmail;
@@ -259,17 +259,17 @@ function statusChangeCallback(response){
 
 // onLogin() on the hidden fb button
 function checkLoginState() {
-  localStorage.clear("user");
+  // localStorage.clear("user");
   // alert("checking login status");
   FB.getLoginStatus(function(response) {
     // alert("getting login status");
     statusChangeCallback(response);
     
     if(response.status === "connected"){
-      let localStorageUser = getLocalStorage("user");
-      if(localStorageUser.fe.name !== "") {
+      // let localStorageUser = getLocalStorage("user");
+      // if(localStorageUser.fe.name !== "") {
         redirectToProfile();
-      }
+      // }
     }
   });
 };
