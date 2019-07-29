@@ -180,23 +180,18 @@ const showMobileSearch = () => {
 // FACEBOOK 
 // ======================================================
 // test if gh-pages is updated
-alert("updated 02:49pm")
+alert("updated 03:07pm")
 
-// let fbUser = {
-//   name: "",
-//   email: "",
-//   picUrl: ""
-// }
-let userName;
-let userEmail;
-let userProfPic;
-let fb_backend = {
-  "provider": "facebook",
-  "access_token": "",
-  "name": "",
-  "email": "",
-  "picUrl": ""
-};
+// let userName;
+// let userEmail;
+// let userProfPic;
+// let fb_backend = {
+//   "provider": "facebook",
+//   "access_token": "",
+//   "name": "",
+//   "email": "",
+//   "picUrl": ""
+// };
 
 // https://crystalmaro.github.io/Web-Front-End-2019-Summer/students/crystal/stylish/
 
@@ -265,6 +260,7 @@ function statusChangeCallback(response){
 // onLogin() on the hidden fb button
 function checkLoginState() {
   alert("checking login status");
+  localStorage.clear("user");
   FB.getLoginStatus(function(response) {
     alert("getting login status");
     statusChangeCallback(response);
