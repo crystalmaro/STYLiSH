@@ -74,6 +74,18 @@ let cartValue = {
   }
 };
 
+let userValue = {
+  be: {
+    "provider": "facebook",
+    "access_token": ""
+  },
+  fe: {
+    "name": "",
+    "email": "",
+    "pic": ""
+  }
+}
+
 function setLocalStorage(key, value){
   localStorage.setItem(key, JSON.stringify(value));
 }
@@ -87,15 +99,23 @@ Shopping Cart
 ================== */
 function updateCartQty() {
   let localStorageCart = getLocalStorage("cart");
+  let localStorageUser = getLocalStorage("user");
     // initialize empty structure into localStorage
-    if (localStorageCart === null) {
+    if (localStorageCart === null || localStorageUser === null) {
       setLocalStorage("cart", cartValue);
+      setLocalStorage("user", userValue);
     } else {
       for (let i = 0; i < cartQty.length; i++) {
         cartQty[i].innerHTML = localStorageCart.order.list.length;
       };
     };
 };
+
+// function updateUser(){
+//   let localStorageUser = getLocalStorage("user");
+//   if (localStorageUser === null)
+// }
+
 window.addEventListener("load", function(){
   updateCartQty();
 });  
@@ -160,7 +180,7 @@ const showMobileSearch = () => {
 // FACEBOOK 
 // ======================================================
 // test if gh-pages is updated
-alert("updated 01:52pm")
+alert("updated 02:49pm")
 
 // let fbUser = {
 //   name: "",
@@ -205,7 +225,7 @@ window.fbAsyncInit = function() {
 
 
 /// status change call back
-function statusChangeCallback(response, cbf){
+function statusChangeCallback(response){
   if (response.status === "connected"){
     console.log("FB is logged in and authenticated");
     // console.log(response)
@@ -215,9 +235,15 @@ function statusChangeCallback(response, cbf){
         alert("check response has something")
         console.log(response)
 
-        userName = response.name;
-        userEmail = response.email;
-        userProfPic = response.picture.data.url;
+        // userName = response.name;
+        // userEmail = response.email;
+        // userProfPic = response.picture.data.url;
+
+        let localStorageUser = getLocalStorage("user");
+        localStorageUser.fe.name = response.name;
+        localStorageUser.fe.email = response.email;
+        localStorageUser.fe.pic = response.picture.data.url;
+        setLocalStorage("user", localStorageUser);
 
         // fb_backend.access_token = response.authResponse.accessToken;
         // fb_backend.picUrl = response.picture.data.url;
