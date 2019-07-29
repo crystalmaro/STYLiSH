@@ -269,14 +269,14 @@ function qtyReset () {
 /* ==================
 Shopping Cart
 ================== */
-function updateCartQty() {
-  let localStorageCart = getLocalStorage("cart");
-    // initialize empty structure into localStorage
-    if (localStorageCart === null) {
-      setLocalStorage("cart", cartValue);
-    } else {
-      for (let i = 0; i < cartQty.length; i++) {
-        cartQty[i].innerHTML = localStorageCart.order.list.length;
-      };
-    };
-  };
+// function updateCartQty() {
+//   let localStorageCart = getLocalStorage("cart");
+//     // initialize empty structure into localStorage
+//     if (localStorageCart === null) {
+//       setLocalStorage("cart", cartValue);
+//     } else {
+//       for (let i = 0; i < cartQty.length; i++) {
+//         cartQty[i].innerHTML = localStorageCart.order.list.length;
+//       };
+//     };
+// };

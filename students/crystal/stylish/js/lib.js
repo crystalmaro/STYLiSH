@@ -83,6 +83,24 @@ function getLocalStorage(key){
 }
 
 /* ==================
+Shopping Cart
+================== */
+function updateCartQty() {
+  let localStorageCart = getLocalStorage("cart");
+    // initialize empty structure into localStorage
+    if (localStorageCart === null) {
+      setLocalStorage("cart", cartValue);
+    } else {
+      for (let i = 0; i < cartQty.length; i++) {
+        cartQty[i].innerHTML = localStorageCart.order.list.length;
+      };
+    };
+};
+window.addEventListener("load", function(){
+  updateCartQty();
+});  
+
+/* ==================
 take Parameter by page URL
 ================== */
 function getParamName(name, url){
@@ -97,9 +115,7 @@ function getParamName(name, url){
 
 
   
-window.addEventListener("load", function(){
-  updateCartQty();
-});  
+
 
 /* ==================
 Remove Element
@@ -189,7 +205,7 @@ window.fbAsyncInit = function() {
 
 
 /// status change call back
-function statusChangeCallback(response){
+function statusChangeCallback(response, cbf){
   if (response.status === "connected"){
     console.log("FB is logged in and authenticated");
     // console.log(response)

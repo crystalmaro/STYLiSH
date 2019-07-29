@@ -18,4 +18,9 @@ function buildProfile() {
   // window.location.href = "./profile.html";
 };
 
-window.addEventListener("load", buildProfile);
+// window.addEventListener("load", function(){
+  // statusChangeCallback("", buildProfile)
+  
+// }
+
+
