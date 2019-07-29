@@ -144,7 +144,7 @@ const showMobileSearch = () => {
 // FACEBOOK 
 // ======================================================
 // test if gh-pages is updated
-alert("updated 9:53pm")
+alert("updated 12:00pm")
 
 // let fbUser = {
 //   name: "",
