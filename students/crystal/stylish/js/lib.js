@@ -1,6 +1,6 @@
-/* ==========================================
-   All Global Variables
-========================================== */
+// ==========================================
+//    All Global Variables
+// ==========================================
 const HOST = "https://api.appworks-school.tw";
 const API_HOST = "https://api.appworks-school.tw/api/1.0";
 const API_HOST_Products = "https://api.appworks-school.tw/api/1.0/products";
@@ -144,7 +144,7 @@ const showMobileSearch = () => {
 // FACEBOOK 
 // ======================================================
 // test if gh-pages is updated
-alert("updated 12:40pm")
+alert("updated 12:48pm")
 
 // let fbUser = {
 //   name: "",
@@ -192,7 +192,7 @@ window.fbAsyncInit = function() {
 function statusChangeCallback(response){
   if (response.status === "connected"){
     console.log("FB is logged in and authenticated");
-    console.log(response)
+    // console.log(response)
 
     FB.api("/me?fields=name,email,picture.width(500)", function(response){
       if (response && !response.error){
@@ -257,7 +257,7 @@ function redirectToProfile(){
 // ============== test API response status
 function testAPI() {
   alert("testAPI activated");
-  console.log(response)
+  // console.log(response)
   FB.api("/me?fields=name,email,picture.width(500)", function(response){
     if (response && !response.error){
       alert("testAPI's FB.api")
