@@ -32,7 +32,7 @@ function postAjax(src, obj, callback){
   let xhr = new XMLHttpRequest();
   xhr.open("POST", src, true);
   xhr.setRequestHeader('Content-type','application/json; charset=utf-8');
-  xhr.setRequestHeader('authorization',`Bearer ${getLocalStorage(user)}`);
+  // xhr.setRequestHeader('authorization',`Bearer ${getLocalStorage(user)}`);
   xhr.onreadystatechange = function  () {
     let parsedGetData = JSON.parse(xhr.response);
     if (this.readyState == 4 && this.status == "200") {
@@ -144,7 +144,7 @@ const showMobileSearch = () => {
 // FACEBOOK 
 // ======================================================
 // test if gh-pages is updated
-alert("updated 12:48pm")
+alert("updated 01:20pm")
 
 // let fbUser = {
 //   name: "",
@@ -227,7 +227,6 @@ function checkLoginState() {
     alert("getting login status");
     statusChangeCallback(response);
     
-
     // send fb access_token to Check Out API
     // let fbObj = {
     //   "provider": "facebook",
@@ -242,9 +241,7 @@ function checkLoginState() {
     // use AJAX post 
     // 
     if(response.status == "connected"){redirectToProfile()}
-
   });
-  
 };
 
 

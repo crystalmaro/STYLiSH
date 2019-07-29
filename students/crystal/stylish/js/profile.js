@@ -1,6 +1,6 @@
 let fbName = document.querySelector(".fbName");
 let fbEmail = document.querySelector(".fbEmail");
-let fbProfPic = document.querySelector(".fbleft img");
+let fbPic = document.querySelector(".fbPic");
 
 // ============== build user profile
 function buildProfile() {
@@ -10,10 +10,9 @@ function buildProfile() {
 
   fbName.innerHTML = userName;
   fbEmail.innerHTML = userEmail;
-  fbProfPic.setAttribute("src", userProfPic);
+  fbPic.setAttribute("src", userProfPic);
 
   // window.location.href = "./profile.html";
 };
-
 
 window.addEventListener("load", buildProfile);
