@@ -180,7 +180,7 @@ const showMobileSearch = () => {
 // FACEBOOK 
 // ======================================================
 // test if gh-pages is updated
-alert("updated 04:12pm")
+alert("updated 04:16pm")
 
 // let userName;
 // let userEmail;
@@ -264,21 +264,11 @@ function checkLoginState() {
   FB.getLoginStatus(function(response) {
     // alert("getting login status");
     statusChangeCallback(response);
-    
-    // send fb access_token to Check Out API
-    // let fbObj = {
-    //   "provider": "facebook",
-    //   "access_token": userAccessToken
-    // };
-    // postAjax(API_HOST_Order, fbObj, redirectToProfile);
 
-    // the response where i gather info
-    // don't need to save accessToken into anywhere (localStorage)
-    // 1. need to set up what i need from FB (ie. access token)
-    // 2. use access token to retrieve user info (name, email, pic)
-    // use AJAX post 
-    // 
-    if(response.status == "connected"){redirectToProfile()}
+    let localStorageUser = getLocalStorage("user");
+    if(response.status === "connected" && localStorageUser.fe.name !== "" ){
+      redirectToProfile();
+    }
   });
 };
 
