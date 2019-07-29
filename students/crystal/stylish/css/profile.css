@@ -22,14 +22,14 @@
     margin-bottom: 10px;
 }
 .fbLeft {
-    width: 50%; 
+    width: 35%; 
     /* outline: 1px solid black; */    
 }
 .fbLeft img {
     width: 100%;
 }
 .fbRight {
-    width: 40%;
+    width: 60%;
     /* outline: 1px solid black; */
     font-size: 1.5rem;
     line-height: 50px;

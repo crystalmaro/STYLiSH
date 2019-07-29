@@ -180,7 +180,7 @@ const showMobileSearch = () => {
 // FACEBOOK 
 // ======================================================
 // test if gh-pages is updated
-alert("updated 04:24pm")
+alert("updated 04:30pm")
 
 // let userName;
 // let userEmail;
@@ -203,6 +203,8 @@ window.fbAsyncInit = function() {
   });
   // FB.AppEvents.logPageView();   
 
+  alert("fbAsyncInit is activated")
+
   // need to put below func within this window.func
   // otherwise it'd say FB isn't found
   FB.getLoginStatus(function(response) {
@@ -223,11 +225,11 @@ window.fbAsyncInit = function() {
 function statusChangeCallback(response){
   if (response.status === "connected"){
     console.log("FB is logged in and authenticated");
-    // console.log(response)
+    console.log(response)
 
     FB.api("/me?fields=name,email,picture.width(500)", function(response){
       if (response && !response.error){
-        // alert("check response has something")
+        alert("check response has something")
         console.log(response)
 
         // userName = response.name;
@@ -239,13 +241,8 @@ function statusChangeCallback(response){
         localStorageUser.fe.email = response.email;
         localStorageUser.fe.pic = response.picture.data.url;
         setLocalStorage("user", localStorageUser);
+        alert("setting localStorage User")
 
-        // fb_backend.access_token = response.authResponse.accessToken;
-        // fb_backend.picUrl = response.picture.data.url;
-        // fb_backend.name = response.name;
-        // fb_backend.email = response.email;
-        // console.log(fb_backend);
-        // setLocalStorage("user", fb_backend)
       };
     });
 
@@ -260,9 +257,9 @@ function statusChangeCallback(response){
 // onLogin() on the hidden fb button
 function checkLoginState() {
   // localStorage.clear("user");
-  // alert("checking login status");
+  alert("checking login status");
   FB.getLoginStatus(function(response) {
-    // alert("getting login status");
+    alert("getting login status");
     statusChangeCallback(response);
     
     if(response.status === "connected"){
