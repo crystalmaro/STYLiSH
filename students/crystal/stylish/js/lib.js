@@ -180,7 +180,7 @@ const showMobileSearch = () => {
 // FACEBOOK 
 // ======================================================
 // test if gh-pages is updated
-alert("updated 04:16pm")
+alert("updated 04:20pm")
 
 // let userName;
 // let userEmail;
@@ -264,10 +264,12 @@ function checkLoginState() {
   FB.getLoginStatus(function(response) {
     // alert("getting login status");
     statusChangeCallback(response);
-
-    let localStorageUser = getLocalStorage("user");
-    if(response.status === "connected" && localStorageUser.fe.name !== "" ){
-      redirectToProfile();
+    
+    if(response.status === "connected"){
+      let localStorageUser = getLocalStorage("user");
+      if(localStorageUser.fe.name !== "") {
+        redirectToProfile();
+      }
     }
   });
 };
