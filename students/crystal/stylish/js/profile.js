@@ -5,18 +5,16 @@ function buildProfile() {
   alert("buildProfile activated")
 
   // let fbStorage = getLocalStorage("fbUser")
-  let fbProfPic = document.querySelector(".fbleft img");
   let fbName = document.querySelector(".fbName");
   let fbEmail = document.querySelector(".fbEmail");
+  let fbProfPic = document.querySelector(".fbleft img");
 
-  fbProfPic.setAttribute("src", userProfPic);
   fbName.innerHTML = userName;
   fbEmail.innerHTML = userEmail;
+  fbProfPic.setAttribute("src", userProfPic);
 
   // window.location.href = "./profile.html";
 };
 
 
-window.addEventListener("load", function(){
-  buildProfile();
-})
+window.addEventListener("load", buildProfile);
