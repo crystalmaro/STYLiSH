@@ -144,7 +144,7 @@ const showMobileSearch = () => {
 // FACEBOOK 
 // ======================================================
 // test if gh-pages is updated
-alert("updated 12:00pm")
+alert("updated 12:31pm")
 
 // let fbUser = {
 //   name: "",
@@ -166,19 +166,17 @@ let fb_backend = {
 
 window.fbAsyncInit = function() {
   FB.init({
-    appId      : '{2255951781382943',
+    appId      : '2255951781382943',
     cookie     : true, 
     version    : 'v3.3'
   });
-    
-//   FB.AppEvents.logPageView();   
+  // FB.AppEvents.logPageView();   
 
   // need to put below func within this window.func
   // otherwise it'd say FB isn't found
   FB.getLoginStatus(function(response) {
     statusChangeCallback(response);
   });
-    
 };
 
 (function(d, s, id){
@@ -188,19 +186,18 @@ window.fbAsyncInit = function() {
     js.src = "https://connect.facebook.net/en_US/sdk.js";
     fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));
+
+
 /// status change call back
 function statusChangeCallback(response){
-  if(response.status === "connected"){
-    console.log("logged in and authenticated");
+  if (response.status === "connected"){
+    console.log("FB is logged in and authenticated");
     console.log(response)
-
-    
 
     FB.api("/me?fields=name,email,picture.width(500)", function(response){
       if (response && !response.error){
         alert("check response has something")
         console.log(response)
-
 
         userName = response.name;
         userEmail = response.email;
@@ -212,10 +209,6 @@ function statusChangeCallback(response){
         // fb_backend.email = response.email;
         // console.log(fb_backend);
         // setLocalStorage("user", fb_backend)
-
-
-
-        // window.location.href = `profile.html`;
       };
     });
 
@@ -248,9 +241,7 @@ function checkLoginState() {
     // 2. use access token to retrieve user info (name, email, pic)
     // use AJAX post 
     // 
-    if(response.status == "connected"){
-      redirectToProfile();
-    }
+    if(response.status == "connected"){redirectToProfile()}
 
   });
   

@@ -13,7 +13,6 @@ function buildProfile() {
   fbName.innerHTML = userName;
   fbEmail.innerHTML = userEmail;
 
-
   // window.location.href = "./profile.html";
 };
 
