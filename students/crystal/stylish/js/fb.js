@@ -1,7 +1,4 @@
 
-// test if gh-pages is updated
-alert("updated 04:30pm")
-
 // https://crystalmaro.github.io/Web-Front-End-2019-Summer/students/crystal/stylish/
 
 window.fbAsyncInit = function() {
@@ -12,7 +9,7 @@ window.fbAsyncInit = function() {
   });
   // FB.AppEvents.logPageView();   
 
-  alert("LIB fbAsyncInit is activated")
+//   alert("LIB fbAsyncInit is activated")
 
   // need to put below func within this window.func
   // otherwise it'd say FB isn't found
@@ -36,6 +33,10 @@ function statusChangeCallback(response){
     console.log("LIB_FB is logged in and authenticated");
     console.log(response)
     
+    let localStorageUser = getLocalStorage("user");
+    localStorageUser.be.access_token = response.authResponse.accessToken;
+    setLocalStorage("user", localStorageUser);
+    
   } else {
     console.log("not authenticated!!!!");
     console.log(response)
@@ -45,9 +46,9 @@ function statusChangeCallback(response){
 // onLogin() on the hidden fb button
 function checkLoginState() {
   // localStorage.clear("user");
-  alert("checking login status");
+//   alert("checking login status");
   FB.getLoginStatus(function(response) {
-    alert("getting login status");
+    // alert("getting login status");
     statusChangeCallback(response);
     
     if(response.status === "connected"){
