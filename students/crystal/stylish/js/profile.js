@@ -6,6 +6,9 @@ let fbPic = document.querySelector(".fbPic");
 function buildProfile() {
   alert("buildProfile activated")
 
+  console.log(userName)
+  console.log(userEmail)
+  console.log(userProfPic)
   // let fbStorage = getLocalStorage("fbUser")
 
   fbName.innerHTML = userName;
