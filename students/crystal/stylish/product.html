@@ -6,20 +6,19 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" type="text/css" href="css/common.css">
     <link rel="stylesheet" type="text/css" href="css/product.css">
-
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.3&appId=2255951781382943"></script>
     <title>STYLiSH Product</title>
 </head>
 <body>
     
   <nav class="flex">
     <a href="./"><img class="logo" src="images/logo.png" alt="logo"></a>
-    <!-- href="./" -->
     <div class="navProductCategory flex">
       <a href="./?tag=women" name="women" class="catg">女裝</a>
       <a href="./?tag=men" name="men" class="catg">男裝</a>
       <a href="./?tag=accessories" name="accessories" class="catg">配件</a>
     </div>
-        
+
     <div class="navFeature flex">
       <form class="searchContainer flex" onSubmit="search();return false;" >
         <!-- add ;return false; to onSubmit 
@@ -29,10 +28,15 @@
         <input class="searchSubmit" type="submit">
       </form>
       <a href="cart.html" class="iconCart"><div class="cartValStyle cartQty">0</div></a>
-      <a class="iconMember"></a>
+      <div class="iconMember">
+        <fb:login-button 
+        scope="public_profile,email"
+        onlogin="checkLoginState();">
+        </fb:login-button>
+      </div>
     </div>
   </nav>
-
+  
   <div class="navProductCategory-mobile flex">
     <a href="./?tag=women" name="women" class="catg">女裝</a>
     <a href="./?tag=men" name="men" class="catg">男裝</a>
@@ -43,14 +47,19 @@
     <a href="cart.html">
       <div class="cart-mobile">
         <div class="cartValStyle-mobile cartQty">0</div>
-        <!-- <img src="images/btn-shopping-cart-02-normal_2019-07-11/btn-shopping-cart-02-normal.png" alt=""> -->
       </div>
       購物車
     </a>
-    <a>
-      <img src="images/member-mobile.png" alt="">
+
+    <div class="iconMember-mobile">
+      <div class="fbIcon-mobile">
+        <fb:login-button 
+        scope="public_profile,email"
+        onlogin="checkLoginState();">
+        </fb:login-button>
+      </div>
       會員
-    </a>
+    </div>
   </div>
 
   <main>
@@ -150,5 +159,6 @@
 
   <script type="text/javascript" src="js/lib.js"></script>
   <script type="text/javascript" src="js/product.js"></script>
+  <script type="text/javascript" src="js/fb.js"></script>
 </body>
 </html>
