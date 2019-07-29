@@ -180,7 +180,7 @@ const showMobileSearch = () => {
 // FACEBOOK 
 // ======================================================
 // test if gh-pages is updated
-alert("updated 03:07pm")
+alert("updated 03:11pm")
 
 // let userName;
 // let userEmail;
@@ -227,7 +227,7 @@ function statusChangeCallback(response){
 
     FB.api("/me?fields=name,email,picture.width(500)", function(response){
       if (response && !response.error){
-        alert("check response has something")
+        // alert("check response has something")
         console.log(response)
 
         // userName = response.name;
@@ -249,7 +249,7 @@ function statusChangeCallback(response){
       };
     });
 
-    testAPI();
+    // testAPI();
     
   } else {
     console.log("not authenticated!!!!");
@@ -259,10 +259,10 @@ function statusChangeCallback(response){
 
 // onLogin() on the hidden fb button
 function checkLoginState() {
-  alert("checking login status");
+  // alert("checking login status");
   localStorage.clear("user");
   FB.getLoginStatus(function(response) {
-    alert("getting login status");
+    // alert("getting login status");
     statusChangeCallback(response);
     
     // send fb access_token to Check Out API
@@ -290,15 +290,15 @@ function redirectToProfile(){
 
 
 // ============== test API response status
-function testAPI() {
-  alert("testAPI activated");
-  // console.log(response)
-  FB.api("/me?fields=name,email,picture.width(500)", function(response){
-    if (response && !response.error){
-      alert("testAPI's FB.api")
+// function testAPI() {
+//   // alert("testAPI activated");
+//   // console.log(response)
+//   FB.api("/me?fields=name,email,picture.width(500)", function(response){
+//     if (response && !response.error){
+//       alert("testAPI's FB.api")
 
-      console.log(response)
-      // buildProfile(response);
-    }
-  })
-};
+//       console.log(response)
+//       // buildProfile(response);
+//     }
+//   })
+// };
