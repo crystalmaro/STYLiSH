@@ -180,7 +180,7 @@ const showMobileSearch = () => {
 // FACEBOOK 
 // ======================================================
 // test if gh-pages is updated
-alert("updated 04:05pm")
+alert("updated 04:12pm")
 
 // let userName;
 // let userEmail;
@@ -259,6 +259,7 @@ function statusChangeCallback(response){
 
 // onLogin() on the hidden fb button
 function checkLoginState() {
+  localStorage.clear("user");
   // alert("checking login status");
   FB.getLoginStatus(function(response) {
     // alert("getting login status");
