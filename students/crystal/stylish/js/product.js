@@ -1,8 +1,4 @@
 const idQuery = getParamName('id');
-/* ==================
-Initial Page Loading
-================== */
-getAjax(`${API_HOST_Item}${idQuery}`, renderItem);
 
 /* ==================
 Variables
@@ -267,16 +263,6 @@ function qtyReset () {
 };
 
 /* ==================
-Shopping Cart
+Initial Page Loading
 ================== */
-// function updateCartQty() {
-//   let localStorageCart = getLocalStorage("cart");
-//     // initialize empty structure into localStorage
-//     if (localStorageCart === null) {
-//       setLocalStorage("cart", cartValue);
-//     } else {
-//       for (let i = 0; i < cartQty.length; i++) {
-//         cartQty[i].innerHTML = localStorageCart.order.list.length;
-//       };
-//     };
-// };
+getAjax(`${API_HOST_Item}${idQuery}`, renderItem);

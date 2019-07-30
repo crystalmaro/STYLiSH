@@ -18,7 +18,6 @@ function checkCartItem(){
 checkCartItem();
 
 function renderCartItem(){
-  // let xIndex = 0;
   localStorageCart.order.list.forEach( x => {
     // individual item row
     let cartProductIndex = document.createElement("div");

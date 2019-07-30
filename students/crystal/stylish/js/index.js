@@ -1,5 +1,3 @@
-// test if gh-pages is updated
-alert("updated 05:58pm")
 
 /* ==================
 Variables
@@ -186,25 +184,9 @@ function setExtProduct(data) {
 window.addEventListener("scroll", handleScroll);
 
 /* ==================
-Shopping Cart
-================== */
-// function updateCartQty() {
-//   let localStorageCart = getLocalStorage("cart");
-//     // initialize empty structure into localStorage
-//     if (localStorageCart === null) {
-//       setLocalStorage("cart", cartValue);
-//     } else {
-//       for (let i = 0; i < cartQty.length; i++) {
-//         cartQty[i].innerHTML = localStorageCart.order.list.length;
-//       };
-//     };
-// };
-
-/* ==================
 Initial Page Loading
 ================== */
 window.addEventListener('load', (event) => {
-
   // load & display marketing campaign
   getAjax(`${API_HOST}/marketing/campaigns`, renderCampaign);
 
@@ -216,9 +198,9 @@ window.addEventListener('load', (event) => {
       x.classList.add("currentCategory");
     }
   });
+
   // 砍掉重練 remove all products on initial loading
   removeElement("allProducts");
-
   if (tagQuery == "women" || tagQuery == "men" || tagQuery == "accessories") {
     type = tagQuery;
     getAjax(`${API_HOST_Products}/${tagQuery}`, renderProduct);

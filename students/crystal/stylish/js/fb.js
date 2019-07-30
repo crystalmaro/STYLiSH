@@ -7,9 +7,6 @@ window.fbAsyncInit = function() {
     cookie     : true, 
     version    : 'v3.3'
   });
-  // FB.AppEvents.logPageView();   
-
-//   alert("LIB fbAsyncInit is activated")
 
   // need to put below func within this window.func
   // otherwise it'd say FB isn't found
@@ -27,37 +24,26 @@ window.fbAsyncInit = function() {
 }(document, 'script', 'facebook-jssdk'));
 
 
-/// status change call back
 function statusChangeCallback(response){
   if (response.status === "connected"){
     console.log("LIB_FB is logged in and authenticated");
-    console.log(response)
-    
     let localStorageUser = getLocalStorage("user");
     localStorageUser.be.access_token = response.authResponse.accessToken;
     setLocalStorage("user", localStorageUser);
-    
   } else {
     console.log("not authenticated!!!!");
-    console.log(response)
   }
 };
 
 // onLogin() on the hidden fb button
 function checkLoginState() {
-  // localStorage.clear("user");
-//   alert("checking login status");
   FB.getLoginStatus(function(response) {
-    // alert("getting login status");
     statusChangeCallback(response);
-    
     if(response.status === "connected"){
-        redirectToProfile();
+      redirectToProfile();
     }
-
   });
 };
-
 
 // ============= redirect to profile page if logged in
 function redirectToProfile(){
