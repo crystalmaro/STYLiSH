@@ -59,6 +59,16 @@ Facebook Button
 /* ====================
 Nav Bar
 ==================== */
+header {
+    position: fixed;
+    width: 100%;
+    z-index: 1;
+}
+.container {
+    position: relative;
+    top: 100px;
+}
+
 nav {
     padding: 1.5rem 3rem;
     height: 80px;
