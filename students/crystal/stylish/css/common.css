@@ -1,4 +1,6 @@
-/* ====== Basic Layout ====== */
+/* ====================  
+Basic Layout
+====================  */
 * {
     box-sizing: border-box;
 }
@@ -22,9 +24,22 @@ a {
 .flex {
     display: flex;
 }
-/* ============= */
-/* FB LOG IN
-/* ============= */
+
+/* ====================  
+Loading Animation
+====================  */
+.keyVisualSection,
+.allProducts,
+.itemContainer,
+.cartProductPic {
+    background-image: url(../images/loading.gif);
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+/* ====================  
+Facebook Button
+====================  */
 .fb_iframe_widget iframe {
     opacity: 0.01;
     height: 35px;
@@ -81,6 +96,7 @@ nav .logo {
 }
 
 .navFeature {
+    display: flex;
     right: 15px;
     position: absolute;
     align-items: center;
