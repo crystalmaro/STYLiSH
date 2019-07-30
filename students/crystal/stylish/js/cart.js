@@ -2,41 +2,6 @@ let localStorageCart = getLocalStorage("cart");
 let cartProductContainer = document.querySelector(".cartProductContainer");
 
 // ==============================
-// FB Init to fill in name and email
-// ==============================
-window.fbAsyncInit = function() {
-  FB.init({
-    appId      : '2255951781382943',
-    cookie     : true, 
-    version    : 'v3.3'
-  });
-
-  FB.getLoginStatus(function(response) {
-    statusChangeCallback(response);
-  });
-};
-
-(function(d, s, id){
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) {return;}
-  js = d.createElement(s); js.id = id;
-  js.src = "https://connect.facebook.net/en_US/sdk.js";
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));
-
-function statusChangeCallback(response){
-  if (response.status === "connected"){
-    let buyerName = document.querySelector(".buyerName");
-    let buyerEmail = document.querySelector(".buyerEmail");
-    console.log("CART_FB is logged in and authenticated");
-    buyerName.innerHTML = response.name;
-    buyerEmail.innerHTML = response.email;
-  } else {
-    console.log("not authenticated!!!!");
-  }
-};
-
-// ==============================
 // Order Submit Function
 // ==============================
 function checkCartItem(){
