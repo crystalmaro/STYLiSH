@@ -88,6 +88,7 @@
     max-width: 12.5%;
     padding-left: 100px;
     margin: auto 0;
+    position: relative;
 }
 /* ==================== 
  配送國家 + 提醒
@@ -286,10 +287,12 @@ Media Query
     }
     .cartPrefShipping,
     .cartPrefShipping div,
+    .cartPrefShipping select,
     .cartPrefPayment,
-    .cartPrefPayment div {
-        width: 90%;
+    .cartPrefPayment div,
+    .cartPrefPayment select {
+        width: 100%;
         display: block;
-}
-
+        margin: 0;
+    }
 }

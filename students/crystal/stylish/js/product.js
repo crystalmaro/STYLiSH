@@ -1,8 +1,4 @@
 const idQuery = getParamName('id');
-/* ==================
-Initial Page Loading
-================== */
-getAjax(`${API_HOST_Item}${idQuery}`, renderItem);
 
 /* ==================
 Variables
@@ -36,7 +32,7 @@ let productDetail = {
 Button: Add to Cart
 ================== */
 addCartButton.addEventListener("click", function(){
-  alert("item added to cart.")
+  alert("item added to cart")
   updateProductDetail();
   let localStorageCart = getLocalStorage("cart");
   // reset sameProductIndex, and run checkIfSameProduct() again
@@ -249,6 +245,7 @@ qtyAdd.addEventListener("click", function(){
   qtyValue.innerHTML = qtyCount;
   }
   updateProductDetail();
+  
 });
 
 qtyMinus.onclick = function(){
@@ -266,16 +263,6 @@ function qtyReset () {
 };
 
 /* ==================
-Shopping Cart
+Initial Page Loading
 ================== */
-function updateCartQty() {
-  let localStorageCart = getLocalStorage("cart");
-    // initialize empty structure into localStorage
-    if (localStorageCart === null) {
-      setLocalStorage("cart", cartValue);
-    } else {
-      for (let i = 0; i < cartQty.length; i++) {
-        cartQty[i].innerHTML = localStorageCart.order.list.length;
-      };
-    };
-  };
+getAjax(`${API_HOST_Item}${idQuery}`, renderItem);

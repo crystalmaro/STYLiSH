@@ -6,6 +6,7 @@
 body {
     margin: auto;
     /* expands background color width */
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 a {
@@ -21,13 +22,31 @@ a {
 .flex {
     display: flex;
 }
+/* ============= */
+/* FB LOG IN
+/* ============= */
+.fb_iframe_widget iframe {
+    opacity: 0.01;
+    height: 35px;
+    top: 15px;
+}
+
+.iconMember:hover{
+    background-image: url(../images/member-hover.png);
+}
+
+.iconMember {
+    background-image: url(../images/member.png);
+    background-repeat: no-repeat;
+    background-size: 100%;
+}
 
 /* ====================
 Nav Bar
 ==================== */
 nav {
     padding: 1.5rem 3rem;
-    width: 100%;
+    /* width: 100%; */
     height: 80px;
     align-items: center;
     background-color: white;
@@ -54,14 +73,14 @@ nav .logo {
 
 .navProductCategory a {
     /* color: #3f3a3a; */
-    font-family: PingFangTC;
+    /* font-family: PingFangTC; */
     margin-left: 25px;
 }
 
-.navProductCategory a,
+/* .navProductCategory a,
 .navProductCategory-mobile a {
     font-family: PingFangTC;
-}
+} */
 
 .navProductCategory-mobile a,
 .myFooter-mobile,
@@ -70,10 +89,10 @@ nav .logo {
 }
 
 .navFeature {
-    display: flex;
+    /* display: flex; */
     right: 15px;
     position: absolute;
-    justify-content: flex-end;
+    /* justify-content: flex-end; */
     align-items: center;
   }
 
@@ -102,22 +121,17 @@ nav .logo {
     width: 200px;
     padding-left: 10px;
 }
+
 .searchSubmit {
     display: none;
 }
+
 .iconCart,
 .iconMember {
     margin-left: 10px;
     width: 44px;
     height: 44px;
     object-fit: contain;
-}
-
-.iconMember:hover {
-    background-image: url(../images/member-hover.png);
-}
-.iconMember {
-    background-image: url(../images/member.png);
 }
 
 .iconCart:hover{
@@ -167,6 +181,7 @@ footer {
     align-items: center;
     justify-content: space-between;
 }
+
 .myFooter>.footerResource {
     justify-content: space-evenly;
     align-items: baseline;
@@ -207,7 +222,6 @@ Media Query
 2. Search Bar
 3. Shopping Cart & Member
 */
-
     .navProductCategory,
     .iconCart,
     .iconMember{
@@ -245,7 +259,6 @@ Media Query
         height: 50px;
     }
     .navProductCategory-mobile>.catg {
-        font-family: PingFangTC;
         display: inline;
         color: #828282;
         border-right: 1px solid #828282;
@@ -275,14 +288,15 @@ Media Query
     .navFeature-mobile .cart-mobile  {
         vertical-align: middle;
     }
-    .navFeature-mobile a {
+    .navFeature-mobile a,
+    .navFeature-mobile div {
         text-decoration: none;
         color: #ffffff;
-        display: block;
+        display: inline-block;
         flex: auto;
         text-align: center;
     }
-    .navFeature-mobile a:first-child {
+    .navFeature-mobile a {
         border-right: 1px solid #f5f5f5;
     }
     .navFeature-mobile .cart-mobile {
@@ -293,13 +307,20 @@ Media Query
         width: 40px;
         height: 40px;
     }
-    /* .campaign_text {
-        left: 15%;
-        bottom: 20%;
-    } */
+    
+    .navFeature-mobile .iconMember-mobile {
+        line-height: 44px;
+    }
+    .navFeature-mobile .iconMember-mobile .fbIcon-mobile {
+        background-image: url(../images/member-mobile.png);
+        width: 40px;
+        height: 40px;
+    }
+    .fb_iframe_widget iframe {
+        top: 0;
+    }
     footer {
         font-size: .8rem;
-        /* width: 100%; */
         padding: 50px 0 100px 0;
     }
     .myFooter .footerResource {

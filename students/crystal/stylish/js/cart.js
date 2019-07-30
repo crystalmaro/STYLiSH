@@ -18,7 +18,6 @@ function checkCartItem(){
 checkCartItem();
 
 function renderCartItem(){
-  // let xIndex = 0;
   localStorageCart.order.list.forEach( x => {
     // individual item row
     let cartProductIndex = document.createElement("div");
@@ -129,7 +128,7 @@ function renderCartItem(){
     cartProductTrash.classList.add("cartProductTrash");
     cartProductTrash.setAttribute("onClick", "removeItem(this)");
     let trashIcon = document.createElement("img");
-    trashIcon.setAttribute("src", "../images/cart-remove.png");
+    trashIcon.setAttribute("src", "images/cart-remove.png");
     cartProductTrash.appendChild(trashIcon);
     cartProductIndex.appendChild(cartProductTrash);
   });

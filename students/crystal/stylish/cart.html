@@ -6,54 +6,70 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" type="text/css" href="css/common.css">
     <link rel="stylesheet" type="text/css" href="css/cart.css">
-
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.3&appId=2255951781382943"></script>
     <script src="https://js.tappaysdk.com/tpdirect/v5.1.0"></script>
-    
-
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-144771158-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-144771158-1');
+    </script>
     <title>STYLiSH Cart</title>
 </head>
 <body>
 
   <nav class="flex">
-    <a href="./"><img class="logo" src="images/logo.png" alt="logo"></a>
-    <div class="navProductCategory flex">
-      <a href="./?tag=women" name="women" class="catg">女裝</a>
-      <a href="./?tag=men" name="men" class="catg">男裝</a>
-      <a href="./?tag=accessories" name="accessories" class="catg">配件</a>
-    </div>
-                
-    <div class="navFeature flex">
-      <form class="searchContainer flex" onSubmit="search();return false;" >
-      <!-- add ;return false; to onSubmit 
-        to render the search result dynamically,
-        without reloading the whole page altogether. -->
-        <input class="searchInput" type="text" onClick="showMobileSearch()"/>
-        <input class="searchSubmit" type="submit">
-      </form>
-        <a class="iconCart"><div class="cartValStyle cartQty">0</div></a>
-        <a class="iconMember"></a>
-    </div>
-  </nav>
-        
-  <div class="navProductCategory-mobile flex">
-      <a href="./?tag=women" name="women" class="catg">女裝</a>
-      <a href="./?tag=men" name="men" class="catg">男裝</a>
-      <a href="./?tag=accessories" name="accessories" class="catg">配件</a>
-  </div>
-
-  <div class="navFeature-mobile flex">
-    <a>
-      <div class="cart-mobile">
-        <div class="cartValStyle-mobile cartQty">0</div>
-        <!-- <img src="images/btn-shopping-cart-02-normal_2019-07-11/btn-shopping-cart-02-normal.png" alt=""> -->
+      <a href="./"><img class="logo" src="images/logo.png" alt="logo"></a>
+      <div class="navProductCategory flex">
+        <a href="./?tag=women" name="women" class="catg">女裝</a>
+        <a href="./?tag=men" name="men" class="catg">男裝</a>
+        <a href="./?tag=accessories" name="accessories" class="catg">配件</a>
       </div>
-      購物車
-    </a>
-    <a>
-      <img src="images/member-mobile.png" alt="">
-      會員
-    </a>
-  </div>
+  
+      <div class="navFeature flex">
+        <form class="searchContainer flex" onSubmit="search();return false;" >
+          <!-- add ;return false; to onSubmit 
+              to render the search result dynamically,
+              without reloading the whole page altogether. -->
+          <input class="searchInput" type="text" onClick="showMobileSearch()"/>
+          <input class="searchSubmit" type="submit">
+        </form>
+        <a href="cart.html" class="iconCart"><div class="cartValStyle cartQty">0</div></a>
+        <div class="iconMember">
+          <fb:login-button 
+          scope="public_profile,email"
+          onlogin="checkLoginState();">
+          </fb:login-button>
+        </div>
+      </div>
+    </nav>
+  
+    <div class="navProductCategory-mobile flex">
+      <a href="./?tag=women" name="women" class="catg">女裝</a>
+      <a href="./?tag=men" name="men" class="catg">男裝</a>
+      <a href="./?tag=accessories" name="accessories" class="catg">配件</a>
+    </div>
+  
+    <div class="navFeature-mobile flex">
+      <a href="cart.html">
+        <div class="cart-mobile">
+          <div class="cartValStyle-mobile cartQty">0</div>
+        </div>
+        購物車
+      </a>
+  
+      <div class="iconMember-mobile">
+        <div class="fbIcon-mobile">
+          <fb:login-button 
+          scope="public_profile,email"
+          onlogin="checkLoginState();">
+          </fb:login-button>
+        </div>
+        會員
+      </div>
+    </div>
 
   <main class="cartMain">
 
@@ -110,6 +126,7 @@
 
         <div class="cartProductTrash">
             <img src="../images/cart-remove.png">
+            <img src="../images/cart-remove-hover.png">
         </div>
       </div> -->
     </div>
@@ -279,6 +296,7 @@
   <script type="text/javascript" src="js/lib.js"></script>
   <script type="text/javascript" src="js/tapPay.js"></script>
   <script type="text/javascript" src="js/cart.js"></script>
+  <script type="text/javascript" src="js/fb.js"></script>
   
 </body>
 </html>

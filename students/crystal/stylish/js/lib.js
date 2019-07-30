@@ -1,18 +1,15 @@
-/* ==========================================
-   All Global Variables
-========================================== */
+// ==========================================
+//    All Global Variables
+// ==========================================
 const HOST = "https://api.appworks-school.tw";
 const API_HOST = "https://api.appworks-school.tw/api/1.0";
 const API_HOST_Products = "https://api.appworks-school.tw/api/1.0/products";
-const API_HOST_Tag = "https://api.appworks-school.tw/api/1.0/products/?tag=";
 const API_HOST_Item = "https://api.appworks-school.tw/api/1.0/products/details?id=";
 const API_HOST_Order = "https://api.appworks-school.tw/api/1.0/order/checkout";
-
 
 const addCartButton = document.querySelector(".addCartButton");
 const checkoutButton = document.querySelector(".checkoutButton");
 let cartQty = document.querySelectorAll(".cartQty");
-
 
 /* ==================
 AJAX: Get & Post
@@ -32,6 +29,7 @@ function postAjax(src, obj, callback){
   let xhr = new XMLHttpRequest();
   xhr.open("POST", src, true);
   xhr.setRequestHeader('Content-type','application/json; charset=utf-8');
+  xhr.setRequestHeader('Authorization',`Bearer ${getLocalStorage("user").be.access_token}`);
   xhr.onreadystatechange = function  () {
     let parsedGetData = JSON.parse(xhr.response);
     if (this.readyState == 4 && this.status == "200") {
@@ -73,6 +71,17 @@ let cartValue = {
   }
 };
 
+let userValue = {
+  be: {
+    "provider": "facebook",
+  },
+  fe: {
+    "name": "",
+    "email": "",
+    "pic": ""
+  }
+}
+
 function setLocalStorage(key, value){
   localStorage.setItem(key, JSON.stringify(value));
 }
@@ -80,6 +89,32 @@ function setLocalStorage(key, value){
 function getLocalStorage(key){
   return JSON.parse(localStorage.getItem(key));
 }
+
+/* ==================
+Shopping Cart
+================== */
+function updateCartQty() {
+  let localStorageCart = getLocalStorage("cart");
+  let localStorageUser = getLocalStorage("user");
+    // initialize empty structure into localStorage
+    if (localStorageCart === null || localStorageUser === null) {
+      setLocalStorage("cart", cartValue);
+      setLocalStorage("user", userValue);
+    } else {
+      for (let i = 0; i < cartQty.length; i++) {
+        cartQty[i].innerHTML = localStorageCart.order.list.length;
+      };
+    };
+};
+
+// function updateUser(){
+//   let localStorageUser = getLocalStorage("user");
+//   if (localStorageUser === null)
+// }
+
+window.addEventListener("load", function(){
+  updateCartQty();
+});  
 
 /* ==================
 take Parameter by page URL
@@ -96,9 +131,7 @@ function getParamName(name, url){
 
 
   
-window.addEventListener("load", function(){
-  updateCartQty();
-});  
+
 
 /* ==================
 Remove Element
@@ -136,4 +169,3 @@ const showMobileSearch = () => {
     navFeature.className = "navFeature";
   }
 };
-
