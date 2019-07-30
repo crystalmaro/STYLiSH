@@ -17,7 +17,7 @@ Marketing Campaign
 function renderCampaign (data) {
   let campaignData = data.data
   let keyVisualSection = document.querySelector(".keyVisualSection");
-  keyVisualSection.className = "keyVisualSection";
+  // keyVisualSection.className = "keyVisualSection";
 
   for (let i = 0; i < campaignData.length; i++) {
     // campaign container
