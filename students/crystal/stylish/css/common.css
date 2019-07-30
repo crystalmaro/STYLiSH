@@ -63,10 +63,12 @@ header {
     position: fixed;
     width: 100%;
     z-index: 1;
+    top: 0;
 }
 .container {
     position: relative;
     top: 100px;
+    margin-bottom: 130px;
 }
 
 nav {
