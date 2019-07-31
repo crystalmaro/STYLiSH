@@ -2,18 +2,15 @@
 .backgroundImg {
     background-image: url(https://images.unsplash.com/photo-1532210317995-cc56d90177d9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80);
     background-size: cover;
-    background-blend-mode: saturation;
 }
 
 .thankyouMain {
     top: 50%;
     left: 50%;
     position: absolute;
-    /* transform: translate(-50%, -50%); */
     background-color: white;
     padding-left: 30px;
     padding-right: 30px;
-    /* opacity: 0.7; */
     box-shadow: 0 0 3px black;
     animation: slide-in-top 1.5s both;
 }
@@ -55,8 +52,6 @@
     }
 }
   
-
-
 @media (max-width: 800px) {
     .thankyouMain {
         padding-left: 20px;
