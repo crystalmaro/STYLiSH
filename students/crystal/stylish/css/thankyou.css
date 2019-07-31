@@ -1,0 +1,98 @@
+
+.orderMsg {
+    font-size: 30px;
+    /* background: white; */
+    height: 100%;
+    width: 400px;
+    line-height: 50px;
+}
+.thankyouMain {
+    /* margin: 0; */
+    top: 50%;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding-left: 40px;
+    padding-right: 40px;
+    opacity: 0.7;
+    box-shadow: 0 0 3px black;
+}
+.backgroundImg {
+    background-image: url(https://images.unsplash.com/photo-1532210317995-cc56d90177d9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80);
+    background-size: cover;
+    background-blend-mode: saturation;
+    /* height: 100px; */
+    /* width: 100%; */
+}
+
+@media (max-width: 800px) {
+
+}
+
+@media (max-width: 600px) {
+    
+}
+/*.tracking-in-expand {
+    animation: tracking-in-expand-fwd-top 0.7s cubic-bezier(0.215, 0.610, 0.355, 1.000) both;
+    animation-name: tracking-in-expand-fwd-top;
+    animation-duration: 0.7s;
+    animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+    animation-iteration-count: 1; /*default
+    animation-direction: normal;
+    animation-fill-mode: both;
+    animation-play-state: running;
+}
+@keyframes tracking-in-expand-fwd-top {
+    0% {
+      letter-spacing: -0.5em;
+      transform: translateZ(-700px) translateY(-500px);
+      opacity: 0;
+    }
+    40% {
+      opacity: 0.6;
+    }
+    100% {
+      transform: translateZ(0) translateY(0);
+      opacity: 1;
+    }
+}*/
+
+.thxAni {
+    /* font-size: 3rem; */
+    animation: jello 0.9s linear ;
+    background-image: url(https://images.unsplash.com/photo-1521685468847-de0a1a3c41a8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    /* width: 380px; */
+    height: 340px;
+    box-shadow: 0 0 3px black;
+    
+}
+@keyframes jello {
+    0% {
+      transform: scale3d(1, 1, 1);
+      /* font-size: 5px; */
+    }
+    30% {
+      transform: scale3d(1.25, 0.75, 1);
+    }
+    40% {
+      transform: scale3d(0.75, 1.25, 1);
+    }
+    50% {
+      transform: scale3d(1.15, 0.85, 1);
+      /* font-size: 50px; */
+    }
+    65% {
+      transform: scale3d(0.95, 1.05, 1);
+    }
+    75% {
+      transform: scale3d(1.05, 0.95, 1);
+    }
+    100% {
+      transform: scale3d(1, 1, 1);
+      /* font-size: 2rem; */
+    }
+}
