@@ -17,7 +17,7 @@
     </script>
     <title>STYLiSH Home Page</title>
 </head>
-<body>
+<body class="site">
 <header>
   <nav class="flex">
     <a href="./"><img class="logo" src="images/logo.png" alt="logo"></a>
@@ -71,16 +71,18 @@
   </div>
 </header>
 
-<div class="container">
+<div class="container site-content">
+<div class="backgroundImg"></div>
   <main class="thanyouMain">
     <div class="orderMsg">
+      <div class="thxAni">Thank You</div>
       感謝您的惠顧</br>
       您的訂單編號：<span class="orderNumber">123</span>  
     </div>
     <script>
       let orderNum = document.querySelector(".orderNumber");
       orderNum.innerHTML = getParamName("order");
-      localStorage.clear("cart");
+      // localStorage.clear("cart");
     </script>
   </main>
 </div>
