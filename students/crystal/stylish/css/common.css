@@ -202,6 +202,7 @@ footer {
     height: 115px;
     background-color: rgb(49,53,56);
     bottom: 0;
+    z-index: 2;
 }
 
 .myFooter {
