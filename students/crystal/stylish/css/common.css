@@ -48,7 +48,7 @@ Loading Animation
 ====================  */
 .keyVisualSection,
 .allProducts,
-.itemContainer,
+.itemMainImg,
 .cartProductPic {
     background-image: url(../images/loading.gif);
     background-repeat: no-repeat;
@@ -202,7 +202,7 @@ footer {
     height: 115px;
     background-color: rgb(49,53,56);
     bottom: 0;
-    z-index: 2;
+    /* z-index: 1; */
 }
 
 .myFooter {
@@ -321,6 +321,7 @@ Media Query
         padding: 10px 0px;
         align-items: center;
         vertical-align: middle;
+        z-index: 1000;
     }
     .navFeature-mobile img,
     .navFeature-mobile .cart-mobile  {
@@ -373,7 +374,7 @@ Media Query
     footer {
         height: 200px;
         padding-top: 20px;
-        padding-bottom: 150px;
+        /* padding-bottom: 150px; */
     }
     .myFooter-mobile {
         max-width: 75%;

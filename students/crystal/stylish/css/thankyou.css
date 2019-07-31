@@ -2,6 +2,7 @@
 .backgroundImg {
     background-image: url(https://images.unsplash.com/photo-1532210317995-cc56d90177d9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80);
     background-size: cover;
+    opacity: 0.7;
 }
 
 .thankyouMain {
@@ -16,11 +17,11 @@
 }
 @keyframes slide-in-top {
     0% {
-      transform: translateY(-3000px);
+      transform: translateY(-10000px);
     }
     100% {
       transform: translate(-50%, -50%);
-      opacity: 0.7;
+      /* opacity: 2; */
     }
 }
 
@@ -51,8 +52,8 @@
       filter: blur(0px);
     }
 }
-  
-@media (max-width: 800px) {
+
+@media (max-width: 600px) {
     .thankyouMain {
         padding-left: 20px;
         padding-right: 20px;
@@ -62,7 +63,16 @@
         font-size: 1.25rem;
         line-height: 35px;
     }
-    .thxAni.thxAni {
+    .thxImg {
         height: 180px;
+    }
+}
+
+@media (max-width: 400px) {
+    .orderMsg {
+        width: 150px;
+    }
+    .thxImg {
+        height: 130px;
     }
 }

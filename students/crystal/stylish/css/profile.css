@@ -1,39 +1,37 @@
-/* main {
-    background-image: url(https://images.unsplash.com/photo-1460467820054-c87ab43e9b59?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1322&q=80);
+.backgroundImg {
+    background-image: url(https://images.pexels.com/photos/2395249/pexels-photo-2395249.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260);
+    background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
-    opacity: 0.5;
-    filter: blur(8px);
-    -webkit-filter: blur(8px);
-    height: 100%;
-    background-position: center;
-} */
-.profileContainer {
-    font-size: 2rem;
-    flex-wrap: wrap;
-    /* outline: 1px solid black; */
-    width: 600px;
-    margin: auto;
-    padding: 50px 20px;
     
 }
-.profileContainer>div:first-child {
-    width: 100%;
-    margin-bottom: 10px;
+
+.profileContainer {
+    font-size: 1.5rem;
+    flex-wrap: wrap;
+    width: 500px;
+    margin: auto;
+    padding: 20px;
+    flex-wrap: wrap;
+    background: rgba(255, 255, 255, 0.6);
+    opacity: 0.8;
 }
-.fbLeft {
-    width: 35%; 
-    /* outline: 1px solid black; */    
+
+.fbLeft{
+    width: 40%;
+    display: inline-block;
 }
-.fbLeft img {
+.fbLeft>img {
     width: 100%;
+    height: 200px;
+    outline: none;
 }
 .fbRight {
-    width: 60%;
-    /* outline: 1px solid black; */
-    font-size: 1.5rem;
-    line-height: 50px;
+    width: 55%;
+    display: inline-block;
     margin-left: 10px;
+    line-height: 50px;
+
 }
 
 @media (max-width: 600px) {
