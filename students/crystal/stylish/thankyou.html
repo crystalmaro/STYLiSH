@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" type="text/css" href="css/common.css">
-    <link rel="stylesheet" type="text/css" href="css/index.css">
+    <link rel="stylesheet" type="text/css" href="css/thankyou.css">
     <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.3&appId=2255951781382943"></script>
     <script type="text/javascript" src="js/lib.js"></script>
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-144771158-1"></script>
@@ -17,8 +17,8 @@
     </script>
     <title>STYLiSH Home Page</title>
 </head>
-<body>
-
+<body class="site">
+<header>
   <nav class="flex">
     <a href="./"><img class="logo" src="images/logo.png" alt="logo"></a>
     <div class="navProductCategory flex">
@@ -69,19 +69,24 @@
       會員
     </div>
   </div>
+</header>
 
-
-  <main class="thanyouMain">
+<div class="container site-content backgroundImg">
+  <main class="thankyouMain">
     <div class="orderMsg">
-      感謝您的惠顧</br>
-      您的訂單編號：<span class="orderNumber">123</span>  
+      <p class="thxImg"></p>
+      <p>訂單編號：<br>
+        <span class="orderNumber">123</span>
+      </p> 
     </div>
     <script>
       let orderNum = document.querySelector(".orderNumber");
       orderNum.innerHTML = getParamName("order");
-      localStorage.clear("cart");
+      // localStorage.clear("cart");
     </script>
   </main>
+</div>
+<!-- <div class="backgroundImg"></div> -->
 
   
 

@@ -175,10 +175,10 @@ function removeImgStock(){
   // call by reference & call by value
   finalStorage = Object.assign({}, localStorageCart);
   // remove main_image and stock from list, to match with order structure
-  for (let i = 0; i < finalStorage.order.list.length; i++){
-    delete finalStorage.order.list[i].stock;
-    delete finalStorage.order.list[i].main_image;
-  };
+//   for (let i = 0; i < finalStorage.order.list.length; i++){
+//     delete finalStorage.order.list[i].stock;
+//     delete finalStorage.order.list[i].main_image;
+//   };
 };
 
 function setUserInput(){
